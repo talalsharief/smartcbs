@@ -1,0 +1,84 @@
+<div class="container-fluid noPadding">
+
+  <ion-row>
+    <ion-col size="6" class="greenBox">
+      <p class="smallTxt lightTxt">Swipe Right For Meter Reading</p>
+
+    </ion-col>
+    <ion-col size="6" class="yellowBox">
+      <p class="smallTxt darkTxt">Swipe left For Meter Feedback</p>
+
+    </ion-col>
+  </ion-row>
+
+
+
+  <br>
+
+
+  <Div class="container pb-5">
+
+    <div class="card borderRadius cardShadow">
+
+      <ion-row>
+        <ion-col>
+
+          <ion-item lines="none">
+            <p class="Hitxt mb-0 ">Next Meter</p>
+
+            <ion-note class=" Txt1" slot="end">
+              20/200
+            </ion-note>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </div>
+<br>
+
+    <!-- Multi-line sliding item with icon options on both sides -->
+    <Div class="card cardShadow borderRadius">
+
+
+      <ion-item-sliding id="item100">
+        <ion-item lines="none" class="borderRadius">
+          <ion-note slot="start">
+            <ion-label>
+              <p class="Hitxt mb-0 ">Meter No.</p>
+              <span class="Txt1 ">PEL 0032432</span>
+
+              <p class="Hitxt mb-0 ">Consumer </p>
+
+              <span class="Txt1">Masood Asalm</span>
+            </ion-label>
+          </ion-note>
+
+          <ion-note class="Hitxt" slot="end">
+            <ion-label>
+              <p class="Hitxt mb-0 ">Supp No.</p>
+              <span class="Txt1"> 32432</span>
+              <br>
+              <p class="Hitxt mb-0 ">Consumer No.</p>
+              <span class="Txt1"> 32432</span>
+
+            </ion-label>
+          </ion-note>
+        </ion-item>
+
+        <ion-item-options side="start">
+          <ion-item-option routerLink="/meterreading" routerDirection="forward">
+            <ion-icon slot="icon-only" name="heart"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+
+        <ion-item-options side="end">
+
+          <ion-item-option color="dark" routerLink="/meterfeedback" routerDirection="forward">
+            <ion-icon slot="icon-only" name="star"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </Div>
+
+  </Div>
+
+</div>

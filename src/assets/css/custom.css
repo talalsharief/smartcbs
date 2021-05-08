@@ -1,0 +1,438 @@
+/* Login Page */
+
+.btnLogin{
+  padding: 8px 45px;
+    background: linear-gradient(358deg, #2a3b90, #025ca3);
+    color: white;
+    border-radius: 30px;
+    box-shadow: 1px 1px 5px 0px #d9d9d9;
+    border: 2px solid white;
+    letter-spacing: 2px;
+}
+.btnCancel{
+  padding: 8px 45px;
+  background: linear-gradient(358deg, #8a8a8b, #868686);
+  color: white;
+  border-radius: 30px;
+  box-shadow: 1px 1px 5px 0px #d9d9d9;
+  border: 2px solid white;
+  letter-spacing: 2px;
+}
+.LoginContainer{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    align-self: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    background-color: #fefefe;
+    background: url(../../assets/img/bgimg/abimg.png) 0 0/100% 100% no-repeat;
+  background-attachment: inherit;
+    background-size: contain;
+    background-position-y: bottom;
+}
+.ClasInput{
+   border-left: none;
+   background: white;
+   border-top-right-radius: 12px;
+   border-bottom-right-radius: 12px;
+   border: none;
+}
+.ClasInput2{
+  /* border-radius: 12px; */
+  border-radius: 20px;
+
+  background: white;
+  border: none;
+  box-shadow: 4px 3px 6px #b8e5ff;
+
+}
+.RightInputGroup{
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+.ClasInputGrpIcon{
+    background: transparent;
+    border-right: none;
+    background: white;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border: none;
+}
+.inputGroup{
+      box-shadow: 4px 3px 6px #b8e5ff;
+  border-radius: 15px;
+  border: none;
+}
+.logoContainer{
+  padding: 0px 75px;
+  padding-top: 0;
+  text-align: left;
+}
+.LabelTxt{
+    margin-bottom: 2px;
+    color: #777777;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+.ClasCard{
+  border: none;
+  padding: 0;
+
+}
+
+.logincaption{
+  margin: 5px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #515151;
+}
+.textCenter{
+  text-align: center;
+}
+.textRight{
+  text-align: right;
+}
+.WelcomeTxt{
+  margin: 5px;
+  font-weight: bold;
+}
+.WelcomeTxtDiv{
+
+}
+.FooterBg{
+  background: #efefef;
+}
+/* Snackbar */
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    /* background-color: #333; */
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+  }
+  
+  #snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  #snackbar.error{
+      background: red;
+  }
+  #snackbar.success{
+    background: green;
+  }
+  #snackbar > ion-icon{
+    font-size: 24px;
+    position: relative;
+    top: 7px;
+  }
+
+  /* SideMenu */
+  .ClasSideMenu{
+padding-left: 10px;
+  }
+  /* Home */
+  .Hitxt{
+    margin: 0;
+    letter-spacing: 1px;
+    color: #9b9999;
+    font-size: 1rem;
+  }
+  .TxtName{
+    font-size: 6vw;
+    letter-spacing: 1px;
+  }
+  .TxtGrey{
+    color: #777777;
+  }
+  .TxtGreyIconic{
+    --color:red
+  }
+  .DateTxt{
+    font-size: 5vw;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .Txt1{
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #777777;
+letter-spacing: 1px;
+  }
+  .NumTxt{
+    font-weight: bolder;
+    color: #363535;
+    margin: 0;
+    font-size: 2.5em;
+  }
+  .smallTxt{
+    font-size: 3vw;
+    white-space: nowrap;
+    padding: 0px 15px;
+  }
+  
+  .ClasToolbar{
+    --background: #253f92;
+    --color: white;
+  }
+  .LogoutIcon{
+    font-size: 25px;
+    padding: 7px;
+  }
+  .noPadding{
+    padding: 0px 1px;
+    overflow: scroll;
+  }
+  .noborder{
+    border: none;
+  }
+  .nobg{
+    background: none;
+  }
+  .BgCard{
+    height: 8rem;
+    background: #253f92;
+  }
+  .ClasTimeDiv{
+    position: relative;
+    top: -35px;
+    transform: translateY(7%);
+    background: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 0px #ebebeb;
+    border: none;
+    /* margin-bottom: px; */
+  }
+  .lightTxt{
+    color: white !important;
+  }
+  .darkTxt{
+    color: black !important;
+  }
+  .lightgrey{
+    color: #9b9999;
+  }
+  .cardShadow{
+        box-shadow: 4px 3px 6px #b8e5ff;
+        /* box-shadow: 1px 1px 8px 2px #d5f0ff; */
+  }
+  .borderRadius{
+    border-radius: 12px;
+    border: none;
+  }
+  .EnableHorizontalScroll {
+    overflow-x: scroll;
+    white-space: nowrap;
+    display: inline-flex;
+    width: 100%;
+    padding: 10px 1px;
+  }
+  .DashIcon{
+    padding: 0px 42px;
+  }
+  .marginBottom{
+    margin-bottom: 15vh;
+  }
+  /* Tabs */
+  .is-active-tabs{
+		--color:#05093f;
+
+	}
+  /* log */
+  .table td, .table th {
+    padding: .75rem;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e600;
+    text-align: center;
+}
+thead{
+  background: #ebf0ff;
+}
+tbody:before {
+  content: "-";
+  display: block;
+  line-height: 1em;
+  color: transparent;
+}
+.borderLeftGreen{
+  border-left: 8px solid green;
+}
+.borderLeftYellow{
+  border-left: 8px solid yellow;
+
+}
+tr.spaceUnder>td {
+  padding-bottom: 1em;
+}
+/* Custom PopUp */
+/* Small Custom Modal Css */
+.CustomPopUp .modal-wrapper{
+  background-color: white;
+  width: 500px;
+  padding: 20px;
+  z-index: 2;
+  border-radius: 5px;
+  top: 100%;
+  transition: top 0.23s ease-out;
+  min-height: 14rem;
+  height: auto;
+  overflow-y: overlay;
+  margin: auto 10px;
+}
+.btnEdit
+{
+  background: none;
+  color: #192b64;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-decoration: underline;
+}
+.btnCircle{
+  border-radius: 100%;
+  color: white;
+  background: radial-gradient(#308d4f, green);
+  border: 11px solid #bcbcbc;
+  box-shadow: 0px 1px 13px 12px #e1e1e1;
+  font-weight: 600;
+  letter-spacing: 1px;
+  width: 10em;
+  height: 10em;
+  font-size: 4vw;
+}
+.btnCircleSetting{
+  border-radius: 100%;
+  padding: 70px 15px;
+}
+.ContainerHeight{
+  height: 100%;
+}
+.logFooter{
+  align-items: center;display: flex;    padding: 2px 11px;
+}
+/* Add Meter Reading */
+.searchbar-input.sc-ion-searchbar-md {
+  padding-left: 55px;
+  padding-right: 55px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  background-position: left 8px center;
+  height: auto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  /* border-radius: 18px; */
+  border-bottom: 3px solid white;
+  color: white;
+  background: none;
+}
+ion-searchbar ion-icon {
+  right: 16px !important;
+  left: auto !important;
+  color: white !important;
+}
+.yellowBox{
+  background: rgb(255, 255, 0);
+}
+.greenBox{
+  background: green;
+}
+.item-inner {
+  padding-right: 0px!important;
+}
+.floatLeft{
+  float: left;
+}
+.floatRight{
+  float: right;
+
+}
+
+ 
+  ion-item .noPaddingItem{
+  --padding-start: 0px;
+  --inner-padding-end: 0px;
+  }
+  .noImg{
+    background: black;
+    color: white;
+    border-radius: 10px;
+    padding: 37px;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+  /* logout  */
+  .LogoutIcon{
+
+  }
+  .greentxt{
+    color: green;
+    font-weight: 600;
+    font-size: 1.1rem;
+letter-spacing: 1px;
+  }
+  .CheckIconGreen{
+    font-size: 30px;
+    position: relative;
+    top: 2px;
+    color: green;
+
+  }
+  .CheckIconRed{
+    font-size: 30px;
+    position: relative;
+    top: 2px;
+    color: rgb(204, 4, 4);
+  }
+  .redTxt{
+    color: rgb(204, 4, 4);
+
+  }
+  .textLeft{
+    text-align: left;
+  }
+  .SyncIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+  }
+  .alignSelf{
+    align-self: center;
+  }
+  .LogoutModalIcon{
+    font-size: 19vw;
+    color: rgb(204, 4, 4);
+  }

@@ -1,0 +1,78 @@
+<div class="container-fluid LoginContainer">
+  <ion-row>
+    <ion-col>
+      <Div class="logoContainer ">
+        <img src="assets/img/logo/logo01.png" class="animate__animated animate__fadeInDownBig" alt="CBX LOGO" />
+
+      </Div>
+      <!-- <div class="WelcomeTxtDiv animate__animated animate__fadeInLeft">
+        <h1 class="WelcomeTxt">Welcome to</h1>
+
+        <h6 class="logincaption">SMART CBS</h6>
+      </div> -->
+
+
+    </ion-col>
+  </ion-row>
+  <br>
+  <div class="card ClasCard">
+    <div class="card-body ClasCard">
+
+      <!-- <ion-row>
+  <ion-col size="12" class="textCenter">
+     <h3 class="WelcomeTxt">Login</h3>
+  </ion-col>
+</ion-row> -->
+
+
+
+      <ion-row>
+        <ion-col class="animate__animated animate__fadeInLeft">
+          <label class="LabelTxt">Username</label>
+
+          <div class="input-group inputGroup">
+
+            <div class="input-group-prepend">
+              <div class="input-group-text ClasInputGrpIcon">
+                <ion-icon name="person-outline"></ion-icon>
+              </div>
+            </div>
+            <input type="text" class="form-control ClasInput" [(ngModel)]="objLogin.Username" name="username"
+              placeholder="Username">
+          </div>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col class="animate__animated animate__fadeInLeft">
+          <label class="LabelTxt">Password</label>
+          <div class="input-group inputGroup">
+            <div class="input-group-prepend">
+              <div class="input-group-text ClasInputGrpIcon">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+              </div>
+            </div>
+            <input type="password" class="form-control ClasInput" [(ngModel)]="objLogin.Password" name="password" id="txtPassword"
+              placeholder="Password">
+              <!-- <div class="input-group-prepend " (click)="togglePassword()">
+                <span class="input-group-text RightInputGroup" id="btneyeicon">
+                  <ion-icon name="eye" id="eyeIcon" [hidden]="this.IsPassShow"></ion-icon>
+                  <ion-icon name="eye-off" [hidden]="!this.IsPassShow"></ion-icon>
+                </span>
+              </div> -->
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <br>
+      <br>
+
+      <ion-row>
+        <ion-col size="12" class="textCenter ">
+          <button type="button" class="btn btnLogin animate__animated aanimate__fadeInUp" (click)="btnLogin()">LOGIN</button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="ClasToolbar">
+    <ion-buttons (click)="modalDismiss()">
+      <ion-icon name="chevron-back" class="LogoutIcon"></ion-icon>
+    </ion-buttons>
+    <!-- <ion-title slot="start">SMART CBS</ion-title> -->
+   
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+<div class="card noborder">
+  <div class="card-body">
+    <div class="card noborder ">
+      <div class="card-body noPadding">
+        
+
+        <ion-row>
+          <ion-col size="12">
+
+
+              <ion-item class="ion-no-padding">
+                <ion-label class="LabelTxt">Select Meter Reading</ion-label>
+                <ion-select value="notifications" interface="action-sheet">
+                  <ion-select-option value="allreading">All Reading</ion-select-option>
+                  <ion-select-option value="meterreading">Only Meter Reading</ion-select-option>
+                  <ion-select-option value="onlinefeedback">Online Feedback</ion-select-option>
+                </ion-select>
+              </ion-item>
+          </ion-col>
+        
+          <ion-col size="12">
+          <label class="LabelTxt mb-2">Search by text</label>
+
+            <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="search">
+
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+           <ion-item lines="none" class="ion-no-padding">
+
+            <ion-checkbox slot="start" color="primary" style="    margin-right: 9px;"></ion-checkbox>
+            <ion-label class="Txt1 TxtGreyIconic"> Date filter</ion-label>
+          </ion-item>
+
+          </ion-col>
+          <ion-col size="12">
+            <label class="LabelTxt mb-2">Date</label>
+  
+              <input type="date" class="form-control ClasInput2" name="date" placeholder="">
+  
+            </ion-col>
+        </ion-row> 
+        <br>
+        <br>
+        <ion-row>
+          <ion-col size="12" class="textCenter ">
+            <button type="button" class="btn btnLogin animate__animated aanimate__fadeInUp" (click)="modalDismiss()">APPLY FILTER</button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+</div>
+</ion-content>

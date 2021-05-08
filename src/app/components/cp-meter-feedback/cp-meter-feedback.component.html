@@ -1,0 +1,97 @@
+<div class="container-fluid noPadding ContainerHeight">
+
+  <br>
+  <Div class="container">
+
+
+
+    <!-- <ion-list style="padding-top:0 ;"> -->
+
+
+      <!-- Multi-line sliding item with icon options on both sides -->
+      <Div class="card cardShadow borderRadius">
+
+
+        <ion-item-sliding id="item100">
+          <ion-item href="#" lines="none" class="borderRadius">
+            <ion-note slot="start" >
+              <ion-label>
+                <p class="Hitxt mb-0 ">Meter No.</p>
+                <span class="Txt1 ">PEL 0032432</span>
+                
+                <p class="Hitxt mb-0 ">Consumer </p>
+
+                <span class="Txt1">Masood Asalm</span>
+              </ion-label>
+            </ion-note>
+
+            <ion-note class="Hitxt" slot="end">
+              <ion-label>
+                <p class="Hitxt mb-0 ">Supp No.</p>
+                <span class="Txt1"> 32432</span>
+                <br>
+                <p class="Hitxt mb-0 ">Consumer No.</p>
+                <span class="Txt1"> 32432</span>
+
+              </ion-label>
+            </ion-note>
+          </ion-item>
+
+          <ion-item-options side="start">
+            <ion-item-option routerLink="/meterreading" routerDirection="forward">
+              <ion-icon slot="icon-only" name="heart"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+
+          <ion-item-options side="end">
+
+            <ion-item-option color="dark" routerLink="/meterfeedback" routerDirection="forward">
+              <ion-icon slot="icon-only" name="star"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </Div>
+
+    <!-- </ion-list> -->
+
+    <ion-row>
+      <ion-col>
+
+        <ion-row>
+          <ion-col size="12">
+
+
+              <ion-item class="ion-no-padding">
+                <ion-label class="LabelTxt">Status</ion-label>
+                <ion-select value="notifications" interface="action-sheet">
+                  <ion-select-option value="enable">Enable</ion-select-option>
+                  <ion-select-option value="mute">Mute</ion-select-option>
+                  <ion-select-option value="mute_week">Mute for a week</ion-select-option>
+                  <ion-select-option value="mute_year">Mute for a year</ion-select-option>
+                </ion-select>
+              </ion-item>
+          </ion-col>
+        
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+
+              <label class="LabelTxt mb-2">Comment</label>
+              <textarea class="form-control ClasInput2" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </ion-col>
+        
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <br>
+    <br>
+
+    <ion-row>
+      <ion-col size="12" class="textCenter" >
+        <button type="button" class="btn btnLogin" routerLink="/addmeterreading">Save Feedback</button>
+      </ion-col>
+    </ion-row>
+  </Div>
+</div>

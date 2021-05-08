@@ -1,0 +1,68 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="ClasToolbar">
+    <ion-buttons (click)="modalDismiss()">
+      <ion-icon name="chevron-back" class="LogoutIcon"></ion-icon>
+    </ion-buttons>
+    <!-- <ion-title slot="start">SMART CBS</ion-title> -->
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+  <div class="card boxShadow borderRadius">
+    <div class="card-body">
+      <ion-row>
+        <ion-col size="12">
+          <label class="LabelTxt mb-2">Meter #</label>
+
+          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="3276376" disabled>
+
+        </ion-col>
+        <ion-col size="12">
+          <label class="LabelTxt mb-2">Supplimentory #</label>
+
+          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="218386" >
+
+        </ion-col>
+        <ion-col size="12">
+          <label class="LabelTxt mb-2">Consumer #</label>
+          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="3276376" >
+        </ion-col>
+
+
+        <ion-col size="12">
+          <label class="LabelTxt mb-2">Consumer Name</label>
+          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="3276376" >
+        </ion-col>
+
+        <ion-col size="12">
+          <label class="LabelTxt mb-2">Previous Meter Reading</label>
+          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="Previous Meter Reading" >
+        </ion-col>
+
+        <ion-col size="12">
+          <label class="LabelTxt mb-2">Current Meter Reading</label>
+          <input type="text" class="form-control ClasInput2" name="currentreading" placeholder="current reading">
+        </ion-col>
+
+        <ion-col size="12">
+          <label class="LabelTxt mb-2">Meter Reading Date</label>
+          <input type="text" class="form-control ClasInput2" name="currentreading" placeholder="current reading">
+        </ion-col>
+
+          <ion-col size="12">
+            <p class="Txt1 mb-2 ">Meter Image</p>
+            <div class="noImg">Select Image</div>
+          </ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" class="textCenter ">
+          <button type="button" class="btn btnLogin animate__animated aanimate__fadeInUp"
+            (click)="modalDismiss()">EDIT</button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>
