@@ -192,6 +192,12 @@ padding-left: 10px;
     color: #777777;
 letter-spacing: 1px;
   }
+  .Txt2{
+    font-size: 1rem;
+    font-weight: 600;
+    color: #777777;
+letter-spacing: 1px;
+  }
   .NumTxt{
     font-weight: bolder;
     color: #363535;
@@ -436,3 +442,12 @@ letter-spacing: 1px;
     font-size: 19vw;
     color: rgb(204, 4, 4);
   }
+  ion-select::part(icon) {
+    float: right !important;
+    position: absolute;
+    right: 12px;
+   }
+   .select-icon {
+   
+    position: absolute;
+   }
