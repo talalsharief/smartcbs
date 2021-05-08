@@ -9,7 +9,7 @@
 
 
       <!-- Multi-line sliding item with icon options on both sides -->
-      <Div class="card cardShadow borderRadius">
+      <Div class="card cardShadow borderRadius mb-3">
 
 
         <ion-item-sliding id="item100">
@@ -26,7 +26,7 @@
             </ion-note>
 
             <ion-note class="Hitxt" slot="end">
-              <ion-label>
+              <ion-label class="textRight">
                 <p class="Hitxt mb-0 ">Supp No.</p>
                 <span class="Txt1"> 32432</span>
                 <br>
@@ -53,20 +53,19 @@
       </Div>
 
     <!-- </ion-list> -->
-
   
 
-        <ion-row>
-          <ion-col size="6" class="textCenter">
+        <ion-row class="mb-3">
+          <ion-col size="6" class="textCenter ">
           <label class="LabelTxt mb-2">Previous Reading</label>
 
-            <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="3276376" disabled>
+            <input type="text" class="form-control ClasInput2 textCenter" name="currentreading1" placeholder="3276376" disabled>
 
           </ion-col>
           <ion-col size="6" class="textCenter">
           <label class="LabelTxt mb-2">Current Reading</label>
 
-            <input type="text" class="form-control ClasInput2" name="currentreading" placeholder="current reading">
+            <input type="text" class="form-control ClasInput2 textCenter" name="currentreading" placeholder="current reading">
           </ion-col>
         </ion-row>
       
@@ -80,9 +79,12 @@
 <br>
 <br>
     <ion-row>
-      <ion-col size="12" class="textCenter">
+      <ion-col size="1"></ion-col>
+      <ion-col size="10" class="textCenter">
         <button type="button" class="btn btnLogin" routerLink="/addmeterreading">Save Meter Reading</button>
       </ion-col>
+      <ion-col size="1"></ion-col>
+
     </ion-row>
   </Div>
 </div>

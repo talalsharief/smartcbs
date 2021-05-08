@@ -1,12 +1,14 @@
 <ion-tabs>  
-
-  <ion-fab vertical="bottom" horizontal="center" translucent="true" routerLink="/addmeterreading" routerDirection="forward">
+ <ion-fab vertical="bottom" horizontal="center" slot="center" routerLink="/addmeterreading" routerDirection="forward">
     <ion-fab-button >
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
+   
   </ion-fab>
   
+  
   <ion-tab-bar slot="bottom" class="ion-no-border">
+    
     <ion-tab-button  routerLink="/home" routerDirection="root" routerLinkActive="is-active-tabs">
       <ion-icon name="home"></ion-icon>
       <ion-label>Home</ion-label>
@@ -23,7 +25,6 @@
 
     <ion-tab-button class="notifs" routerLink="/syncdata" routerDirection="forward" routerLinkActive="is-active-tabs">
       <ion-icon name="notifications"></ion-icon>
-      <ion-badge >1</ion-badge>
       <ion-label>Sync Data</ion-label>
     </ion-tab-button>
 

@@ -1,22 +1,25 @@
 /* Login Page */
 
 .btnLogin{
-  padding: 8px 45px;
+  /* padding: 8px 2px; */
     background: linear-gradient(358deg, #2a3b90, #025ca3);
     color: white;
     border-radius: 30px;
     box-shadow: 1px 1px 5px 0px #d9d9d9;
     border: 2px solid white;
     letter-spacing: 2px;
+    width: 100%;
 }
 .btnCancel{
-  padding: 8px 45px;
+  /* padding: 8px 45px; */
   background: linear-gradient(358deg, #8a8a8b, #868686);
   color: white;
   border-radius: 30px;
   box-shadow: 1px 1px 5px 0px #d9d9d9;
   border: 2px solid white;
   letter-spacing: 2px;
+  width: 100%;
+
 }
 .LoginContainer{
     height: 100%;
@@ -73,7 +76,7 @@
 .LabelTxt{
     margin-bottom: 2px;
     color: #777777;
-    font-size: 1.1rem;
+    font-size: 15px;
     letter-spacing: 1px;
     font-weight: 600;
 }
@@ -169,7 +172,7 @@ padding-left: 10px;
     margin: 0;
     letter-spacing: 1px;
     color: #9b9999;
-    font-size: 1rem;
+    font-size: 13px;
   }
   .TxtName{
     font-size: 6vw;
@@ -182,18 +185,18 @@ padding-left: 10px;
     --color:red
   }
   .DateTxt{
-    font-size: 5vw;
+    font-size: 1.3em;
     letter-spacing: 1px;
     font-weight: 600;
   }
   .Txt1{
     font-weight: 600;
-    font-size: 1.1rem;
+        font-size: 15px;
     color: #777777;
 letter-spacing: 1px;
   }
   .Txt2{
-    font-size: 1rem;
+        font-size: 15px;
     font-weight: 600;
     color: #777777;
 letter-spacing: 1px;
@@ -202,7 +205,7 @@ letter-spacing: 1px;
     font-weight: bolder;
     color: #363535;
     margin: 0;
-    font-size: 2.5em;
+    font-size: 2em;
   }
   .smallTxt{
     font-size: 3vw;
@@ -219,7 +222,7 @@ letter-spacing: 1px;
     padding: 7px;
   }
   .noPadding{
-    padding: 0px 1px;
+    padding: 0px 0px;
     overflow: scroll;
   }
   .noborder{
@@ -274,7 +277,7 @@ letter-spacing: 1px;
   }
   /* Tabs */
   .is-active-tabs{
-		--color:#05093f;
+		--color:#253f92;
 
 	}
   /* log */

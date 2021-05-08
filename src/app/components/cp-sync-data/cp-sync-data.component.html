@@ -1,4 +1,4 @@
-<div class="container-fluid noPadding ContainerHeight">
+<div class="container-fluid noPadding  mb-5">
 
 <br>
   <div class="container textCenter">
@@ -39,7 +39,7 @@
         <br>
         <br>
 
-        <button type="button" class="btn btnCircle">
+        <button type="button" class="btn btnCircle" (click)="btnSync()">
           SYNC
           <br>NOW
         </button>
@@ -55,5 +55,42 @@
 
       </div>
     </div>
+    <br>
+    <div class="card borderRadius cardShadow">
+
+      <ion-row>
+        <ion-col>
+
+          <p class="Hitxt mb-0 pt-2 pb-2">Last 10 Synced Data</p>
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th>Sr No.</th>
+                  <th>Sync Date</th>
+                  <th>Records Sync</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Apr 11 2:00PM</td>
+                  <td>100</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Apr 11 2:00PM</td>
+                  <td>100</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </ion-col>
+      </ion-row>
+    </div>
   </div>
+  <br>
+  <br>
 </div>

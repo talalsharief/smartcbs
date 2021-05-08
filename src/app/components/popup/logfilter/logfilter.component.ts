@@ -7,13 +7,18 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./logfilter.component.scss'],
 })
 export class LogfilterComponent implements OnInit {
-
+  isShown: boolean = false ;
   constructor(
-    private modalCtrl : ModalController
+    private modalCtrl: ModalController
   ) { }
 
-  ngOnInit() {}
-  modalDismiss(){
+  ngOnInit() { }
+  modalDismiss() {
     this.modalCtrl.dismiss();
   }
+
+  btnFilter(){
+    this.isShown = ! this.isShown;
+  }
+  
 }

@@ -7,9 +7,12 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AlertModalComponent } from './components/popup/alert-modal/alert-modal.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,
+  AlertModalComponent
+  ],
   entryComponents: [],
   imports: [
     BrowserModule,

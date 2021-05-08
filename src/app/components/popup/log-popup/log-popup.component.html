@@ -1,9 +1,9 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="ClasToolbar">
-    <ion-buttons (click)="modalDismiss()">
+    <ion-buttons slot="start" (click)="modalDismiss()">
       <ion-icon name="chevron-back" class="LogoutIcon"></ion-icon>
     </ion-buttons>
-    <!-- <ion-title slot="start">SMART CBS</ion-title> -->
+    <ion-title >Edit Meter Reading</ion-title>
 
   </ion-toolbar>
 </ion-header>
@@ -22,33 +22,33 @@
         <ion-col size="12">
           <label class="LabelTxt mb-2">Supplimentory #</label>
 
-          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="218386" >
+          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="218386" disabled>
 
         </ion-col>
         <ion-col size="12">
           <label class="LabelTxt mb-2">Consumer #</label>
-          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="3276376" >
+          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="21878" disabled >
         </ion-col>
 
 
         <ion-col size="12">
           <label class="LabelTxt mb-2">Consumer Name</label>
-          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="3276376" >
+          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="Muhammad Rameez" disabled>
         </ion-col>
 
         <ion-col size="12">
           <label class="LabelTxt mb-2">Previous Meter Reading</label>
-          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="Previous Meter Reading" >
+          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="200" disabled>
         </ion-col>
 
         <ion-col size="12">
           <label class="LabelTxt mb-2">Current Meter Reading</label>
-          <input type="text" class="form-control ClasInput2" name="currentreading" placeholder="current reading">
+          <input type="text" class="form-control ClasInput2" name="currentreading" placeholder="100" >
         </ion-col>
 
         <ion-col size="12">
           <label class="LabelTxt mb-2">Meter Reading Date</label>
-          <input type="text" class="form-control ClasInput2" name="currentreading" placeholder="current reading">
+          <input type="text" class="form-control ClasInput2" name="currentreading" placeholder="21 April 2021" disabled>
         </ion-col>
 
           <ion-col size="12">
@@ -58,10 +58,13 @@
 
       </ion-row>
       <ion-row>
-        <ion-col size="12" class="textCenter ">
+        <ion-col size="3"></ion-col>
+        <ion-col size="6" class="textCenter ">
           <button type="button" class="btn btnLogin animate__animated aanimate__fadeInUp"
             (click)="modalDismiss()">EDIT</button>
         </ion-col>
+        <ion-col size="3"></ion-col>
+
       </ion-row>
     </div>
   </div>

@@ -10,6 +10,8 @@ export class GlobalService {
   public objUserData : ClsUserData;
   public objDeviceInfo : ClasDeviceInfo;
 
+  IsSync :boolean =false;
+  IsEdit :boolean = false;
   constructor() { 
     this.objUserData = new ClsUserData();
   }

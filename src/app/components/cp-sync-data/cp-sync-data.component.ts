@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController, NavController } from '@ionic/angular';
+import { GlobalService } from 'src/app/services/global.service';
+import { AlertModalComponent } from '../popup/alert-modal/alert-modal.component';
 
 @Component({
   selector: 'app-cp-sync-data',
@@ -7,8 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CpSyncDataComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private modalController :ModalController ,private global : GlobalService ,private navController :NavController
+  ) { }
 
   ngOnInit() {}
-
+  async btnSync(){
+    this.global.IsSync = true;
+    this.global.IsEdit = false
+    const modal = await this.modalController.create({
+      component: AlertModalComponent,
+      cssClass: 'CustomPopUp'
+    });
+    return await modal.present();
+    
+  }
+  
 }

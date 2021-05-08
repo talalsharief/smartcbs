@@ -1,9 +1,9 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="ClasToolbar">
-    <ion-buttons (click)="modalDismiss()">
+    <ion-buttons slot="start" (click)="modalDismiss()">
       <ion-icon name="chevron-back" class="LogoutIcon"></ion-icon>
     </ion-buttons>
-    <!-- <ion-title slot="start">SMART CBS</ion-title> -->
+    <ion-title >Filter log</ion-title>
    
   </ion-toolbar>
 </ion-header>
@@ -26,7 +26,7 @@
                 <ion-select value="notifications" interface="action-sheet" [value]="['allreading']">
                   <ion-select-option value="allreading">All Reading</ion-select-option>
                   <ion-select-option value="meterreading">Only Meter Reading</ion-select-option>
-                  <ion-select-option value="onlinefeedback">Online Feedback</ion-select-option>
+                  <ion-select-option value="onlinefeedback">Only Meter Feedback</ion-select-option>
                 </ion-select>
               </ion-item>
           </ion-col>
@@ -43,14 +43,12 @@
           <ion-col>
            <ion-item lines="none" class="ion-no-padding">
 
-            <ion-checkbox slot="start" color="primary" style="    margin-right: 9px;"></ion-checkbox>
+            <ion-checkbox slot="start" color="primary"  (click)="btnFilter()" style="    margin-right: 9px;"></ion-checkbox>
             <p class="Txt1 TxtGreyIconic"> Date filter</p>
           </ion-item>
 
           </ion-col>
-          <ion-col size="12">
-            <label class="LabelTxt mb-2">Date</label>
-  
+          <ion-col size="12" [hidden]="!isShown">
               <input type="date" class="form-control ClasInput2" name="date" placeholder="">
   
             </ion-col>
