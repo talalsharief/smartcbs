@@ -6,7 +6,7 @@
     <ion-title >Add Meter Reading</ion-title> -->
     <ion-row>
       <ion-col>
-        <ion-searchbar placeholder="Search by text" animated="true"></ion-searchbar>
+        <ion-searchbar placeholder="Search by text" ></ion-searchbar>
       </ion-col>
     </ion-row>
   </ion-toolbar>
@@ -15,6 +15,6 @@
 <ion-content>
 <app-cp-add-meter-reading></app-cp-add-meter-reading>
 </ion-content>
-<ion-footer>
+<ion-footer *ngIf="isKeyboardHide">
   <app-cp-tabs></app-cp-tabs>
 </ion-footer>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @Component({
   selector: 'app-pg-add-meter-reading',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PgAddMeterReadingPage implements OnInit {
 
-  constructor() { }
-
+  isKeyboardHide=true;
+  constructor(public keyboard:Keyboard) { 
+    this.isKeyboardHide=true;
+  }
   ngOnInit() {
   }
+  ionViewWillEnter() {
+    this.keyboard.onKeyboardWillShow().subscribe(()=>{
+      this.isKeyboardHide=false;
+      // console.log('SHOWK');
+    });
 
+    this.keyboard.onKeyboardWillHide().subscribe(()=>{
+      this.isKeyboardHide=true;
+      // console.log('HIDEK');
+    });
+  }
 }

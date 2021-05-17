@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CpHomeComponent implements OnInit {
 
+  TodayDate= new Date().toDateString()
+
   constructor() { }
 
   ngOnInit() {}

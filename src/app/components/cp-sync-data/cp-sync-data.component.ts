@@ -10,14 +10,21 @@ import { AlertModalComponent } from '../popup/alert-modal/alert-modal.component'
 })
 export class CpSyncDataComponent implements OnInit {
 
+  
   constructor(
     private modalController :ModalController ,private global : GlobalService ,private navController :NavController
-  ) { }
+  ) {
+   
+   }
 
-  ngOnInit() {}
+  ngOnInit() {
+   
+
+  }
   async btnSync(){
     this.global.IsSync = true;
-    this.global.IsEdit = false
+    this.global.IsEdit = false;
+    this.global.isFetch = false;
     const modal = await this.modalController.create({
       component: AlertModalComponent,
       cssClass: 'CustomPopUp'

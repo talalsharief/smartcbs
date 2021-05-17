@@ -44,21 +44,23 @@
            <ion-item lines="none" class="ion-no-padding">
 
             <ion-checkbox slot="start" color="primary"  (click)="btnFilter()" style="    margin-right: 9px;"></ion-checkbox>
-            <p class="Txt1 TxtGreyIconic"> Date filter</p>
+            <p class="Txt1 TxtGreyIconic"><span [hidden]="isShown">No</span> Date filter</p>
           </ion-item>
 
           </ion-col>
           <ion-col size="12" [hidden]="!isShown">
-              <input type="date" class="form-control ClasInput2" name="date" placeholder="">
+              <input type="date" class="form-control ClasInput2" id="date" name="date" placeholder="">
   
             </ion-col>
         </ion-row> 
         <br>
-        <br>
         <ion-row>
-          <ion-col size="12" class="textCenter ">
+          <ion-col size="3"></ion-col>
+          <ion-col size="6" class="textCenter ">
             <button type="button" class="btn btnLogin animate__animated aanimate__fadeInUp" (click)="modalDismiss()">APPLY FILTER</button>
           </ion-col>
+          <ion-col size="3"></ion-col>
+
         </ion-row>
       </div>
     </div>

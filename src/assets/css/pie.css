@@ -39,17 +39,18 @@
   .pie-wrapper .label {
     background: #34495e;
     border-radius: 50%;
-    bottom: 0.4em;
+    /* bottom: 0.4em; */
     color: #ecf0f1;
     cursor: default;
     display: block;
     font-size: 0.25em;
-    left: 0.4em;
-    line-height: 2.6em;
+    left: 50%;
+    /* line-height: 2.6em; */
     position: absolute;
-    right: 0.4em;
+    /* right: 0.4em; */
     text-align: center;
-    top: 0.4em;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
   .pie-wrapper .label .smaller {
     color: #bdc3c7;
@@ -70,8 +71,20 @@
   .pie-wrapper.style-2 .label .smaller {
     color: #bdc3c7;
   }
-  .pie-wrapper.progress-30 .pie .right-side {
+  /* transform: rotate(28deg); */
+  .pie-wrapper.progress-10 .pie .right-side {
     display: none;
+  }
+  .pie-wrapper.progress-10 .pie .half-circle {
+    border-color: #2ba30d;
+  }
+  .pie-wrapper.progress-10 .pie .left-side {
+    transform: rotate(28deg);
+  }
+
+  .pie-wrapper.progress-30 .pie .right-side {
+    /* display: none; */
+    clip: rect(auto, auto, auto, auto);
   }
   .pie-wrapper.progress-30 .pie .half-circle {
     border-color: #3498db;

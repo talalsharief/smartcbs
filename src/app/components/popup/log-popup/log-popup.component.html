@@ -14,46 +14,60 @@
     <div class="card-body">
       <ion-row>
         <ion-col size="12">
-          <label class="LabelTxt mb-2">Meter #</label>
+          <p class="Hitxt mb-0 ">Meter No.</p>
+          <span class="Txt1 ">PEL 0032432</span>
 
-          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="3276376" disabled>
-
-        </ion-col>
-        <ion-col size="12">
-          <label class="LabelTxt mb-2">Supplimentory #</label>
-
-          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="218386" disabled>
+          <!-- <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="3276376" disabled> -->
 
         </ion-col>
         <ion-col size="12">
-          <label class="LabelTxt mb-2">Consumer #</label>
-          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="21878" disabled >
+          <!-- <label class="LabelTxt mb-2">Supplimentory #</label>
+          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="218386" disabled> -->
+          <p class="Hitxt mb-0 ">Supplimentory No</p>
+          <span class="Txt1 ">0032432</span>
+        </ion-col>
+        <ion-col size="12">
+          <!-- <label class="LabelTxt mb-2">Consumer #</label>
+          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="21878" disabled > -->
+        
+          <p class="Hitxt mb-0 ">Consumer No</p>
+          <span class="Txt1 ">0032432</span>
         </ion-col>
 
 
         <ion-col size="12">
-          <label class="LabelTxt mb-2">Consumer Name</label>
-          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="Muhammad Rameez" disabled>
+          <!-- <label class="LabelTxt mb-2">Consumer Name</label> -->
+          <!-- <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="Muhammad Rameez" disabled> -->
+          <p class="Hitxt mb-0 ">Consumer Name</p>
+          <span class="Txt1 ">Muhammad Rameez Raja</span>
+        </ion-col>
+
+        <ion-col size="6" class="textCenter">
+          <!-- <label class="LabelTxt mb-2">Pre Meter Reading</label> -->
+          <p class="Hitxt mb-2">Pre Meter Reading</p>
+
+          <input type="text" class="form-control ClasInput2 textCenter" name="currentreading1" placeholder="200" disabled>
+        </ion-col>
+
+        <ion-col size="6" class="textCenter">
+          <!-- <label class="LabelTxt mb-2">Curr Meter Reading</label> -->
+          <p class="Hitxt mb-2 ">Curr Meter Reading</p>
+
+          <input type="text" class="form-control ClasInput2 textCenter" name="currentreading" placeholder="100" id="inputFocus1">
         </ion-col>
 
         <ion-col size="12">
-          <label class="LabelTxt mb-2">Previous Meter Reading</label>
-          <input type="text" class="form-control ClasInput2" name="currentreading1" placeholder="200" disabled>
-        </ion-col>
-
-        <ion-col size="12">
-          <label class="LabelTxt mb-2">Current Meter Reading</label>
-          <input type="text" class="form-control ClasInput2" name="currentreading" placeholder="100" >
-        </ion-col>
-
-        <ion-col size="12">
-          <label class="LabelTxt mb-2">Meter Reading Date</label>
-          <input type="text" class="form-control ClasInput2" name="currentreading" placeholder="21 April 2021" disabled>
+          <!-- <label class="LabelTxt mb-2">Meter Reading Date</label>
+          <input type="text" class="form-control ClasInput2" name="currentreading" placeholder="21 April 2021" disabled> -->
+          <p class="Hitxt mb-0 ">Meter Reading Date</p>
+          <span class="Txt1 ">{{TodayDate }} {{CurrentTime}}</span>
+       
         </ion-col>
 
           <ion-col size="12">
-            <p class="Txt1 mb-2 ">Meter Image</p>
+            <p class="Hitxt mb-2 ">Meter Image</p>
             <div class="noImg">Select Image</div>
+            
           </ion-col>
 
       </ion-row>
@@ -61,7 +75,7 @@
         <ion-col size="3"></ion-col>
         <ion-col size="6" class="textCenter ">
           <button type="button" class="btn btnLogin animate__animated aanimate__fadeInUp"
-            (click)="modalDismiss()">EDIT</button>
+            (click)="modalDismiss()">Save</button>
         </ion-col>
         <ion-col size="3"></ion-col>
 

@@ -8,12 +8,23 @@
         <br>
         <br>
 
-        <button type="button" class="btn btnCircle">
-          FETCH
+        <button type="button"  (click)="btnFetch()" class="btn btnCircle">
+          <span [hidden]="!global.btnFetch" id="IDFetchServer">
+            FETCH
           <br>FROM<BR>
           SERVER
+          </span>
+             <span  [hidden]="!global.isFetched" id="IDFetch">
+          <img src="assets\img\gif\syncing.gif">
+        </span>
+
+        <span [hidden]="!global.DoneFetched">
+          <ion-icon name="checkmark" class="SyncFetchIcon"></ion-icon>
+        </span>
         </button>
-        <br>
+       
+        <br  >
+        <br [hidden]="global.isFetched">
         <br>
         <br>
 
@@ -29,16 +40,16 @@
     <div class="card borderRadius cardShadow">
 
       <ion-row>
-        <ion-col>
+        <ion-col class="noPadding">
 
-          <p class="Hitxt mb-0 pt-2 pb-2">Last 10 Synced Data</p>
+          <p class="Hitxt mb-0 pt-2 pb-2">Last 10 Fetched Data</p>
           <div class="table-responsive">
             <table class="table">
-              <thead class="thead-light">
+              <thead class="theadCustom">
                 <tr>
                   <th>Sr No.</th>
-                  <th>Sync Date</th>
-                  <th>Records Sync</th>
+                  <th>Fetch Date</th>
+                  <th>Records Fetch</th>
                 </tr>
               </thead>
               <tbody>

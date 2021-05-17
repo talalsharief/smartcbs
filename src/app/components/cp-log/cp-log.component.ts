@@ -20,6 +20,7 @@ export class CpLogComponent implements OnInit {
  async btnEdit(){
    this.global.IsEdit =true
    this.global.IsSync = false;
+   this.global.isFetch = false;
 
     const modal = await this.modalController.create({
       component: AlertModalComponent,

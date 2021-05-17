@@ -94,6 +94,7 @@
 }
 .textCenter{
   text-align: center;
+  text-align: -webkit-center;
 }
 .textRight{
   text-align: right;
@@ -282,19 +283,23 @@ letter-spacing: 1px;
 	}
   /* log */
   .table td, .table th {
-    padding: .75rem;
+    padding: .1rem;
     vertical-align: middle;
     border-top: 1px solid #dee2e600;
     text-align: center;
 }
 thead{
-  background: #ebf0ff;
+  background: #253f92;
+  color: white;
 }
 tbody:before {
   content: "-";
   display: block;
-  line-height: 1em;
+  line-height: 0.5em;
   color: transparent;
+}
+.theadCustom{
+
 }
 .borderLeftGreen{
   border-left: 8px solid green;
@@ -368,8 +373,8 @@ tr.spaceUnder>td {
   background: none;
 }
 ion-searchbar ion-icon {
-  right: 16px !important;
-  left: auto !important;
+  /* right: 16px !important;
+  left: auto !important; */
   color: white !important;
 }
 .yellowBox{
@@ -409,8 +414,8 @@ ion-searchbar ion-icon {
   .greentxt{
     color: green;
     font-weight: 600;
-    font-size: 1.1rem;
-letter-spacing: 1px;
+    font-size: 15px;
+    letter-spacing: 1px;
   }
   .CheckIconGreen{
     font-size: 30px;
@@ -427,7 +432,9 @@ letter-spacing: 1px;
   }
   .redTxt{
     color: rgb(204, 4, 4);
-
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 1px;
   }
   .textLeft{
     text-align: left;
@@ -453,4 +460,11 @@ letter-spacing: 1px;
    .select-icon {
    
     position: absolute;
+   }
+   .btn:focus{
+     color: white !important;
+   }
+   .SyncFetchIcon{
+     color: white;
+     font-size: 3em;
    }

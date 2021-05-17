@@ -10,6 +10,14 @@ export class PgLoginPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    // this.showHelp()
   }
-
+  showHelp(){
+    // introJs(document.querySelector("app-pg-login")).setOptions({
+    //   'nextLabel': 'Next step',
+    //   'prevLabel': 'Previous step',
+    //   'skipLabel': 'Don\'t bother me!',
+    //   'doneLabel': 'Finish'
+    // }).start(); 
+  }
 }

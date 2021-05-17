@@ -7,8 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CpMeterReadingComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    this.setInputFocus()
+   }
 
-  ngOnInit() {}
+  ngOnInit(
+    
+  ) {
+  
+  }
 
+  setInputFocus(){
+    window.setTimeout(function () { 
+      document.getElementById('inputFocus').focus(); 
+  }, 0); 
+  }
 }

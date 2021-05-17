@@ -12,6 +12,15 @@ export class GlobalService {
 
   IsSync :boolean =false;
   IsEdit :boolean = false;
+  isSyncing :boolean = false;
+  isFetch :boolean = false;
+  btnSync : boolean = true;
+  btnFetch:boolean = true;
+  isFetched :boolean = false;
+  DoneFetched : boolean = false;
+  DoneSync : boolean = false;
+
+
   constructor() { 
     this.objUserData = new ClsUserData();
   }

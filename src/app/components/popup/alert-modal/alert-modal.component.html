@@ -16,7 +16,7 @@
     </ion-row>
     <ion-row>
       <ion-col size="6" class="textCenter">
-        <button type="button" class="btn btnCancel animate__animated aanimate__fadeInUp">CANCEL</button>
+        <button type="button" class="btn btnCancel animate__animated aanimate__fadeInUp" (click)="btnCancel()">Cancel</button>
       </ion-col>
       <ion-col size="6" class="textCenter">
         <button type="button" class="btn btnLogin animate__animated aanimate__fadeInUp" (click)="btnYesSync()">Yes</button>
@@ -43,10 +43,37 @@
     </ion-row>
     <ion-row>
       <ion-col size="6" class="textCenter">
-        <button type="button" class="btn btnCancel animate__animated aanimate__fadeInUp">CANCEL</button>
+        <button type="button" class="btn btnCancel animate__animated aanimate__fadeInUp" (click)="btnCancel()">Cancel</button>
       </ion-col>
       <ion-col size="6" class="textCenter">
         <button type="button" class="btn btnLogin animate__animated aanimate__fadeInUp" (click)="btnYesEdit()">Yes</button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="this.global.isFetch">
+  <div class="container">
+    <ion-row>
+      <ion-col class="textCenter">
+        <ion-icon name="alert-circle-outline" class="LogoutModalIcon"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="textCenter">
+
+        <span class="Txt1">Are You Sure ?</span>
+        <p class="">
+          <span class="Hitxt">You want to fetch data from server ?</span>
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6" class="textCenter">
+        <button type="button" class="btn btnCancel animate__animated aanimate__fadeInUp" (click)="btnCancel()">Cancel</button>
+      </ion-col>
+      <ion-col size="6" class="textCenter">
+        <button type="button" class="btn btnLogin animate__animated aanimate__fadeInUp" (click)="btnYesFetched()">Yes</button>
       </ion-col>
     </ion-row>
   </div>

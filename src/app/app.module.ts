@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AlertModalComponent } from './components/popup/alert-modal/alert-modal.component';
-
+import { Keyboard } from '@ionic-native/keyboard/ngx'
 @NgModule({
   declarations: [AppComponent,
   AlertModalComponent
@@ -22,7 +22,7 @@ import { AlertModalComponent } from './components/popup/alert-modal/alert-modal.
      
   providers: [
     HttpClient,
-
+    Keyboard,
     { provide: RouteReuseStrategy,
      useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

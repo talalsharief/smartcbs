@@ -35,16 +35,25 @@
     <p class="Hitxt">SYNC DATA</p>
     <br> -->
     <div class="card cardShadow borderRadius">
-      <div class="card-body ">
+      <div class="card-body textCenter">
         <br>
         <br>
 
         <button type="button" class="btn btnCircle" (click)="btnSync()">
+          <span  [hidden]="!global.btnSync">
           SYNC
           <br>NOW
+        </span>
+        <span [hidden]="!global.isSyncing">
+          <img src="assets\img\gif\syncing.gif">
+        </span>
+        <span [hidden]="!global.DoneSync">
+          <ion-icon name="checkmark" class="SyncFetchIcon"></ion-icon>
+        </span>
         </button>
-        <br>
-        <br>
+      
+        <br  >
+        <br [hidden]="global.isSyncing">
         <br>
 
         <p class="Hitxt">Last Synced at</p>
@@ -59,12 +68,12 @@
     <div class="card borderRadius cardShadow">
 
       <ion-row>
-        <ion-col>
+        <ion-col class="noPadding">
 
           <p class="Hitxt mb-0 pt-2 pb-2">Last 10 Synced Data</p>
           <div class="table-responsive">
             <table class="table">
-              <thead class="thead-light">
+              <thead class="theadCustom">
                 <tr>
                   <th>Sr No.</th>
                   <th>Sync Date</th>
