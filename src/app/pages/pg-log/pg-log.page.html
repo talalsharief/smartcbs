@@ -1,9 +1,20 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="ClasToolbar">
-    <ion-title >Log</ion-title>
-    <ion-buttons slot="end" (click)="btnShowLog()">
-      <ion-icon name="funnel" class="LogoutIcon"></ion-icon>
+    <ion-title [hidden]="this.global.isSearch">
+      <span >Log</span>
+
+
+    </ion-title>
+    <ion-searchbar slot="start" [hidden]="!this.global.isSearch" placeholder="Search by text" ></ion-searchbar>
+
+    <ion-buttons slot="end" >
+      <ion-icon name="search" (click)="btnSearch()" class="LogoutIcon" [hidden]="this.global.isSearch"></ion-icon>
+      <span [hidden]="!this.global.isSearch" (click)="btnClose()">
+        <ion-icon name="close" class="LogoutIcon pb-0"></ion-icon>
+      </span>
     </ion-buttons>
+   
+     
   </ion-toolbar>
 </ion-header>
 

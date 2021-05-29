@@ -19,6 +19,7 @@ export class GlobalService {
   isFetched :boolean = false;
   DoneFetched : boolean = false;
   DoneSync : boolean = false;
+  isSearch :boolean = false;
 
 
   constructor() { 

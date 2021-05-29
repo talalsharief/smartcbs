@@ -3,6 +3,23 @@
 
   <br>
 
+ 
+      <div class="EnableHorizontalScroll">
+        <button type="button" id="AR" class="btn  animate__animated aanimate__fadeInUp"
+        [ngClass]="highlightedDiv == 1 ? 'active' : 'notActive'" (click)="btnFilterlog(1)">
+          
+          All Reading</button>
+        <button type="button" id="MR" class="btn  animate__animated aanimate__fadeInUp"
+        [ngClass]="highlightedDiv == 2 ? 'active' : 'notActive'"
+        (click)="btnFilterlog(2)">Meter Reading</button>
+        <button type="button" id="MF" class="btn  animate__animated aanimate__fadeInUp" 
+        [ngClass]="highlightedDiv == 3 ? 'active' : 'notActive'"
+        
+        (click)="btnFilterlog(3)">Meter Feedback</button>
+
+      </div>
+   <br>
+
   <!-- green border -->
   <Div class="card cardShadow borderRadius borderLeftGreen" (click)="btnEdit()">
 
@@ -36,7 +53,7 @@
     <div class="card-footer logFooter ">
       <span>
         <ion-icon name="checkmark-circle-outline" class="CheckIconGreen"></ion-icon>
-      </span><span class="greentxt ">&nbsp; Synced</span>
+      </span><span class="greentxt ">&nbsp; Synced</span> &nbsp; <span class="Hitxt textRight"> on 7 April 2021 12:46 PM</span>
 
     </div>
 
@@ -63,8 +80,8 @@
           <span class="Txt1">Masood Asalm</span>
         </ion-col>
         <ion-col size="5" class="textRight">
-          <p class="Hitxt mb-0 ">Curr.Reading </p>
-          <span class="Txt1">123456</span>
+          <p class="Hitxt mb-0 ">Meter Status </p>
+          <span class="Txt1">House Locked</span>
         </ion-col>
 
 
@@ -101,8 +118,8 @@
           <span class="Txt1">Masood Asalm</span>
         </ion-col>
         <ion-col size="5" class="textRight">
-          <p class="Hitxt mb-0 ">Curr.Reading </p>
-          <span class="Txt1">123456</span>
+          <p class="Hitxt mb-0 ">Meter Status </p>
+          <span class="Txt1">Faulty</span>
         </ion-col>
 
 
@@ -112,7 +129,7 @@
     <div class="card-footer logFooter" style="    align-items: center;display: flex;">
       <span>
         <ion-icon name="close-circle-outline" class="CheckIconRed"></ion-icon>
-      </span><span class="redTxt ">&nbsp; Not Synced</span>
+      </span><span class="redTxt ">&nbsp; Not Synced </span>
     </div>
 
   </Div>
@@ -150,7 +167,7 @@
     <div class="card-footer logFooter ">
       <span>
         <ion-icon name="checkmark-circle-outline" class="CheckIconGreen"></ion-icon>
-      </span><span class="greentxt ">&nbsp; Synced</span>
+      </span><span class="greentxt ">&nbsp; Synced</span> &nbsp; <span class="Hitxt textRight"> on 7 April 2021 12:46 PM</span>
 
     </div>
 

@@ -12,15 +12,18 @@ import { LogPopupComponent } from '../popup/log-popup/log-popup.component';
 export class CpLogComponent implements OnInit {
 
   constructor(
-    private modalController : ModalController, private global : GlobalService
+    private modalController: ModalController, private global: GlobalService
   ) { }
 
-  ngOnInit() {}
- 
- async btnEdit(){
-   this.global.IsEdit =true
-   this.global.IsSync = false;
-   this.global.isFetch = false;
+  ngOnInit() { 
+    this.highlightedDiv = 1;
+
+  }
+
+  async btnEdit() {
+    this.global.IsEdit = true
+    this.global.IsSync = false;
+    this.global.isFetch = false;
 
     const modal = await this.modalController.create({
       component: AlertModalComponent,
@@ -29,7 +32,17 @@ export class CpLogComponent implements OnInit {
     return await modal.present();
   }
 
-  
 
+  
+  highlightedDiv: number;
+
+  btnFilterlog(newValue: number) {
+  if (this.highlightedDiv === newValue) {
+    this.highlightedDiv = 0;
   }
+  else {
+    this.highlightedDiv = newValue;
+  }
+}
+}
 
