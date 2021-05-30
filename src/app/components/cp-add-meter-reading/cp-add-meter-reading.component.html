@@ -38,6 +38,8 @@
     <!-- Multi-line sliding item with icon options on both sides -->
     <Div class="card cardShadow borderRadius">
 
+<!-- <ion-list #sList > -->
+
 
       <ion-item-sliding id="item100">
         <ion-item lines="none" class="borderRadius">
@@ -65,18 +67,23 @@
         </ion-item>
 
         <ion-item-options side="start">
-          <ion-item-option routerLink="/meterreading" routerDirection="forward">
-            <ion-icon slot="icon-only" name="heart"></ion-icon>
+          <ion-item-option routerLink="/meterreading" routerDirection="forward" style="background: #e1f4ff;">
+            <!-- <ion-icon slot="icon-only" name="heart"></ion-icon> -->
+            <img slot="top" src="assets/img/meterfb.png" alt="meterfb" class="meter"/>
+            <span class="Txt1">Meter Reading</span> 
           </ion-item-option>
         </ion-item-options>
 
         <ion-item-options side="end">
 
-          <ion-item-option color="dark" routerLink="/meterfeedback" routerDirection="forward">
-            <ion-icon slot="icon-only" name="star"></ion-icon>
+          <ion-item-option  routerLink="/meterfeedback" routerDirection="forward" style="background: #e1f4ff;">
+            <!-- <ion-icon slot="icon-only" name="star"></ion-icon> -->
+            <img slot="top" src="assets/img/meterfb.png" alt="meterfb" class="meter"/>
+            <span class="Txt1">Meter Feedback</span> 
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
+    <!-- </ion-list> -->
     </Div>
 
   </Div>

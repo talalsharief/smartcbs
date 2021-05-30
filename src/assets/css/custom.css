@@ -489,3 +489,7 @@ ion-searchbar ion-icon {
     letter-spacing: 2px;
     width: 100%;
    }
+   .meter{
+     width: 70px;
+     padding: 6px;
+   }
