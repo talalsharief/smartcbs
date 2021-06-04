@@ -2,12 +2,13 @@
   <ion-toolbar class="ClasToolbar">
     <!-- <ion-buttons routerLink="/home" slot="start">
       <ion-icon name="chevron-back" class="LogoutIcon"></ion-icon>
-    </ion-buttons>
-    <ion-title >Add Meter Reading</ion-title> -->
+    </ion-buttons> -->
+    <!-- <ion-title >Add Meter Reading</ion-title>  -->
     <ion-row>
       <ion-col>
-        <ion-searchbar placeholder="Search by text" ></ion-searchbar>
+        <ion-searchbar (ionInput)="SearchConsumerMeter($event)" placeholder="Search by text" ></ion-searchbar>
       </ion-col>
+      
     </ion-row>
   </ion-toolbar>
 </ion-header>

@@ -9,29 +9,27 @@
 
 
       <!-- Multi-line sliding item with icon options on both sides -->
-      <Div class="card cardShadow borderRadius mb-3">
-
-
+      <Div class="card cardShadow borderRadius mb-3" *ngIf="this.meterReading">
         <ion-item-sliding id="item100">
           <ion-item class="borderRadius" lines="none">
             <ion-note slot="start" >
               <ion-label>
                 <p class="Hitxt mb-0 ">Meter No.</p>
-                <span class="Txt1 ">PEL 0032432</span>
+                <span class="Txt1 ">{{meterReading.MeterNo}}</span>
                 
                 <p class="Hitxt mb-0 ">Consumer </p>
 
-                <span class="Txt1">Masood Asalm</span>
+                <span class="Txt1">{{meterReading.ConsumerName}}</span>
               </ion-label>
             </ion-note>
 
             <ion-note class="Hitxt" slot="end">
               <ion-label class="textRight">
                 <p class="Hitxt mb-0 ">Supp No.</p>
-                <span class="Txt1"> 32432</span>
+                <span class="Txt1"> {{meterReading.SuppMeterNo}}</span>
                 <br>
                 <p class="Hitxt mb-0 ">Consumer No.</p>
-                <span class="Txt1"> 32432</span>
+                <span class="Txt1"> {{meterReading.ConsumerNo}}</span>
 
               </ion-label>
             </ion-note>
@@ -59,13 +57,13 @@
           <ion-col size="6" class="textCenter ">
           <label class="LabelTxt mb-2">Previous Reading</label>
 
-            <input type="text" class="form-control ClasInput2 textCenter" name="currentreading1" placeholder="3276376" disabled>
+            <input type="text" class="form-control ClasInput2 textCenter" [(ngModel)]="this.meterReading.PreviousReading"  name="currentreading1" placeholder="0" disabled>
 
           </ion-col>
           <ion-col size="6" class="textCenter">
           <label class="LabelTxt mb-2">Current Reading</label>
 
-            <input type="number" id="inputFocus" class="form-control ClasInput2 textCenter" name="currentreading" placeholder="current reading">
+            <input type="number" id="inputFocus" class="form-control ClasInput2 textCenter" [(ngModel)]="this.CurrentReading" name="currentreading" placeholder="0">
           </ion-col>
         </ion-row>
       
@@ -81,7 +79,7 @@
     <ion-row>
       <ion-col size="1"></ion-col>
       <ion-col size="10" class="textCenter">
-        <button type="button" class="btn btnLogin" routerLink="/addmeterreading">Save Meter Reading</button>
+        <button type="button" class="btn btnLogin" (click)="addMeterReading()">Save Meter Reading</button>
       </ion-col>
       <ion-col size="1"></ion-col>
 

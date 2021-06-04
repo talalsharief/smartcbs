@@ -7,8 +7,9 @@ export const environment = {
     // baseURL: "http://192.168.1.100/dPOSAPI/"
       //  baseURL: "http://192.168.1.111/dPOSAPI/"
           // baseURL: "http://localhost/dPOSAPI/"
-
-      baseURL : "http://localhost:51306/" //todo: /pick from environment variable
+      
+        baseURL:"http://192.168.1.113/xcbm/webservices/" //Development
+      //baseURL : "http://localhost:51306/" //todo: /pick from environment variable
 };
 
 /*

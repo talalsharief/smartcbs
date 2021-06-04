@@ -9,6 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AlertModalComponent } from './components/popup/alert-modal/alert-modal.component';
 import { Keyboard } from '@ionic-native/keyboard/ngx'
+import { IonicStorageModule } from '@ionic/storage';
+import { AuthguardService } from './services/authguard.service';
+
 @NgModule({
   declarations: [AppComponent,
   AlertModalComponent
@@ -17,14 +20,18 @@ import { Keyboard } from '@ionic-native/keyboard/ngx'
   imports: [
     BrowserModule,
     HttpClientModule,
-     IonicModule.forRoot(), 
+     IonicModule.forRoot(),
+     IonicStorageModule.forRoot(), 
      AppRoutingModule],
      
   providers: [
     HttpClient,
     Keyboard,
     { provide: RouteReuseStrategy,
-     useClass: IonicRouteStrategy }],
+     useClass: IonicRouteStrategy },
+     AuthguardService
+    
+    ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -1,5 +1,24 @@
 # SMART-CBS-APP
 
+# Backend ChangeLog 4 June 2021 6:50 PM
+1- Fetched Meter<br>
+2- Fetched Consumer<br>
+3- SearchConsumers <br>
+4- Add Meter Reading<br>
+5- Scroll Infinity
+
+# Aleena UI Changes 29 May 2021 1:08 PM
+new ui changes
+--Log page
+Synced on date/time
+yellow feedback div points
+filter button remove -> search icon 
+toggle search bar when click search icon
+Horizontal scroll buttons -> All reading -> Meter Reading -> Meter Feedback
+Loading Process sync page and setting page 
+Showing next meter spelling
+current meter reading by default focus
+
 # Application guide install
 npm install intro.js --save
 
@@ -14,15 +33,3 @@ npm install @ionic-native/keyboard
 
 # ionic native missing dependencies (error resolve)
 npm install --save @ionic-native/core
-
-# Aleena UI Changes 29 May 2021 1:08 PM
-new ui changes
---Log page
-Synced on date/time
-yellow feedback div points
-filter button remove -> search icon 
-toggle search bar when click search icon
-Horizontal scroll buttons -> All reading -> Meter Reading -> Meter Feedback
-Loading Process sync page and setting page 
-Showing next meter spelling
-current meter reading by default focus

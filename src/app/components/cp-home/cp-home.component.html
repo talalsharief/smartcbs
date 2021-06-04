@@ -6,7 +6,7 @@
         <ion-row>
           <ion-col size="12">
             <p class="Hitxt lightTxt">Hello !</p>
-            <span class="TxtName lightTxt">Muhammad Rameez Raja</span>
+            <span class="TxtName lightTxt" *ngIf="this.global.UserData">{{this.global.UserData.userName}}</span>
           </ion-col>
         </ion-row>
       </div>

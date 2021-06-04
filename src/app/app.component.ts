@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { DalService } from './services/dal.service';
+import { GlobalService } from './services/global.service';
+import { LocalstorageService } from './services/localstorage.service';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +13,28 @@ import { Component } from '@angular/core';
 export class AppComponent {
   CustomToastText ="invalid"
 
-  constructor() {}
+  constructor(
+    public local:LocalstorageService,
+    public dal:DalService,
+    public global:GlobalService
+  ) {
+    this.FetchMetersAndConsumers();
+  }
+
+
+  FetchMetersAndConsumers(){
+    this.global.AllConsumersList=[]
+    this.global.AllMetersList=[]
+    this.local.get("Consumers").then((data)=>{
+      if(data){
+        this.global.AllConsumersList=data;
+      }
+    })
+    this.local.get("Meters").then((data)=>{
+      if(data){
+        this.global.AllMetersList=data;
+      }
+    })
+
+  }
 }

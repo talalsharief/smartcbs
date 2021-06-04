@@ -24,14 +24,10 @@ export class CpSettingComponent implements OnInit {
     this.global.isFetch = true
     this.global.IsSync = false;
     this.global.IsEdit = false
-
     const modal = await this.modalController.create({
       component: AlertModalComponent,
       cssClass: 'CustomPopUp'
     });
-
-   
-
     return await modal.present();
     
   }

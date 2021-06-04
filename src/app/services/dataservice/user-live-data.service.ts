@@ -12,19 +12,17 @@ export class UserLiveDataService {
   UserSignInService(param) {
     return new Promise((resolve, reject) => {
       try{
-        this.api.Get("api/user/userlogin",{params: param,observe: 'response',page:"login"}).then((res: any) => {
-           let respData = res.body; //todo: to check if status is 1.....
+        this.api.Get('wsMeterReadingUser.asmx/validateUser?_user='+param._user+"&_pwd="+param._pwd).then((res: any) => {
+           let respData = res.substring(res.indexOf("{"), res.indexOf("}")+1);
+           
         // })
-        if(respData.status ==1){ //valid data{
-          console.log("Login Data Fetched")
-          console.log("Status:"+respData.status +" and Data:"+respData.data[0])
-         
-          return  resolve(respData.data);
+        if(respData){ //valid data{
+          let data=JSON.parse(respData);
+          return  resolve(data);
         }
-        else if(respData.status==0)
+        else if(respData==null || respData=="")
         {
-          console.log("Status:"+respData.status +" and Data:"+null)
-          return resolve(respData)
+          return resolve(null)
         }
       })
     }

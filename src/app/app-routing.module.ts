@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthguardService } from './services/authguard.service';
+// import { DalService } from './services/dal.service';
 
 const routes: Routes = [
   // Default Home Comment by Aleena 
@@ -14,11 +16,13 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/pg-login/pg-login.module').then( m => m.PgLoginPageModule)
+    loadChildren: () => import('./pages/pg-login/pg-login.module').then( m => m.PgLoginPageModule),
+    // canActivate: [AuthguardService]
   },
   {
     path: 'home',
-    loadChildren: () => import('./pages/pg-home/pg-home.module').then( m => m.PgHomePageModule)
+    loadChildren: () => import('./pages/pg-home/pg-home.module').then( m => m.PgHomePageModule),
+    // canActivate: [AuthguardService]
   },
   {
     path: 'log',

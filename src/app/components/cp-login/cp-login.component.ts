@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { ClsLogin } from 'src/app/classes/cls-login';
 import { ClsUserData } from 'src/app/classes/cls-user-data';
 import { DalService } from 'src/app/services/dal.service';
+import { GlobalService } from 'src/app/services/global.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -20,9 +21,11 @@ export class CpLoginComponent implements OnInit {
   constructor(
     private dal:DalService,
     private nav:NavController,
-    // private global:GlobalService,
+     private global:GlobalService,
     private local:LocalstorageService,
     private toast:ToastService,
+  
+    
   ) {}
 
   ngOnInit() {
@@ -32,46 +35,27 @@ export class CpLoginComponent implements OnInit {
 
  
   btnLogin(){ 
-    if(this.objLogin.Username == null || this.objLogin.Password == null){
-      console.log(this.objLogin.Username);
+    if(this.objLogin.Username == "" || this.objLogin.Password == ""){
+    
      this.toast.ShowCustomToast('<ion-icon name="alert-circle"></ion-icon> Enter Username/Password' , "error" );
 
     }else{
       let obj={
-        username:this.objLogin.Username,
-        password:this.objLogin.Password
-      }
-      this.nav.navigateRoot("home");
-      
-    // this.dal.UserLiveSignIn(obj).then((res:any)=>{
-    //   try{
-    //   let data=res;
-    //   if(data.length>0){
-    //     // this.dal.UserprefrencesList().then((user:any)=>{
-    //     //   if(user !=undefined){
-    //     //     this.objUserData.userPreferences=user; 
-    //     //     this.local.set('userPreferences',this.global.userPreferences);
-    //     //     this.toast.Showtoast("Login Succesfully", "success");
-    //     //     this.appcomponent.FillLocalStorageIfEmpty();
-    //     //     this.nav.navigateRoot("home");
-    //     //   }
-  
-  
-    //     // }) 
+        _user:this.objLogin.Username,
+        _pwd:this.objLogin.Password
+      } 
+      this.dal.UserLiveSignIn(obj).then((data:any)=>{
+       if(data){
+         this.global.UserData=data;
+     this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Login Successfully' , "success" );
+    //  this.dal.isLogin=true;
+         this.nav.navigateRoot("home");
+       }
+       else if(data==null){
+     this.toast.ShowCustomToast('<ion-icon name="alert-circle"></ion-icon>Invalid Username or password' , "error" );
 
-      
-    //   }
-    //   else if(data.status==0){
-    //      console.log("Invalid Email or Password");
-    //     this.toast.Showtoast("Username or password invalid", "error");
-
-    //   }
-    // }
-    // catch(error){
-    //   console.log(error);
-    // }
-    // })
-
+       }
+      })
   }
   }
   IsPassShow = false;
