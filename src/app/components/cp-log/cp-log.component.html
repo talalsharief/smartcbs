@@ -1,31 +1,23 @@
 <div class="container ">
 
 
-      <div class="EnableHorizontalScroll">
-        <button type="button" id="AR" class="btn  animate__animated aanimate__fadeInUp"
-        [ngClass]="highlightedDiv == 1 ? 'active' : 'notActive'" (click)="btnFilterlog(1)">
-          
-          All Reading</button>
-        <button type="button" id="MR" class="btn  animate__animated aanimate__fadeInUp"
-        [ngClass]="highlightedDiv == 2 ? 'active' : 'notActive'"
-        (click)="btnFilterlog(2)">Meter Reading</button>
-        <button type="button" id="MF" class="btn  animate__animated aanimate__fadeInUp" 
-        [ngClass]="highlightedDiv == 3 ? 'active' : 'notActive'"
-        
-        (click)="btnFilterlog(3)">Meter Feedback</button>
+  <div class="EnableHorizontalScroll">
+    <button type="button" id="AR" class="btn  animate__animated aanimate__fadeInUp"
+      [ngClass]="highlightedDiv == 1 ? 'active' : 'notActive'" (click)="GetAllReadingFeedback(1)">
 
-      </div>
-   <br>
+      All Reading</button>
+    <button type="button" id="MR" class="btn  animate__animated aanimate__fadeInUp"
+      [ngClass]="highlightedDiv == 2 ? 'active' : 'notActive'" (click)="GetMeterReadingList(2)">Meter Reading</button>
+    <button type="button" id="MF" class="btn  animate__animated aanimate__fadeInUp"
+      [ngClass]="highlightedDiv == 3 ? 'active' : 'notActive'" (click)="GetFeedBackList(3)">Meter Feedback</button>
+
+  </div>
+  <br>
 
   <!-- green border -->
-  <!-- <ng-container> -->
-
-
+  <ng-container *ngIf="ReadingList==true">
   <Div class="card cardShadow borderRadius borderLeftGreen" (click)="btnEdit()" *ngFor="let meter of MeterReadingList">
-
     <div class="card-body noPadding">
-
-
       <ion-row>
         <ion-col size="5">
           <p class="Hitxt mb-0 ">Meter No.</p>
@@ -45,15 +37,14 @@
           <p class="Hitxt mb-0 ">Curr.Reading </p>
           <span class="Txt1">{{meter.CurrentReadig}}</span>
         </ion-col>
-
-
       </ion-row>
 
     </div>
     <div class="card-footer logFooter " *ngIf="meter.IsSend=='true'">
       <span>
         <ion-icon name="checkmark-circle-outline" class="CheckIconGreen"></ion-icon>
-      </span><span class="greentxt ">&nbsp; Synced</span> &nbsp; <span class="Hitxt textRight"> on 7 April 2021 12:46 PM</span>
+      </span><span class="greentxt ">&nbsp; Synced</span> &nbsp; <span class="Hitxt textRight"> on 7 April 2021 12:46
+        PM</span>
 
     </div>
     <div class="card-footer logFooter" style="align-items: center;display: flex;" *ngIf="meter.IsSend=='false'">
@@ -63,7 +54,7 @@
     </div>
 
   </Div>
-<!-- </ng-container> -->
+  </ng-container>
   <br>
   <!-- <Div class="card cardShadow borderRadius borderLeftYellow" (click)="btnEdit()">
 
@@ -178,10 +169,10 @@
     </div>
 
   </Div> -->
-<br>
-<br>
-<br>
-<br>
+  <br>
+  <br>
+  <br>
+  <br>
 </div>
 
 <!-- comment old div -->

@@ -37,7 +37,7 @@
               <ion-col size="7" class="alignSelf">
 
                 <p class="NumTxt">
-                  <span class="lightgrey">20</span> / <span>200</span>
+                  <span class="lightgrey">20</span> / <span *ngIf="this.global.AllConsumerMeters">{{this.global.AllConsumerMeters.length}}</span>
                 </p>
                 <span class="Hitxt">Meter Reading Added</span>
 
@@ -109,9 +109,9 @@
               <ion-col size="12" class="pt-0">
                 <p class="">
 
-                  <span class="Hitxt">Today</span>
+                  <span class="Hitxt">{{todaay}}</span>
                 </p>
-                <span class="Txt1">1:00 PM</span>
+                <span class="Txt1">{{GetLastFeteched()}}</span>
                 <p class="">
                   <span class="Hitxt">Last Fetched</span>
                 </p>

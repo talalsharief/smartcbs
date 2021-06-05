@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
+import * as moment from 'moment';
 import { DalService } from 'src/app/services/dal.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
@@ -125,6 +126,7 @@ export class AlertModalComponent implements OnInit {
 
   isFectched(){
     if (this.global.AllFetched >= 2) {
+      this.local.set("LastFetchDateTime",moment().format('DD MM YYYY, h:mm:ss A'));
       this.global.DoneFetched = false;
       this.global.btnFetch = true;
       this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Data Sync successfully', "success");

@@ -75,12 +75,20 @@ export class GlobalService {
         //Checking Feedback
         let FindFeedback = this.AllMeterFeedback.find(items => items.MeterId == CMeters[j].MeterID);
         let FeedbackValue = FindFeedback != undefined;
-        if(FindMR == false && FeedbackValue==false)
+        if(MRValue === false && FeedbackValue===false)
         this.AllConsumerMeters.push({ Name: this.AllConsumersList[index].ConsumerName + " " + CMeters[j].MeterNo + " " + CMeters[j].SuppMeterNo + " " + this.AllConsumersList[index].ConsumerNo, MeterID: CMeters[j].MeterID, ConsumerID: this.AllConsumersList[index].ConsumerID, IsReadingAdded: MRValue, SerialNo: CMeters[j].SerialNo, IsFeedbackAdded: FeedbackValue,ConsumerName:this.AllConsumersList[index].ConsumerName,MeterNo:CMeters[j].MeterNo,ConsumerNo:this.AllConsumersList[index].ConsumerNo,SuppMeterNo:CMeters[j].SuppMeterNo,PreviousReading:CMeters[j].PreviousReading });
-      
       }
     }
     console.log("all consumermeterslist filled");
 
+  }
+
+  GetPrimaryKey() {
+    let id = "";
+    let possible = "0123456789"+Date.now().toString().substring(7,13);
+    for (let i = 0; i < 6; i++){
+      id += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return id;
   }
 }

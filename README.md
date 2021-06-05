@@ -1,6 +1,12 @@
 # SMART-CBS-APP
 
-# Backend ChangeLog 4 June 2021 6:50 PM
+# Backend ChangeLog 5 June 2021 4:14 PM by SHAZ
+1- Feedback Added<br>
+2- Filter Log<br>
+3- LastFetched Data in Setting <br>
+4- Main Dashobard Last Fetched Show Time<br>
+
+# Backend ChangeLog 4 June 2021 6:50 PM by SHAZ
 1- Fetched Meter<br>
 2- Fetched Consumer<br>
 3- SearchConsumers <br>

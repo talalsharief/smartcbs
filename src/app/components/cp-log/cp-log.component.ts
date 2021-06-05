@@ -13,12 +13,14 @@ import { LogPopupComponent } from '../popup/log-popup/log-popup.component';
 export class CpLogComponent implements OnInit {
 
   MeterReadingList=[]
+  MeterFeedbackList=[]
+  AllReadingFeedbackList=[]
   constructor(
     private modalController: ModalController, 
     private global: GlobalService,
     public local:LocalstorageService
   ) {
-    this.GetMeterReadingList()
+    
    }
 
   ngOnInit() { 
@@ -50,12 +52,39 @@ export class CpLogComponent implements OnInit {
     this.highlightedDiv = newValue;
   }
 }
-GetMeterReadingList(){
-  this.local.get("MeterReading").then((data)=>{
-    if(data){
-      this.MeterReadingList=data;
-    }
-  })
+GetMeterReadingList(newValue){
+  this.MeterReadingList=[]
+  if (this.highlightedDiv === newValue) {
+    this.highlightedDiv = 0;
+  }
+  else 
+  {
+    this.highlightedDiv = newValue;
+  }
+
+  this.MeterReadingList= this.global.AllConsumerMeters.filter(x=>x.IsReadingAdded==true);
+}
+
+GetAllReadingFeedback(newValue){
+  if (this.highlightedDiv === newValue) {
+    this.highlightedDiv = 0;
+  }
+  else 
+  {
+    this.highlightedDiv = newValue;
+  }
+  this.MeterFeedbackList= this.global.AllConsumerMeters.filter(x=>x.IsReadingAdded==true || x.IsFeedbackAdded==true);
+}
+
+GetFeedBackList(newValue){
+  if (this.highlightedDiv === newValue) {
+    this.highlightedDiv = 0;
+  }
+  else 
+  {
+    this.highlightedDiv = newValue;
+  }
+  this.MeterFeedbackList= this.global.AllConsumerMeters.filter(x=>x.IsFeedbackAdded==true);
 }
 
 }

@@ -29,7 +29,7 @@ export class PgAddMeterReadingPage implements OnInit {
     });
   }
     async SearchConsumerMeter(evt) {
-      this.global.AllFilterSearch = this.global.AllConsumerMeters;
+      this.global.AllFilterSearch = this.global.AllConsumerMeters.filter(x=>x.IsReadingAdded==false && x.IsFeedbackAdded==false);
       const searchTerm = evt.srcElement.value;
       if (!searchTerm) {
         return;

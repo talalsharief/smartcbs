@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { GlobalService } from 'src/app/services/global.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -13,19 +14,6 @@ export class CpMeterReadingComponent implements OnInit {
 
   MeterReadingData;
   meterReading={
-    // MeterReadingID:"",
-    // MeterID:"2",
-    // MeterNo: "",
-    // PreviousReading: "232",
-    // CurrentReading:"",
-    // cload: "",
-    // consumerName:"",
-    // consumerNo: "2332",
-    // consumerID:"3434",
-    // branchid: "122",
-    // imageUrl:"",
-    // ReadingDate:"",
-    // SerialNo:""
 ConsumerID:-1 ,
 ConsumerName: "",
 ConsumerNo: "",
@@ -54,7 +42,8 @@ _date:""
     public route:ActivatedRoute,
     public local:LocalstorageService,
     public toast:ToastService,
-    public nav:NavController
+    public nav:NavController,
+    public global:GlobalService
   ) {
     this.ReadingDate=new Date().toLocaleDateString();
     this.setInputFocus();
@@ -91,7 +80,7 @@ _date:""
         ConsumerID: this.meterReading.ConsumerID,
         ConsumerName: this.meterReading.ConsumerName,
         CurrentReadig: this.CurrentReading,
-        ID: this.meterReading.MeterReadingUserID,
+        ID: this.global.GetPrimaryKey(),
         MeterId: this.meterReading.MeterID,
         MeterNo: this.meterReading.MeterNo,
         MeterReadingUserID: this.meterReading.MeterReadingUserID,
@@ -99,24 +88,36 @@ _date:""
         imageUrl: "",
         _date:this.ReadingDate ,
         ImageSync: "false",
-        IsSend: "false"
+        IsSend: "false",
+        Type:"mr"
       }
       this.local.get("MeterReading").then((reading:any)=>{
         if(reading){
           let newResArr=[]
           newResArr = reading
           newResArr.push(obj);
-                 this.local.set("MeterReading",newResArr).then((result)=>{
+          this.local.set("MeterReading",newResArr).then((result)=>{
+            let index=this.global.AllConsumerMeters.findIndex(x=>x.MeterNo==this.meterReading.MeterNo);
+            let Value=this.global.AllConsumerMeters.filter(x=>x.MeterNo==this.meterReading.MeterNo);
+          
+            // Value[0].IsReadingAdded=true;
+            // this.global.AllConsumerMeters[index] = value;
+            // this.global.AllConsumerMeters.join();
           this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter reading saved' , "success" );
-          this.nav.navigateRoot("log");
+          // this.nav.navigateRoot("log");
            });
         }
         else if(reading==null){
           let aRRay=[]
         aRRay.push(obj)
             this.local.set("MeterReading",aRRay).then((result)=>{
+              let index=this.global.AllConsumerMeters.findIndex(x=>x.MeterNo==this.meterReading.MeterNo);
+              let Value=this.global.AllConsumerMeters.filter(x=>x.MeterNo==this.meterReading.MeterNo);
+              // Value[0].IsReadingAdded=true;
+              // this.global.AllConsumerMeters.splice(index, 0, Value)[0];
+              // this.global.AllConsumerMeters.join();
               this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter reading saved' , "success" );
-              this.nav.navigateRoot("log"); 
+              // this.nav.navigateRoot("log"); 
                });
         }
 

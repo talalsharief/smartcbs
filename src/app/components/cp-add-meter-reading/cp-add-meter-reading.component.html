@@ -13,7 +13,7 @@
             <p class="Hitxt mb-0 ">Showing next meter</p>
 
             <ion-note class=" Txt1" slot="end">
-                  {{this.global.AllFilterSearch.length}}/{{this.global.AllConsumerMeters.length}}
+                  {{this.RemainingMeterReadingCount()}}/{{this.global.AllConsumerMeters.length}}
             </ion-note>
           </ion-item>
         </ion-col>
@@ -47,15 +47,15 @@
         </ion-item>
 
         <ion-item-options side="start" (ionSwipe)="goto_MeterReading(item)">
-          <ion-item-option  style="background: #e1f4ff;">
+          <ion-item-option  style="background: #e1f4ff;" (click)="goto_MeterReading(item)">
             <img slot="top" src="assets/img/meterfb.png" alt="meterfb" class="meter"/>
             <span class="Txt1">Meter Reading</span> 
           </ion-item-option>
         </ion-item-options>
 
-        <ion-item-options side="end">
+        <ion-item-options side="end" (ionSwipe)="goto_MeterFeedback(item)">
 
-          <ion-item-option  routerLink="/meterfeedback" routerDirection="forward" style="background: #e1f4ff;">
+          <ion-item-option (click)="goto_MeterFeedback(item)" style="background: #e1f4ff;">
 
             <img slot="top" src="assets/img/meterfb.png" alt="meterfb" class="meter"/>
             <span class="Txt1">Meter Feedback</span> 

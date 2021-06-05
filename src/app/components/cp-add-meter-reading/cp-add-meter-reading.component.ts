@@ -57,53 +57,53 @@ export class CpAddMeterReadingComponent implements OnInit {
     });
   }
 
-  addMeterReading(){
-    if(this.meterReading.CurrentReading==""){
-     this.toast.ShowCustomToast('<ion-icon name="alert-circle"></ion-icon> Enter current meter reading' , "error" );
-    }
-    else
-    {
-      let obj={
-        BranchID: this.meterReading.branchid,
-        Cload: this.meterReading.cload,
-        ConsumerID: this.meterReading.consumerID,
-        ConsumerName: this.meterReading.consumerName,
-        CurrentReadig: this.meterReading.CurrentReading,
-        ID: this.meterReading.MeterReadingID,
-        MeterId: this.meterReading.MeterID,
-        MeterNo: this.meterReading.MeterNo,
-        MeterReadingUserID: this.meterReading.branchid,
-        SerialNo: this.meterReading.SerialNo,
-        imageUrl: this.meterReading.imageUrl,
-        _date: this.meterReading.ReadingDate,
-        ImageSync: "false",
-        IsSend: "false"
-      }
-      this.local.get("MeterReading").then((reading:any)=>{
-        if(reading){
-          let newResArr=[] 
-          newResArr = reading
-          newResArr.push(obj);
-                 this.local.set("MeterReading",newResArr).then((result)=>{
-          this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter reading saved' , "success" );
-          this.nav.navigateRoot("log");
-           });
-        }
-        else if(reading==null){
-          let aRRay=[]
-        aRRay.push(obj)
-            this.local.set("MeterReading",aRRay).then((result)=>{
-              this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter reading saved' , "success" );
-              this.nav.navigateRoot("log");
+  // addMeterReading(){
+  //   if(this.meterReading.CurrentReading==""){
+  //    this.toast.ShowCustomToast('<ion-icon name="alert-circle"></ion-icon> Enter current meter reading' , "error" );
+  //   }
+  //   else
+  //   {
+  //     let obj={
+  //       BranchID: this.meterReading.branchid,
+  //       Cload: this.meterReading.cload,
+  //       ConsumerID: this.meterReading.consumerID,
+  //       ConsumerName: this.meterReading.consumerName,
+  //       CurrentReadig: this.meterReading.CurrentReading,
+  //       ID: this.global.GetPrimaryKey(),
+  //       MeterId: this.meterReading.MeterID,
+  //       MeterNo: this.meterReading.MeterNo,
+  //       MeterReadingUserID: this.meterReading.branchid,
+  //       SerialNo: this.meterReading.SerialNo,
+  //       imageUrl: this.meterReading.imageUrl,
+  //       _date: this.meterReading.ReadingDate,
+  //       ImageSync: "false",
+  //       IsSend: "false"
+  //     }
+  //     this.local.get("MeterReading").then((reading:any)=>{
+  //       if(reading){
+  //         let newResArr=[] 
+  //         newResArr = reading
+  //         newResArr.push(obj);
+  //                this.local.set("MeterReading",newResArr).then((result)=>{
+  //         this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter reading saved' , "success" );
+  //         this.nav.navigateRoot("log");
+  //          });
+  //       }
+  //       else if(reading==null){
+  //         let aRRay=[]
+  //       aRRay.push(obj)
+  //           this.local.set("MeterReading",aRRay).then((result)=>{
+  //             this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter reading saved' , "success" );
+  //             this.nav.navigateRoot("log");
                
-               });
-        }
+  //              });
+  //       }
 
-      })
+  //     })
     
 
-    }
-  }
+  //   }
+  // }
   FetchAllConsumerMeters(){
     this.global.getAllConsumerMeters();
   }
@@ -128,6 +128,7 @@ export class CpAddMeterReadingComponent implements OnInit {
   }
 
   goto_MeterReading(data){
+
     if(data !=undefined){
       let navigationExtras: NavigationExtras = {
         queryParams: {
@@ -139,8 +140,28 @@ export class CpAddMeterReadingComponent implements OnInit {
 
   }
 
+  goto_MeterFeedback(data){
+    
+    if(data !=undefined){
+      let navigationExtras: NavigationExtras = {
+        queryParams: {
+            consumerdata: JSON.stringify(data)
+        }
+    };
+    this.nav.navigateForward(['meterfeedback'], navigationExtras);
+    }
+
+  }
+
   ngOnDestroy(): void {
     
+  }
+
+  RemainingMeterReadingCount(){
+    let count=this.global.AllConsumerMeters.filter(x=>x.IsReadingAdded==false && x.IsFeedbackAdded==false).length;
+    if(count){
+      return count;
+    }
   }
 
 
