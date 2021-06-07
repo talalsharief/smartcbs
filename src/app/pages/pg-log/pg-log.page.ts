@@ -34,4 +34,17 @@ export class PgLogPage implements OnInit {
   btnClose(){
     this.global.isSearch = false
   }
+
+  async SearchLog(evt) {
+    this.global.MeterReadingList= this.global.AllFilterMeterReading
+    const searchTerm = evt.srcElement.value;
+    if (!searchTerm) {
+      return;
+    }
+    this.global.MeterReadingList = this.global.MeterReadingList.filter(item => {
+      if (item.Name && searchTerm) {
+        return (item.Name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
+      }
+    });
+  }
 }

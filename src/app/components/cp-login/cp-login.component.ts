@@ -15,55 +15,57 @@ import { ToastService } from 'src/app/services/toast.service';
 export class CpLoginComponent implements OnInit {
 
   // Classes in classes Folder
-  public objLogin : ClsLogin;
-  public objUserData : ClsUserData;
+  public objLogin: ClsLogin;
+  public objUserData: ClsUserData;
 
   constructor(
-    private dal:DalService,
-    private nav:NavController,
-     private global:GlobalService,
-    private local:LocalstorageService,
-    private toast:ToastService,
-  
-    
-  ) {}
+    private dal: DalService,
+    private nav: NavController,
+    private global: GlobalService,
+    private local: LocalstorageService,
+    private toast: ToastService,
+
+
+  ) { }
 
   ngOnInit() {
     this.objLogin = new ClsLogin();
     this.objUserData = new ClsUserData();
   }
 
- 
-  btnLogin(){ 
-    if(this.objLogin.Username == "" || this.objLogin.Password == ""){
-    
-     this.toast.ShowCustomToast('<ion-icon name="alert-circle"></ion-icon> Enter Username/Password' , "error" );
 
-    }else{
-      let obj={
-        _user:this.objLogin.Username,
-        _pwd:this.objLogin.Password
-      } 
-      this.dal.UserLiveSignIn(obj).then((data:any)=>{
-       if(data){
-         this.global.UserData=data;
-     this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Login Successfully' , "success" );
-    //  this.dal.isLogin=true;
-         this.nav.navigateRoot("home");
-       }
-       else if(data==null){
-     this.toast.ShowCustomToast('<ion-icon name="alert-circle"></ion-icon>Invalid Username or password' , "error" );
+  btnLogin() {
+    if (this.objLogin.Username == "" || this.objLogin.Password == "") {
 
-       }
+      this.toast.ShowCustomToast('<ion-icon name="alert-circle"></ion-icon> Enter Username/Password', "error");
+
+    } else {
+      let obj = {
+        _user: this.objLogin.Username,
+        _pwd: this.objLogin.Password
+      }
+      this.dal.UserLiveSignIn(obj).then((data: any) => {
+        if (data) {
+          this.global.UserData = data;
+          this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Login Successfully', "success");
+          //  this.dal.isLogin=true;
+          this.global.GetDataFromLocal();
+          this.nav.navigateRoot("home");
+
+        }
+        else if (data == null) {
+          this.toast.ShowCustomToast('<ion-icon name="alert-circle"></ion-icon>Invalid Username or password', "error");
+
+        }
       })
-  }
+    }
   }
   IsPassShow = false;
-  
+
   togglePassword() {
     var passwordInput = (<HTMLInputElement>document.getElementById('txtPassword'));
-     var toggle = document.getElementById('btneyeicon');
-     var icon =  document.getElementById('eyeIcon');
+    var toggle = document.getElementById('btneyeicon');
+    var icon = document.getElementById('eyeIcon');
     if (passwordInput.type === 'password') {
       passwordInput.type = 'text';
       this.IsPassShow = true;

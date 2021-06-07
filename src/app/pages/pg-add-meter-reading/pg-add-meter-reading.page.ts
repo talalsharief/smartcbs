@@ -9,41 +9,41 @@ import { GlobalService } from 'src/app/services/global.service';
 })
 export class PgAddMeterReadingPage implements OnInit {
 
-  isKeyboardHide=true;
-  constructor(public keyboard:Keyboard,
-    public global:GlobalService
-    ) { 
-    this.isKeyboardHide=true;
+  isKeyboardHide = true;
+  constructor(public keyboard: Keyboard,
+    public global: GlobalService
+  ) {
+    this.isKeyboardHide = true;
   }
   ngOnInit() {
   }
   ionViewWillEnter() {
-    this.keyboard.onKeyboardWillShow().subscribe(()=>{
-      this.isKeyboardHide=false;
+    this.keyboard.onKeyboardWillShow().subscribe(() => {
+      this.isKeyboardHide = false;
       // console.log('SHOWK');
     });
 
-    this.keyboard.onKeyboardWillHide().subscribe(()=>{
-      this.isKeyboardHide=true;
+    this.keyboard.onKeyboardWillHide().subscribe(() => {
+      this.isKeyboardHide = true;
       // console.log('HIDEK');
     });
   }
-    async SearchConsumerMeter(evt) {
-      this.global.AllFilterSearch = this.global.AllConsumerMeters.filter(x=>x.IsReadingAdded==false && x.IsFeedbackAdded==false);
-      const searchTerm = evt.srcElement.value;
-      if (!searchTerm) {
-        return;
+  async SearchConsumerMeter(evt) {
+    this.global.AllFilterSearch = this.global.AllConsumerMeters.filter(x => x.IsReadingAdded == false && x.IsFeedbackAdded == false);
+    const searchTerm = evt.srcElement.value;
+    if (!searchTerm) {
+      return;
+    }
+    this.global.AllFilterSearch = this.global.AllFilterSearch.filter(item => {
+      if (item.Name && searchTerm && item.IsReadingAdded == false && item.IsFeedbackAdded == false) {
+        return (item.Name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
       }
-      this.global.AllFilterSearch = this.global.AllFilterSearch.filter(item=> {
-        if (item.Name && searchTerm) {
-            return (item.Name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);   
-        }
-      });
-      console.log("All Filter Search Found length: "+ this.global.AllFilterSearch.length);
-      if(searchTerm !=""){
-        this.global.FilterSearchShow=this.global.AllFilterSearch.slice(0, 20);
-        this.global.ScrollArrayCount=this.global.FilterSearchShow.length;
-      }
-     
+    });
+    console.log("All Filter Search Found length: " + this.global.AllFilterSearch.length);
+    if (searchTerm != "") {
+      this.global.FilterSearchShow = this.global.AllFilterSearch.slice(0, 20);
+      this.global.ScrollArrayCount = this.global.FilterSearchShow.length;
+    }
+
   }
 }

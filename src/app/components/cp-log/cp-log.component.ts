@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { NavigationExtras } from '@angular/router';
+import { ModalController, NavController } from '@ionic/angular';
 import { GlobalService } from 'src/app/services/global.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { AlertModalComponent } from '../popup/alert-modal/alert-modal.component';
@@ -12,80 +13,118 @@ import { LogPopupComponent } from '../popup/log-popup/log-popup.component';
 })
 export class CpLogComponent implements OnInit {
 
-  MeterReadingList=[]
-  MeterFeedbackList=[]
-  AllReadingFeedbackList=[]
-  constructor(
-    private modalController: ModalController, 
-    private global: GlobalService,
-    public local:LocalstorageService
-  ) {
-    
-   }
+  MeterReadingList = []
+  AllReadingFeedbackList = [];
+  highlightedDiv: number;
 
-  ngOnInit() { 
+  constructor(
+    private modalController: ModalController,
+    private global: GlobalService,
+    public local: LocalstorageService,
+    public nav:NavController
+  ) {
+
+  }
+
+  ngOnInit() {
+    this.global.getAllConsumerMeters()
+    this.GetAllReadingFeedback(1);
     this.highlightedDiv = 1;
 
   }
 
-  async btnEdit() {
+  async btnEdit(id,type) {
     this.global.IsEdit = true
     this.global.IsSync = false;
     this.global.isFetch = false;
+    this.GetEditData(id,type).then(async (data)=>{
 
-    const modal = await this.modalController.create({
-      component: AlertModalComponent,
-      cssClass: 'CustomPopUp'
-    });
-    return await modal.present();
+      if(data !=undefined){
+        const modal = await this.modalController.create({
+          component: AlertModalComponent,
+          cssClass: 'CustomPopUp',
+          componentProps:{data:data,type:type}
+        });
+        return await modal.present();
+      }
+    })
+  
+ 
   }
 
 
-  
-  highlightedDiv: number;
+
 
   btnFilterlog(newValue: number) {
-  if (this.highlightedDiv === newValue) {
-    this.highlightedDiv = 0;
-  }
-  else {
-    this.highlightedDiv = newValue;
-  }
-}
-GetMeterReadingList(newValue){
-  this.MeterReadingList=[]
-  if (this.highlightedDiv === newValue) {
-    this.highlightedDiv = 0;
-  }
-  else 
-  {
-    this.highlightedDiv = newValue;
+    if (this.highlightedDiv === newValue) {
+      this.highlightedDiv = 0;
+    }
+    else {
+      this.highlightedDiv = newValue;
+    }
   }
 
-  this.MeterReadingList= this.global.AllConsumerMeters.filter(x=>x.IsReadingAdded==true);
-}
+  GetMeterReadingList(newValue) {
+    this.global.MeterReadingList=[]
+    if (this.highlightedDiv === newValue) {
+      this.highlightedDiv = 0;
+    }
+    else {
+      this.highlightedDiv = newValue;
+    }
 
-GetAllReadingFeedback(newValue){
-  if (this.highlightedDiv === newValue) {
-    this.highlightedDiv = 0;
-  }
-  else 
-  {
-    this.highlightedDiv = newValue;
-  }
-  this.MeterFeedbackList= this.global.AllConsumerMeters.filter(x=>x.IsReadingAdded==true || x.IsFeedbackAdded==true);
-}
+    this.global.MeterReadingList = this.global.AllConsumerMeters.filter(x => x.IsReadingAdded == true);
+    this.global.AllFilterMeterReading=this.global.MeterReadingList;
 
-GetFeedBackList(newValue){
-  if (this.highlightedDiv === newValue) {
-    this.highlightedDiv = 0;
   }
-  else 
-  {
+
+  GetAllReadingFeedback(newValue) {
     this.highlightedDiv = newValue;
+    this.global.MeterReadingList = this.global.AllConsumerMeters.filter(x => x.IsReadingAdded == true || x.IsFeedbackAdded == true);
+    this.global.AllFilterMeterReading=this.global.MeterReadingList;
   }
-  this.MeterFeedbackList= this.global.AllConsumerMeters.filter(x=>x.IsFeedbackAdded==true);
-}
+
+  GetFeedBackList(newValue) {
+    if (this.highlightedDiv === newValue) {
+      this.highlightedDiv = 0;
+    }
+    else {
+      this.highlightedDiv = newValue;
+    }
+    this.global.MeterReadingList = this.global.AllConsumerMeters.filter(x => x.IsFeedbackAdded == true);
+    this.global.AllFilterMeterReading=this.global.MeterReadingList;
+  }
+
+  goto_MeterReading(data){
+    if(data !=undefined){
+      let navigationExtras: NavigationExtras = {
+        queryParams: {
+            consumerdata: JSON.stringify(data)
+        }
+    };
+    this.nav.navigateForward(['meterreading'], navigationExtras);
+    }
+
+  }
+
+  GetEditData(id,type){
+    return new Promise((resolve,reject)=>{
+      if(type==1){
+        let data = this.global.AllConsumerMeters.find(x => x.MeterId == id);
+      //  let data= this.global.AllMeterReading.find(x=>x.ID==id);
+      //  let consumer=this.global.AllConsumersList.find(x=>x.)
+       console.log(data)
+       return resolve(data);
+      }
+      else if(type==2){
+        let data=this.global.AllConsumerMeters.find(x=>x.FeedbackId==id);
+       console.log(data)
+
+        return resolve(data);
+      }
+    })
+  }
+
 
 }
 

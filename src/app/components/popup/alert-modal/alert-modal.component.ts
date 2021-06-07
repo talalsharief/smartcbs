@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController } from '@ionic/angular';
+import { NavigationExtras } from '@angular/router';
+import { ModalController, NavController, NavParams } from '@ionic/angular';
 import * as moment from 'moment';
 import { DalService } from 'src/app/services/dal.service';
 import { GlobalService } from 'src/app/services/global.service';
@@ -13,16 +14,19 @@ import { LogPopupComponent } from '../log-popup/log-popup.component';
   styleUrls: ['./alert-modal.component.scss'],
 })
 export class AlertModalComponent implements OnInit {
-
+Data;
+MeterOrFeedback=0;
   constructor(
     private modalController: ModalController,
     private global: GlobalService,
     private navController: NavController,
     public dal: DalService,
     public local: LocalstorageService,
-    public toast: ToastService
+    public toast: ToastService,
+    public navparam:NavParams
   ) {
-
+    this.Data=this.navparam.get('data');
+    this.MeterOrFeedback=this.navparam.get('type');
   }
 
   ngOnInit(
@@ -52,14 +56,24 @@ export class AlertModalComponent implements OnInit {
     this.modalController.dismiss();
 
   }
+
   async btnYesEdit() {
-    this.modalController.dismiss().then(() => this.navController.navigateRoot("/log"));
-    const modal = await this.modalController.create({
-      component: LogPopupComponent,
-      // cssClass: 'CustomPopUp'
-    });
-    return await modal.present();
-  }
+    this.modalController.dismiss().then(() => {
+      let navigationExtras: NavigationExtras = {
+        queryParams: {
+             consumerdata: JSON.stringify(this.Data)
+        }
+    };
+    let pagename=this.MeterOrFeedback==1?'/meterreading':'/meterfeedback'
+      this.navController.navigateRoot(pagename,navigationExtras)
+    }
+    );
+  //   const modal = await this.modalController.create({
+  //     component: LogPopupComponent,
+  //     // cssClass: 'CustomPopUp'
+  //   });
+  //   return await modal.present();
+   }
   Syncing() {
   }
 

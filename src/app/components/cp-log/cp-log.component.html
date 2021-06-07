@@ -15,46 +15,53 @@
   <br>
 
   <!-- green border -->
-  <ng-container *ngIf="ReadingList==true">
-  <Div class="card cardShadow borderRadius borderLeftGreen" (click)="btnEdit()" *ngFor="let meter of MeterReadingList">
-    <div class="card-body noPadding">
-      <ion-row>
-        <ion-col size="5">
-          <p class="Hitxt mb-0 ">Meter No.</p>
-          <span class="Txt1 ">{{meter.MeterNo}}</span>
-        </ion-col>
-        <ion-col size="7" class="textRight">
-          <p class="Hitxt mb-0 ">Reading Date</p>
-          <span class="Txt2">{{meter._date}}</span>
+  <ng-container *ngFor="let meter of this.global.MeterReadingList">
+    <div [ngClass]="meter.IsReadingAdded==true?'card cardShadow borderRadius borderLeftGreen':'card cardShadow borderRadius borderLeftYellow'" (click)="btnEdit(meter.IsReadingAdded==true?meter.MeterID:meter.FeedbackId,meter.IsReadingAdded==true?1:2)">
+      <div class="card-body noPadding">
+        <ion-row>
+          <ion-col size="5">
+            <p class="Hitxt mb-0 ">Meter No.</p>
+            <span class="Txt1 ">{{meter.MeterNo}}</span>
+          </ion-col>
+          <ion-col size="7" class="textRight">
+            <p class="Hitxt mb-0 " *ngIf="meter.IsReadingAdded==true">Reading Date</p>
+            <p class="Hitxt mb-0 " *ngIf="meter.IsFeedbackAdded==true">Feedback Date</p>
+            <span class="Txt2">{{meter._date}}</span>
 
-        </ion-col>
+          </ion-col>
 
-        <ion-col size="7">
-          <p class="Hitxt mb-0 ">Consumer </p>
-          <span class="Txt1">{{meter.ConsumerName}}</span>
-        </ion-col>
-        <ion-col size="5" class="textRight">
-          <p class="Hitxt mb-0 ">Curr.Reading </p>
-          <span class="Txt1">{{meter.CurrentReadig}}</span>
-        </ion-col>
-      </ion-row>
+          <ion-col size="7">
+            <p class="Hitxt mb-0 ">Consumer </p>
+            <span class="Txt1">{{meter.ConsumerName}}</span>
+          </ion-col>
+          <ion-col size="5" class="textRight" *ngIf="meter.IsReadingAdded==true">
+            <p class="Hitxt mb-0" >Curr.Reading </p>
+            <span class="Txt1">{{meter.CurrentReading}}</span>
+          </ion-col>
+
+          <ion-col size="5" class="textRight" *ngIf="meter.IsFeedbackAdded==true">
+            <p class="Hitxt mb-0" >Feedback Status </p>
+            <span class="Txt1">{{meter.status}}</span>
+          </ion-col>
+        </ion-row>
+
+      </div>
+      <div class="card-footer logFooter " *ngIf="meter.IsSend=='true'">
+        <span>
+          <ion-icon name="checkmark-circle-outline" class="CheckIconGreen"></ion-icon>
+        </span><span class="greentxt ">&nbsp; Synced</span> &nbsp; <span class="Hitxt textRight"> on 7 April 2021 12:46
+          PM</span>
+
+      </div>
+      <div class="card-footer logFooter" style="align-items: center;display: flex;" *ngIf="meter.IsSend=='false'">
+        <span>
+          <ion-icon name="close-circle-outline" class="CheckIconRed"></ion-icon>
+        </span><span class="redTxt ">&nbsp; Not Synced</span>
+      </div>
 
     </div>
-    <div class="card-footer logFooter " *ngIf="meter.IsSend=='true'">
-      <span>
-        <ion-icon name="checkmark-circle-outline" class="CheckIconGreen"></ion-icon>
-      </span><span class="greentxt ">&nbsp; Synced</span> &nbsp; <span class="Hitxt textRight"> on 7 April 2021 12:46
-        PM</span>
-
-    </div>
-    <div class="card-footer logFooter" style="align-items: center;display: flex;" *ngIf="meter.IsSend=='false'">
-      <span>
-        <ion-icon name="close-circle-outline" class="CheckIconRed"></ion-icon>
-      </span><span class="redTxt ">&nbsp; Not Synced</span>
-    </div>
-
-  </Div>
   </ng-container>
+
   <br>
   <!-- <Div class="card cardShadow borderRadius borderLeftYellow" (click)="btnEdit()">
 

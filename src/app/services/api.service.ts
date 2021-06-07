@@ -23,8 +23,9 @@ export class ApiService {
   }
   Get(url): Promise<any> {
     return new Promise((resolve, error) => {
-
+      console.log("Final API Url : "+environment.baseURL + url);
       this.http.get(environment.baseURL + url, { responseType: 'text' }).subscribe((data: any) => {
+
         let respData= data
         return resolve(respData);
       }, (ServiceErr) => {

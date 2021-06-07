@@ -25,7 +25,6 @@ export class CpSettingComponent implements OnInit {
 
     })
   }
-
   ngOnInit() {
 
   }
@@ -38,14 +37,17 @@ export class CpSettingComponent implements OnInit {
       cssClass: 'CustomPopUp'
     });
     return await modal.present();
-
   }
 
   
   GetLastFeteched(){
     this.local.get("LastFetchDateTime").then((datetime) => {
-      if (datetime != null) {
+      if (datetime != null || datetime !="") {
         return moment(datetime,'DD MM YYYY, h:mm:ss A').fromNow() 
+      }
+      else
+      {
+        return "-"
       }
 
     })

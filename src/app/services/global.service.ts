@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ClasDeviceInfo } from '../classes/clas-device-info';
 import { ClsUserData } from '../classes/cls-user-data';
+import { LocalstorageService } from './localstorage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -37,11 +38,16 @@ export class GlobalService {
 
   //These variables used in searching
   AllConsumerMeters = [];
-  AllFilterSearch=[];
-  FilterSearchShow=[]
-  ScrollArrayCount=0;
+  AllFilterSearch = [];
+  FilterSearchShow = []
+  ScrollArrayCount = 0;
 
-  constructor() {
+  MeterReadingList=[]
+  AllFilterMeterReading = [];
+
+
+
+  constructor(public local: LocalstorageService) {
     this.objUserData = new ClsUserData();
   }
   getDeviceInfo() {
@@ -63,7 +69,7 @@ export class GlobalService {
   }
 
   getAllConsumerMeters() {
-    this.AllConsumerMeters=[]
+    this.AllConsumerMeters = []
     for (let index = 0; index < this.AllConsumersList.length; index++) {
       let CMeters = this.AllMetersList.filter(items => items.ConsumerID == this.AllConsumersList[index].ConsumerID);
       for (let j = 0; j < CMeters.length; j++) {
@@ -75,20 +81,81 @@ export class GlobalService {
         //Checking Feedback
         let FindFeedback = this.AllMeterFeedback.find(items => items.MeterId == CMeters[j].MeterID);
         let FeedbackValue = FindFeedback != undefined;
-        if(MRValue === false && FeedbackValue===false)
-        this.AllConsumerMeters.push({ Name: this.AllConsumersList[index].ConsumerName + " " + CMeters[j].MeterNo + " " + CMeters[j].SuppMeterNo + " " + this.AllConsumersList[index].ConsumerNo, MeterID: CMeters[j].MeterID, ConsumerID: this.AllConsumersList[index].ConsumerID, IsReadingAdded: MRValue, SerialNo: CMeters[j].SerialNo, IsFeedbackAdded: FeedbackValue,ConsumerName:this.AllConsumersList[index].ConsumerName,MeterNo:CMeters[j].MeterNo,ConsumerNo:this.AllConsumersList[index].ConsumerNo,SuppMeterNo:CMeters[j].SuppMeterNo,PreviousReading:CMeters[j].PreviousReading });
+        let _date:"";
+        let FeedbackId:"";
+        let ID:"";
+        let comments:''
+        if(FeedbackValue==true){
+          _date=FindFeedback._date,
+          FeedbackId=FindFeedback.FeedbackId
+          comments=FindFeedback.comments
+        }
+        else if(MRValue==true){
+          _date=FindMR._date,
+          ID=FindMR.ID
+        }
+        else{_date=""}
+        // if (MRValue === false && FeedbackValue === false)
+        this.AllConsumerMeters.push({
+          Name: this.AllConsumersList[index].ConsumerName + " " + CMeters[j].MeterNo + " " + CMeters[j].SuppMeterNo + " " + this.AllConsumersList[index].ConsumerNo,
+          MeterID: CMeters[j].MeterID,
+          ConsumerID: this.AllConsumersList[index].ConsumerID, 
+          IsReadingAdded: MRValue, 
+          SerialNo: CMeters[j].SerialNo, 
+          IsFeedbackAdded: FeedbackValue, 
+          ConsumerName: this.AllConsumersList[index].ConsumerName, 
+          MeterNo: CMeters[j].MeterNo, 
+          ConsumerNo: this.AllConsumersList[index].ConsumerNo, 
+          SuppMeterNo: CMeters[j].SuppMeterNo, 
+          PreviousReading: CMeters[j].PreviousReading,
+          _date:_date,
+          CurrentReading:MRValue==true?FindMR.CurrentReadig:0,
+          status:FeedbackValue==true?FindFeedback.status:"",
+          ID:MRValue==true?ID:"",
+          FeedbackId:FeedbackValue==true?FeedbackId:"",
+          comments:FeedbackValue==true?comments:""
+        });
       }
     }
     console.log("all consumermeterslist filled");
-
   }
 
   GetPrimaryKey() {
     let id = "";
-    let possible = "0123456789"+Date.now().toString().substring(7,13);
-    for (let i = 0; i < 6; i++){
+    let possible = "0123456789" + Date.now().toString().substring(7, 13);
+    for (let i = 0; i < 6; i++) {
       id += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return id;
+  }
+
+  GetDataFromLocal() {
+    this.AllConsumersList = []
+    this.AllMetersList = []
+    this.AllMeterReading = [];
+    this.AllMeterFeedback = [];
+
+    this.local.get("Consumers").then((data) => {
+      if (data) {
+        this.AllConsumersList = data;
+      }
+    })
+    this.local.get("Meters").then((data) => {
+      if (data) {
+        this.AllMetersList = data;
+      }
+    })
+    this.local.get("MeterReading").then((data) => {
+      if (data) {
+        this.AllMeterReading = data;
+      }
+    })
+    this.local.get("MeterFeedback").then((data) => {
+      if (data) {
+        this.AllMeterFeedback = data;
+      }
+    })
+
+    this.getAllConsumerMeters();
   }
 }

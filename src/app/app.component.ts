@@ -11,30 +11,15 @@ import { LocalstorageService } from './services/localstorage.service';
 
 
 export class AppComponent {
-  CustomToastText ="invalid"
+  CustomToastText = "invalid"
 
   constructor(
-    public local:LocalstorageService,
-    public dal:DalService,
-    public global:GlobalService
+    public dal: DalService,
+    public global: GlobalService
   ) {
-    this.FetchMetersAndConsumers();
+    this.global.GetDataFromLocal();
   }
 
 
-  FetchMetersAndConsumers(){
-    this.global.AllConsumersList=[]
-    this.global.AllMetersList=[]
-    this.local.get("Consumers").then((data)=>{
-      if(data){
-        this.global.AllConsumersList=data;
-      }
-    })
-    this.local.get("Meters").then((data)=>{
-      if(data){
-        this.global.AllMetersList=data;
-      }
-    })
 
-  }
 }

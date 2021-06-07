@@ -5,7 +5,7 @@
 
 
     </ion-title>
-    <ion-searchbar slot="start" [hidden]="!this.global.isSearch" placeholder="Search by text" ></ion-searchbar>
+    <ion-searchbar slot="start" (ionInput)="SearchLog($event)" [hidden]="!this.global.isSearch" placeholder="Search by text" ></ion-searchbar>
 
     <ion-buttons slot="end" >
       <ion-icon name="search" (click)="btnSearch()" class="LogoutIcon" [hidden]="this.global.isSearch"></ion-icon>
