@@ -34,7 +34,25 @@ LastFetched="";
 
 
   GetLastFeteched(){
-      return moment(this.LastFetched,'DD MM YYYY, h:mm:ss A').fromNow()
+      return moment(this.LastFetched,'MM/DD/YYYY, h:mm:ss A').fromNow()
+      }
+
+      Added:number
+      GetMeterFeedbackAddedCount(){
+      let value=  this.global.AllConsumerMeters.filter(x => x.IsReadingAdded == true || x.IsFeedbackAdded == true).length;
+      if(value){
+        return this.Added=value
+      }
+      }
+
+       percentageMeterFeedbackDone() {
+         let total=this.global.AllConsumerMeters.length;
+        return ((100 * this.Added) / total).toFixed(1);
+     }
+
+     GetUnSyncData(){
+      let value=  this.global.AllConsumerMeters.filter(x => x.isSend == false).length;
+      return value;
       }
     
   

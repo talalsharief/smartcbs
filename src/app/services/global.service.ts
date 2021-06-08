@@ -85,14 +85,17 @@ export class GlobalService {
         let FeedbackId:"";
         let ID:"";
         let comments:''
+        let isSend:""
         if(FeedbackValue==true){
           _date=FindFeedback._date,
           FeedbackId=FindFeedback.FeedbackId
-          comments=FindFeedback.comments
+          comments=FindFeedback.comments,
+          isSend=FindFeedback.isSend
         }
         else if(MRValue==true){
           _date=FindMR._date,
-          ID=FindMR.ID
+          ID=FindMR.ID,
+          isSend=FindMR.IsSend
         }
         else{_date=""}
         // if (MRValue === false && FeedbackValue === false)
@@ -113,7 +116,9 @@ export class GlobalService {
           status:FeedbackValue==true?FindFeedback.status:"",
           ID:MRValue==true?ID:"",
           FeedbackId:FeedbackValue==true?FeedbackId:"",
-          comments:FeedbackValue==true?comments:""
+          comments:FeedbackValue==true?comments:"",
+          isSend:isSend
+          
         });
       }
     }

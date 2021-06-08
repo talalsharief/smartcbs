@@ -107,7 +107,41 @@ MeterOrFeedback=0;
             this.global.DoneFetched = true
             console.log("Meters list fetched")
             this.global.AllFetched++;
-            this.isFectched()
+            this.isFectched().then((isFetched)=>{
+              if(isFetched){
+                this.local.set('LastFetchDateTime',new Date().toLocaleString())
+                this.local.get("DataFetch").then((d)=>{
+                  if(d==null){
+                    let tepmArr=[]
+                    let N=[]
+                  let obj={
+                    records:this.global.AllMetersList.length,
+                    syncDateTime:new Date().toLocaleString()
+                  }
+                  tepmArr.push(obj)
+                  this.local.set("DataFetch",tepmArr);
+                }
+                else
+                {
+                  this.local.get("DataFetch").then((data)=>{
+                    let tepmArr=[]
+                  tepmArr=data;
+                    let obj={
+                      records:this.global.AllMetersList.length,
+                      syncDateTime:new Date().toLocaleString()
+                    }
+                    tepmArr.push(obj)
+
+                  this.local.set("DataFetch",tepmArr); 
+                
+                })
+                 
+                }
+
+                  })
+                }
+              
+            })
             //  this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meters list fetched' , "success" );
 
           }
@@ -139,12 +173,15 @@ MeterOrFeedback=0;
   }
 
   isFectched(){
-    if (this.global.AllFetched >= 2) {
-      this.local.set("LastFetchDateTime",moment().format('DD MM YYYY, h:mm:ss A'));
-      this.global.DoneFetched = false;
-      this.global.btnFetch = true;
-      this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Data Sync successfully', "success");
-    }
+    return new Promise((resolve,reject)=>{
+      if (this.global.AllFetched >= 2) {
+        this.global.DoneFetched = false;
+        this.global.btnFetch = true;
+        this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Data Sync successfully', "success");
+        return resolve(true);
+      }
+    })
+ 
   }
 
 

@@ -29,7 +29,7 @@
         <br>
 
         <p class="Hitxt">Last Fetched</p>
-        <!-- <span class="Txt1">{{GetLastFeteched()}}</span> -->
+        <span class="Txt1">{{LastFechedDateTime}}</span>
         <br>
         <br>
 
@@ -52,17 +52,13 @@
                   <th>Records Fetch</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody *ngFor="let item of FetchDataHistoryList;let i=index">
                 <tr>
-                  <td>1</td>
-                  <td>Apr 11 2:00PM</td>
-                  <td>100</td>
+                  <td>{{i+1}}</td>
+                  <td>{{GetLastFeteched(item.syncDateTime)}}</td>
+                  <td>{{item.records}}</td>
                 </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Apr 11 2:00PM</td>
-                  <td>100</td>
-                </tr>
+             
 
               </tbody>
             </table>

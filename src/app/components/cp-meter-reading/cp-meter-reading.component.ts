@@ -73,6 +73,9 @@ export class CpMeterReadingComponent implements OnInit {
     if (this.CurrentReading == "" || this.CurrentReading == undefined) {
       this.toast.ShowCustomToast('<ion-icon name="alert-circle"></ion-icon> Enter current meter reading', "error");
     }
+    else if(this.CurrentReading>=5001){
+      this.toast.ShowCustomToast('<ion-icon name="alert-circle"></ion-icon> Current Reading Should be 5000 Maximum', "error");
+    }
     else {
       let obj = {
         BranchID: this.meterReading.BranchID,

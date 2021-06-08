@@ -93,11 +93,6 @@ export class CpMeterFeedbackComponent implements OnInit {
             
 
           }
-
-
-
-
-
         })
       }
     }

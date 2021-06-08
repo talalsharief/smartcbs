@@ -1,5 +1,11 @@
 # SMART-CBS-APP
 
+# Backend ChangeLog 8 June 2021 1:16 PM by SHAZ
+1- Feedback Update<br>
+2- Search Log<br>
+3- Dynamic Dashboard <br>
+4- Fetched  and Save Last Feteched Data<br>
+
 # Backend ChangeLog 5 June 2021 4:14 PM by SHAZ
 1- Feedback Added<br>
 2- Filter Log<br>

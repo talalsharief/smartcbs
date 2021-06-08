@@ -32,5 +32,10 @@ export class CpSyncDataComponent implements OnInit {
     return await modal.present();
     
   }
+
+  GetUnSyncData(){
+    let value=  this.global.AllConsumerMeters.filter(x => x.isSend == false).length;
+    return value;
+    }
   
 }

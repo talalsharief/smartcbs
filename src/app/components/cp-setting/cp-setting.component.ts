@@ -13,14 +13,17 @@ import { AlertModalComponent } from '../popup/alert-modal/alert-modal.component'
 })
 export class CpSettingComponent implements OnInit {
   LastFechedDateTime = ""
+  FetchDataHistoryList=[]
   constructor(
     private global: GlobalService,
     private modalController: ModalController,
     public local: LocalstorageService
   ) {
+    this.GetFetchDataHistory()
     this.local.get("LastFetchDateTime").then((datetime) => {
       if (datetime != null) {
          this.LastFechedDateTime=datetime
+      this.LastFechedDateTime=   moment(datetime,'MM/DD/YYYY, h:mm:ss A').fromNow()
       }
 
     })
@@ -40,18 +43,17 @@ export class CpSettingComponent implements OnInit {
   }
 
   
-  GetLastFeteched(){
-    this.local.get("LastFetchDateTime").then((datetime) => {
-      if (datetime != null || datetime !="") {
-        return moment(datetime,'DD MM YYYY, h:mm:ss A').fromNow() 
-      }
-      else
-      {
-        return "-"
-      }
+  GetLastFeteched(datetime){
+    // 6/8/2021, 12:53:38 PM
+   return moment(datetime,'MM/DD/YYYY, h:mm:ss A').fromNow()
+    }
 
-    })
-   
+    GetFetchDataHistory(){
+      this.local.get("DataFetch").then((data)=>{
+        if(data){
+          this.FetchDataHistoryList=data
+        }
+      })
     }
 
 }
