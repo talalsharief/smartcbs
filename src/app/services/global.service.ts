@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
 import { ClasDeviceInfo } from '../classes/clas-device-info';
 import { ClsUserData } from '../classes/cls-user-data';
 import { LocalstorageService } from './localstorage.service';
@@ -162,5 +163,9 @@ export class GlobalService {
     })
 
     this.getAllConsumerMeters();
+  }
+
+  GetRelativeTime(datetime){
+   return moment(datetime,'MM/DD/YYYY, h:mm:ss A').fromNow()
   }
 }

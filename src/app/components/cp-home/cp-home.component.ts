@@ -23,7 +23,7 @@ LastFetched="";
   ) {
     this.local.get("LastFetchDateTime").then((data)=>{
       if(data){
-        this.LastFetched=data;
+        this.LastFetched=this.global.GetRelativeTime(data);
       }
       }).then(()=>{
         this.GetLastFeteched();
@@ -54,7 +54,9 @@ LastFetched="";
       let value=  this.global.AllConsumerMeters.filter(x => x.isSend == false).length;
       return value;
       }
-    
-  
 
+
+      GotoFetchData(){
+        this.nav.navigateForward('setting');
+      }
 }

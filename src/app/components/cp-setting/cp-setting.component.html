@@ -55,7 +55,7 @@
               <tbody *ngFor="let item of FetchDataHistoryList;let i=index">
                 <tr>
                   <td>{{i+1}}</td>
-                  <td>{{GetLastFeteched(item.syncDateTime)}}</td>
+                  <td>{{this.global.GetRelativeTime(item.syncDateTime)}}</td>
                   <td>{{item.records}}</td>
                 </tr>
              

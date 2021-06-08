@@ -110,7 +110,7 @@ export class CpLogComponent implements OnInit {
   GetEditData(id,type){
     return new Promise((resolve,reject)=>{
       if(type==1){
-        let data = this.global.AllConsumerMeters.find(x => x.MeterId == id);
+        let data = this.global.AllConsumerMeters.find(x => x.MeterID == id);
       //  let data= this.global.AllMeterReading.find(x=>x.ID==id);
       //  let consumer=this.global.AllConsumersList.find(x=>x.)
        console.log(data)

@@ -98,7 +98,7 @@
       </ion-col>
       <ion-col>
         <div class="card cardShadow borderRadius text-center">
-          <div class="card-body">
+          <div class="card-body" (click)="GotoFetchData()">
             <ion-row>
               <ion-col size="12">
                 <div>
@@ -107,12 +107,12 @@
                 </div>
               </ion-col>
              
-              <ion-col size="12" class="pt-0">
+              <ion-col size="12" class="pt-0" >
                 <p class="">
 
                   <span class="Hitxt">{{todaay}}</span>
                 </p>
-                <span class="Txt1">{{GetLastFeteched()}}</span>
+                <span class="Txt1">{{LastFetched}}</span>
                 <p class="">
                   <span class="Hitxt">Last Fetched</span>
                 </p>

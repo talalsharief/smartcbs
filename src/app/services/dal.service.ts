@@ -3,6 +3,7 @@ import { Platform } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { ApiService } from './api.service';
 import { MeterandconsumerService } from './dataservice/meterandconsumer.service';
+import { SyncdataService } from './dataservice/syncdata.service';
 import { UserLiveDataService } from './dataservice/user-live-data.service';
 import { UserPreferenceTestdsService } from './dataservice/user-preference-testds.service';
 import { UserTestDataService } from './dataservice/user-test-data.service';
@@ -24,7 +25,8 @@ export class DalService {
     private userpreftd: UserPreferenceTestdsService,
     private local: LocalstorageService,
     private platform: Platform,
-    public meterandconsumer: MeterandconsumerService
+    public meterandconsumer: MeterandconsumerService,
+    public syncdata:SyncdataService
 
   ) {
     this.platform.ready().then(() => {
@@ -146,5 +148,40 @@ export class DalService {
     });
   }
 
+  SyncMeterFeedback(obj) {
+    return new Promise((resolve, reject) => {
+      try {
+        this.syncdata.SyncMeterFeedback(obj).then((res: any) => {
+          if (res != undefined) {
+            return resolve(res);
+          }
+        });
+      }
+      catch (error) {
+        console.log(error);
+        return reject(null);
+      }
+
+    });
+
+  }
+
+  SyncMeterReading(obj) {
+    return new Promise((resolve, reject) => {
+      try {
+        this.syncdata.SyncMeterReading(obj).then((res: any) => {
+          if (res != undefined) {
+            return resolve(res);
+          }
+        });
+      }
+      catch (error) {
+        console.log(error);
+        return reject(null);
+      }
+
+    });
+
+  }
 
 }

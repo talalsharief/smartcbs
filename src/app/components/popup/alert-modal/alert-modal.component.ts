@@ -14,8 +14,8 @@ import { LogPopupComponent } from '../log-popup/log-popup.component';
   styleUrls: ['./alert-modal.component.scss'],
 })
 export class AlertModalComponent implements OnInit {
-Data;
-MeterOrFeedback=0;
+  Data;
+  MeterOrFeedback = 0;
   constructor(
     private modalController: ModalController,
     private global: GlobalService,
@@ -23,10 +23,10 @@ MeterOrFeedback=0;
     public dal: DalService,
     public local: LocalstorageService,
     public toast: ToastService,
-    public navparam:NavParams
+    public navparam: NavParams
   ) {
-    this.Data=this.navparam.get('data');
-    this.MeterOrFeedback=this.navparam.get('type');
+    this.Data = this.navparam.get('data');
+    this.MeterOrFeedback = this.navparam.get('type');
   }
 
   ngOnInit(
@@ -35,6 +35,8 @@ MeterOrFeedback=0;
 
   }
   async btnYesSync() {
+    // this.SyncMeterFeedback();
+    this.SyncMeterFeedBack()
     //gear gif show and button hide
     this.global.isSyncing = true;
     this.global.btnSync = false;
@@ -61,19 +63,19 @@ MeterOrFeedback=0;
     this.modalController.dismiss().then(() => {
       let navigationExtras: NavigationExtras = {
         queryParams: {
-             consumerdata: JSON.stringify(this.Data)
+          consumerdata: JSON.stringify(this.Data)
         }
-    };
-    let pagename=this.MeterOrFeedback==1?'/meterreading':'/meterfeedback'
-      this.navController.navigateRoot(pagename,navigationExtras)
+      };
+      let pagename = this.MeterOrFeedback == 1 ? '/meterreading' : '/meterfeedback'
+      this.navController.navigateRoot(pagename, navigationExtras)
     }
     );
-  //   const modal = await this.modalController.create({
-  //     component: LogPopupComponent,
-  //     // cssClass: 'CustomPopUp'
-  //   });
-  //   return await modal.present();
-   }
+    //   const modal = await this.modalController.create({
+    //     component: LogPopupComponent,
+    //     // cssClass: 'CustomPopUp'
+    //   });
+    //   return await modal.present();
+  }
   Syncing() {
   }
 
@@ -93,7 +95,7 @@ MeterOrFeedback=0;
             console.log("Consumers list fetched")
             this.global.AllFetched++;
             this.isFectched();
-       
+
           }
           else if (consumers == null) {
             console.log("Consumers list fetched failed")
@@ -107,40 +109,13 @@ MeterOrFeedback=0;
             this.global.DoneFetched = true
             console.log("Meters list fetched")
             this.global.AllFetched++;
-            this.isFectched().then((isFetched)=>{
-              if(isFetched){
-                this.local.set('LastFetchDateTime',new Date().toLocaleString())
-                this.local.get("DataFetch").then((d)=>{
-                  if(d==null){
-                    let tepmArr=[]
-                    let N=[]
-                  let obj={
-                    records:this.global.AllMetersList.length,
-                    syncDateTime:new Date().toLocaleString()
-                  }
-                  tepmArr.push(obj)
-                  this.local.set("DataFetch",tepmArr);
-                }
-                else
-                {
-                  this.local.get("DataFetch").then((data)=>{
-                    let tepmArr=[]
-                  tepmArr=data;
-                    let obj={
-                      records:this.global.AllMetersList.length,
-                      syncDateTime:new Date().toLocaleString()
-                    }
-                    tepmArr.push(obj)
+            this.isFectched().then((isFetched) => {
+              if (isFetched) {
+                this.local.set('LastFetchDateTime', new Date().toLocaleString())
+                this.SaveFetcheHistory();//Saving/Update Fetechd time and record 
 
-                  this.local.set("DataFetch",tepmArr); 
-                
-                })
-                 
-                }
+              }
 
-                  })
-                }
-              
             })
             //  this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meters list fetched' , "success" );
 
@@ -172,8 +147,8 @@ MeterOrFeedback=0;
 
   }
 
-  isFectched(){
-    return new Promise((resolve,reject)=>{
+  isFectched() {
+    return new Promise((resolve, reject) => {
       if (this.global.AllFetched >= 2) {
         this.global.DoneFetched = false;
         this.global.btnFetch = true;
@@ -181,8 +156,109 @@ MeterOrFeedback=0;
         return resolve(true);
       }
     })
- 
+
+  }
+
+  SaveFetcheHistory() {
+    this.local.get("DataFetch").then((d) => {
+      if (d == null) {
+        let tepmArr = []
+        let N = []
+        let obj = {
+          records: this.global.AllMetersList.length,
+          syncDateTime: new Date().toLocaleString()
+        }
+        tepmArr.push(obj)
+        this.local.set("DataFetch", tepmArr);
+      }
+      else {
+        this.local.get("DataFetch").then((data) => {
+          let tepmArr = []
+          tepmArr = data;
+          let obj = {
+            records: this.global.AllMetersList.length,
+            syncDateTime: new Date().toLocaleString()
+          }
+          tepmArr.push(obj)
+
+          this.local.set("DataFetch", tepmArr);
+
+        })
+
+      }
+
+    })
   }
 
 
+  SyncMeterFeedback() {
+    let TempArray = [];
+    let MeterFeedback = []
+    this.local.get("userData").then((userData) => {
+      if (userData) {
+        // var obj = {
+        //   MeterReading: MeterReading,
+        //   MeterReadingUserID: M_ID,
+        // };
+        this.local.get("MeterFeedback").then((Feedback) => {
+          if (Feedback) {
+            let meter = [];
+            TempArray = Feedback;
+            MeterFeedback = TempArray.filter(x => x.isSend == false);
+            for (let index = 0; index < MeterFeedback.length; index++) {
+              meter[index] = JSON.stringify(MeterFeedback[index]);
+            }
+            var obj = {
+              Meterfeedback: meter,
+              MeterReadingUserID: userData.MTUserID,
+            }
+
+            this.dal.SyncMeterFeedback(obj).then((data) => {
+              if (data) {
+                console.log(data);
+              }
+            })
+          }
+        })
+      }
+    })
+  }
+
+  SyncMeterReading() {
+    let TempArray = [];
+    let MeterReading = []
+    this.local.get("userData").then((userData) => {
+      if (userData) {
+        // var obj = {
+        //   MeterReading: MeterReading,
+        //   MeterReadingUserID: M_ID,
+        // };
+        this.local.get("MeterReading").then((Reading) => {
+          if (Reading) {
+            let meter = [];
+            TempArray = Reading;
+            MeterReading = TempArray.filter(x => x.IsSend == false);
+            for (let index = 0; index < MeterReading.length; index++) {
+              meter[index] = JSON.stringify(MeterReading[index]);
+            }
+            var obj = {
+              MeterReading: meter,
+              MeterReadingUserID: userData.MTUserID,
+            }
+
+            this.dal.SyncMeterReading(obj).then((data) => {
+              if (data) {
+                console.log(data);
+              }
+            })
+          }
+        })
+      }
+    })
+  }
+
+  SyncMeterFeedBack(){
+    this.SyncMeterFeedback()
+    this.SyncMeterReading()
+  }
 }

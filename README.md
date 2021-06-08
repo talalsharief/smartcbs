@@ -1,5 +1,10 @@
 # SMART-CBS-APP
 
+# Backend ChangeLog 8 June 2021 6:30 PM by SHAZ
+1- Sync meter implemented<br>
+2- Sync feedback implemented<br>
+
+
 # Backend ChangeLog 8 June 2021 1:16 PM by SHAZ
 1- Feedback Update<br>
 2- Search Log<br>

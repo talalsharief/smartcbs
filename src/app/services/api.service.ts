@@ -35,19 +35,19 @@ export class ApiService {
     });
   }
 
-  // Get(url, params): Promise<any> {
-  //   return new Promise((resolve, error) => {
-  //     this.http.get(environment.baseURL + url, params).toPromise().then((data: any) => {
-  //       this.RequestUrl = data.url
-  //       console.log("GET Request Url On Success :" + this.RequestUrl);
-  //       return resolve(data);
-  //     }, (ServiceErr) => {
-  //       console.log("GET Request Url On Error :" + this.RequestUrl);
-  //       return error(ServiceErr)
+  GetWithParams(url, params): Promise<any> {
+    return new Promise((resolve, error) => {
+      this.http.get(environment.baseURL + url, params).toPromise().then((data: any) => {
+        this.RequestUrl = data.url
+        console.log("GET Request Url On Success :" + this.RequestUrl);
+        return resolve(data);
+      }, (ServiceErr) => {
+        console.log("GET Request Url On Error :" + this.RequestUrl);
+        return error(ServiceErr)
 
-  //     });
-  //   });
-  // }
+      });
+    });
+  }
 
 
 
@@ -62,7 +62,7 @@ export class ApiService {
 
     _headers.set('Content-Type','application/json; charset=utf-8')
     
-      this.http.post(environment.baseURL + URL, data,{headers:_headers}).subscribe((Respdata: any) => {
+      this.http.post(environment.baseURL + URL, data,{headers:_headers}).pipe().subscribe((Respdata: any) => {
 
 
         console.log("Success Post Data :" + Respdata.data)

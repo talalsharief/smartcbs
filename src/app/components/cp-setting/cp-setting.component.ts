@@ -23,7 +23,7 @@ export class CpSettingComponent implements OnInit {
     this.local.get("LastFetchDateTime").then((datetime) => {
       if (datetime != null) {
          this.LastFechedDateTime=datetime
-      this.LastFechedDateTime=   moment(datetime,'MM/DD/YYYY, h:mm:ss A').fromNow()
+      this.LastFechedDateTime= this.global.GetRelativeTime(datetime)
       }
 
     })
