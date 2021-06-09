@@ -17,7 +17,7 @@
   <!-- green border -->
  
   <ng-container *ngFor="let meter of this.global.MeterReadingList">
-    <div [ngClass]="meter.IsReadingAdded==true?'card cardShadow borderRadius borderLeftGreen':'card cardShadow borderRadius borderLeftYellow'" (click)="btnEdit(meter.IsReadingAdded==true?meter.MeterID:meter.FeedbackId,meter.IsReadingAdded==true?1:2)">
+    <div [ngClass]="meter.IsReadingAdded==true?'card cardShadow borderRadius borderLeftGreen':'card cardShadow borderRadius borderLeftYellow'" (click)="btnEdit(meter.IsReadingAdded==true?meter.MeterID:meter.FeedbackId,meter.IsReadingAdded==true?1:2,meter.isSend)">
       <!-- <h5 *ngIf="this.global.MeterReadingList.length==0">No Log Found</h5> -->
       <div class="card-body noPadding">
         <ion-row>

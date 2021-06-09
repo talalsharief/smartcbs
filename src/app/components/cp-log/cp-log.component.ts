@@ -3,6 +3,7 @@ import { NavigationExtras } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
 import { GlobalService } from 'src/app/services/global.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { AlertModalComponent } from '../popup/alert-modal/alert-modal.component';
 import { LogPopupComponent } from '../popup/log-popup/log-popup.component';
 
@@ -21,7 +22,8 @@ export class CpLogComponent implements OnInit {
     private modalController: ModalController,
     private global: GlobalService,
     public local: LocalstorageService,
-    public nav:NavController
+    public nav:NavController,
+    public toast:ToastService
   ) {
 
   }
@@ -33,7 +35,8 @@ export class CpLogComponent implements OnInit {
 
   }
 
-  async btnEdit(id,type) {
+  async btnEdit(id,type,isSend) {
+    if(isSend==false){
     this.global.IsEdit = true
     this.global.IsSync = false;
     this.global.isFetch = false;
@@ -48,6 +51,11 @@ export class CpLogComponent implements OnInit {
         return await modal.present();
       }
     })
+  }
+  else
+  {
+    this.toast.ShowCustomToast('<ion-icon name="alert-circle"></ion-icon> This meter reading is already sync.', "success");
+  }
   
  
   }
