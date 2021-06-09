@@ -137,4 +137,19 @@ export class ApiService {
       });
     })
   }
+
+
+  GetLocal(): Promise<any> {
+    return new Promise((resolve, error) => {
+      // console.log();
+      this.http.get("/meterReading.json").subscribe((data: any) => {
+
+        let respData= data
+        return resolve(respData);
+      }, (ServiceErr) => {
+        return error(ServiceErr)
+
+      });
+    });
+  }
 }

@@ -96,7 +96,7 @@ export class GlobalService {
         else if(MRValue==true){
           _date=FindMR._date,
           ID=FindMR.ID,
-          isSend=FindMR.IsSend
+          isSend=FindMR.isSend
         }
         else{_date=""}
         // if (MRValue === false && FeedbackValue === false)

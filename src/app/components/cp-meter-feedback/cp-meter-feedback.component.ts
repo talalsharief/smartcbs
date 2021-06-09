@@ -43,6 +43,7 @@ export class CpMeterFeedbackComponent implements OnInit {
       this.local.get("userData").then((data) => {
 
       })
+      
     });
   }
 

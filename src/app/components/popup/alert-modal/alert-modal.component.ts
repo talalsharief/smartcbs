@@ -212,7 +212,6 @@ export class AlertModalComponent implements OnInit {
               Meterfeedback: meter,
               MeterReadingUserID: userData.MTUserID,
             }
-
             this.dal.SyncMeterFeedback(obj).then((data) => {
               if (data) {
                 console.log(data);

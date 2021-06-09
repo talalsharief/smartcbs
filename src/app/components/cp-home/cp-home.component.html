@@ -6,7 +6,7 @@
         <ion-row>
           <ion-col size="12">
             <p class="Hitxt lightTxt">Hello !</p>
-            <small class="Hitxt lightTxt">Your Current Batch is #BTC54556</small><br>
+            <small class="Hitxt lightTxt">Your Current Batch is {{this.global.UserData.BatchName}}</small><br>
             <span class="TxtName lightTxt" *ngIf="this.global.UserData">{{this.global.UserData.userName}}</span>
           </ion-col>
         </ion-row>

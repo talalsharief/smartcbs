@@ -51,8 +51,10 @@
                   <th>Fetch Date</th>
                   <th>Records Fetch</th>
                 </tr>
+                
               </thead>
-              <tbody *ngFor="let item of FetchDataHistoryList;let i=index">
+              
+               <tbody *ngFor="let item of FetchDataHistoryList;let i=index">
                 <tr>
                   <td>{{i+1}}</td>
                   <td>{{this.global.GetRelativeTime(item.syncDateTime)}}</td>
@@ -61,6 +63,8 @@
              
 
               </tbody>
+              <p style="text-align: center !important;" *ngIf="FetchDataHistoryList.length==0">Records not found</p>
+           
             </table>
           </div>
 

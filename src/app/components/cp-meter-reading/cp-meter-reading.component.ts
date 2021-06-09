@@ -25,7 +25,7 @@ export class CpMeterReadingComponent implements OnInit {
     PreviousReading: 0,
     SerialNo: "",
     SuppMeterNo: "",
-    CurrentReading: "",
+    CurrentReading: 0,
     ImageSync: "",
     imageUrl: "",
     BranchID: "",
@@ -53,6 +53,7 @@ export class CpMeterReadingComponent implements OnInit {
         console.log(this.meterReading);
         this.meterReading.BranchID = data.BranchID,
           this.meterReading.MeterReadingUserID = data.MTUserID
+         
       })
     });
   }
@@ -70,10 +71,10 @@ export class CpMeterReadingComponent implements OnInit {
   }
 
   addMeterReading() {
-    if (this.CurrentReading == "" || this.CurrentReading == undefined) {
+    if (this.meterReading.CurrentReading == 0 || this.meterReading.CurrentReading == undefined) {
       this.toast.ShowCustomToast('<ion-icon name="alert-circle"></ion-icon> Enter current meter reading', "error");
     }
-    else if(this.CurrentReading>=5001){
+    else if(this.meterReading.CurrentReading>=5001){
       this.toast.ShowCustomToast('<ion-icon name="alert-circle"></ion-icon> Current Reading Should be 5000 Maximum', "error");
     }
     else {
@@ -82,7 +83,7 @@ export class CpMeterReadingComponent implements OnInit {
         Cload: "0",
         ConsumerID: this.meterReading.ConsumerID,
         ConsumerName: this.meterReading.ConsumerName,
-        CurrentReadig: this.CurrentReading,
+        CurrentReadig:this.meterReading.CurrentReading, 
         ID: this.global.GetPrimaryKey(),
         MeterId: this.meterReading.MeterID,
         MeterNo: this.meterReading.MeterNo,
@@ -91,16 +92,45 @@ export class CpMeterReadingComponent implements OnInit {
         imageUrl: "",
         _date: this.ReadingDate,
         ImageSync: false,
-        IsSend: false,
+        isSend: false,
         Type: "mr"
       }
-      this.global.AllMeterReading.push(obj);
+     
+
+        if (this.meterReading.ID === "") {
+          this.global.AllMeterReading.push(obj);
       this.local.set("MeterReading", this.global.AllMeterReading).then((data) => {
         let index = this.global.AllConsumerMeters.findIndex(x => x.MeterNo == this.meterReading.MeterNo);
         if (index >= 0)
           this.global.AllConsumerMeters[index].IsReadingAdded = true;
         this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter reading saved', "success");
       })
+        }
+        else {
+
+          this.local.get("MeterReading").then((reading: any) => {
+            if (reading) {
+              let newResArr = []
+              newResArr = reading
+              let index = newResArr.findIndex(x => x.ID == this.meterReading.ID);
+              let Value = newResArr.filter(x => x.ID == this.meterReading.ID);
+              newResArr[index] = obj;
+              this.local.set("MeterReading", newResArr)
+              // this.global.AllConsumerMeters.join();
+              this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter Reading Updated', "success");
+              // this.nav.navigateRoot("log");
+              this.global.GetDataFromLocal();
+              this.global.getAllConsumerMeters();
+          
+            }
+            // this.global.AllFilterSearch = this.global.AllConsumerMeters.filter(x => x.IsReadingAdded == false && x.IsFeedbackAdded == false);
+  
+        
+          })
+        }
+
+
+      
       // this.local.get("MeterReading").then((reading: any) => {
       //   if (reading) {
       //     let newResArr = []

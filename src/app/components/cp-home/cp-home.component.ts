@@ -25,6 +25,10 @@ LastFetched="";
       if(data){
         this.LastFetched=this.global.GetRelativeTime(data);
       }
+      else
+      {
+        this.LastFetched="-"
+      }
       }).then(()=>{
         this.GetLastFeteched();
       })
@@ -41,13 +45,26 @@ LastFetched="";
       GetMeterFeedbackAddedCount(){
       let value=  this.global.AllConsumerMeters.filter(x => x.IsReadingAdded == true || x.IsFeedbackAdded == true).length;
       if(value){
+        this.percentageMeterFeedbackDone()
         return this.Added=value
+
+      }
+      else
+      {
+        return 0;
       }
       }
 
        percentageMeterFeedbackDone() {
          let total=this.global.AllConsumerMeters.length;
-        return ((100 * this.Added) / total).toFixed(1);
+        let percentage= ((100 * this.Added) / total).toFixed(1);
+        if(percentage !="NaN"){
+          return percentage;
+        }
+        else
+        {
+          return 0;
+        }
      }
 
      GetUnSyncData(){

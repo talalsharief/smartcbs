@@ -126,5 +126,17 @@ export class CpLogComponent implements OnInit {
   }
 
 
+  CheckIsSync(MeterorFeedback,obj){
+      if(obj && MeterorFeedback==1)
+      {
+        return obj.isSend;
+      }
+      if(obj && MeterorFeedback==2)
+      {
+        return obj.isSend;
+      }
+  }
+
+
 }
 

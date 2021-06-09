@@ -64,7 +64,7 @@
               <ion-item class="ion-no-padding ClasInput2">
                 <ion-label class="LabelTxt" style="display: none;">Status</ion-label>
                 <ion-select value="notifications" [(ngModel)]="meterFeedback.status" interface="action-sheet">
-                  <ion-select-option [value]="Faulty">Faulty</ion-select-option>
+                  <ion-select-option [value]="Faulty" [selected]="meterFeedback.status">Faulty</ion-select-option>
                   <ion-select-option [value]="stopper">Stopped</ion-select-option>
                   <ion-select-option [value]="Tempered">Tempered</ion-select-option>
                   <ion-select-option [value]="Disconnected">Disconnected</ion-select-option>
