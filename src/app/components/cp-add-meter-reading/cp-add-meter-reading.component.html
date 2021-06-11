@@ -13,14 +13,14 @@
             <p class="Hitxt mb-0 ">Showing next meter</p>
 
             <ion-note class=" Txt1" slot="end">
-                  {{this.global.AllFilterSearch.length}}/{{this.global.AllConsumerMeters.length}}
+              {{this.global.AllFilterSearch.length}}/{{this.global.AllConsumerMeters.length}}
             </ion-note>
           </ion-item>
         </ion-col>
       </ion-row>
     </div>
-<br>
-    <Div class="card cardShadow borderRadius" *ngFor="let item of this.global.FilterSearchShow">
+    <br>
+    <div class="card cardShadow borderRadius" *ngFor="let item of this.global.FilterSearchShow">
 
       <ion-item-sliding id="item100">
         <ion-item lines="none" class="borderRadius">
@@ -47,9 +47,9 @@
         </ion-item>
 
         <ion-item-options side="start" (ionSwipe)="goto_MeterReading(item)">
-          <ion-item-option  style="background: #e1f4ff;" (click)="goto_MeterReading(item)">
-            <img slot="top" src="assets/img/meterfb.png" alt="meterfb" class="meter"/>
-            <span class="Txt1">Meter Reading</span> 
+          <ion-item-option style="background: #e1f4ff;" (click)="goto_MeterReading(item)">
+            <img slot="top" src="assets/img/meterfb.png" alt="meterfb" class="meter" />
+            <span class="Txt1">Meter Reading</span>
           </ion-item-option>
         </ion-item-options>
 
@@ -57,20 +57,20 @@
 
           <ion-item-option (click)="goto_MeterFeedback(item)" style="background: #e1f4ff;">
 
-            <img slot="top" src="assets/img/meterfb.png" alt="meterfb" class="meter"/>
-            <span class="Txt1">Meter Feedback</span> 
+            <img slot="top" src="assets/img/meterfb.png" alt="meterfb" class="meter" />
+            <span class="Txt1">Meter Feedback</span>
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
+      <br>
 
-    </Div>
+    </div>
     <ion-infinite-scroll (ionInfinite)="LoadMoreData($event)">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
-  
+
 
   </Div>
 
-</div> 
-
+</div>

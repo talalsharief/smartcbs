@@ -12,33 +12,33 @@ import { ToastService } from 'src/app/services/toast.service';
   styleUrls: ['./cp-add-meter-reading.component.scss'],
 })
 export class CpAddMeterReadingComponent implements OnInit {
-  @ViewChild('sList') sList : IonList;
-  isKeyboardHide=true;
+  @ViewChild('sList') sList: IonList;
+  isKeyboardHide = true;
 
-  meterReading={
-    MeterReadingID:"",
-    MeterID:"2",
+  meterReading = {
+    MeterReadingID: "",
+    MeterID: "2",
     MeterNo: "",
     PreviousReading: "232",
-    CurrentReading:"",
+    CurrentReading: "",
     cload: "",
-    consumerName:"",
+    consumerName: "",
     consumerNo: "2332",
-    consumerID:"3434",
+    consumerID: "3434",
     branchid: "122",
-    imageUrl:"",
-    ReadingDate:"",
-    SerialNo:""
-    
+    imageUrl: "",
+    ReadingDate: "",
+    SerialNo: ""
+
   }
-  constructor(public keyboard:Keyboard,
-    public toast:ToastService,
-    public local:LocalstorageService,
-    public nav:NavController,
-    public global:GlobalService
-    ) { 
-    this.isKeyboardHide=true;
-    this.meterReading.ReadingDate=new Date().toLocaleDateString();
+  constructor(public keyboard: Keyboard,
+    public toast: ToastService,
+    public local: LocalstorageService,
+    public nav: NavController,
+    public global: GlobalService
+  ) {
+    this.isKeyboardHide = true;
+    this.meterReading.ReadingDate = new Date().toLocaleDateString();
     this.FetchAllConsumerMeters();
   }
 
@@ -46,13 +46,15 @@ export class CpAddMeterReadingComponent implements OnInit {
     // this.sList.closeSlidingItems()
   }
   ionViewWillEnter() {
-    this.keyboard.onKeyboardWillShow().subscribe(()=>{
-      this.isKeyboardHide=false;
+    alert("Entered");
+    this.FetchAllConsumerMeters();
+    this.keyboard.onKeyboardWillShow().subscribe(() => {
+      this.isKeyboardHide = false;
       // console.log('SHOWK');
     });
 
-    this.keyboard.onKeyboardWillHide().subscribe(()=>{
-      this.isKeyboardHide=true;
+    this.keyboard.onKeyboardWillHide().subscribe(() => {
+      this.isKeyboardHide = true;
       // console.log('HIDEK');
     });
   }
@@ -95,77 +97,76 @@ export class CpAddMeterReadingComponent implements OnInit {
   //           this.local.set("MeterReading",aRRay).then((result)=>{
   //             this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter reading saved' , "success" );
   //             this.nav.navigateRoot("log");
-               
+
   //              });
   //       }
 
   //     })
-    
+
 
   //   }
   // }
-  FetchAllConsumerMeters(){
+  FetchAllConsumerMeters() {
     this.global.getAllConsumerMeters();
   }
 
-  LoadMoreData(evt){
-    if(this.global.ScrollArrayCount<this.global.AllFilterSearch.length){
-      let start=this.global.ScrollArrayCount;
-      this.global.ScrollArrayCount +=20
-      for(var i=start;i<this.global.ScrollArrayCount;i++){
-        if(i ===this.global.AllFilterSearch.length){
+  LoadMoreData(evt) {
+    if (this.global.ScrollArrayCount < this.global.AllFilterSearch.length) {
+      let start = this.global.ScrollArrayCount;
+      this.global.ScrollArrayCount += 20
+      for (var i = start; i < this.global.ScrollArrayCount; i++) {
+        if (i === this.global.AllFilterSearch.length) {
           break;
         }
-        else
-        {
+        else {
           this.global.FilterSearchShow.push(this.global.AllFilterSearch[i]);
         }
       }
       evt.target.complete();
-    
+
     }
 
   }
 
-  goto_MeterReading(data){
+  goto_MeterReading(data) {
 
-    if(data !=undefined){
+    if (data != undefined) {
       let navigationExtras: NavigationExtras = {
         queryParams: {
-            consumerdata: JSON.stringify(data)
+          consumerdata: JSON.stringify(data)
         }
-    };
-    this.nav.navigateForward(['meterreading'], navigationExtras);
+      };
+      this.nav.navigateForward(['meterreading'], navigationExtras);
     }
 
   }
 
-  goto_MeterFeedback(data){
-    
-    if(data !=undefined){
+  goto_MeterFeedback(data) {
+
+    if (data != undefined) {
       let navigationExtras: NavigationExtras = {
         queryParams: {
-            consumerdata: JSON.stringify(data)
+          consumerdata: JSON.stringify(data)
         }
-    };
-    this.nav.navigateForward(['meterfeedback'], navigationExtras);
+      };
+      this.nav.navigateForward(['meterfeedback'], navigationExtras);
     }
 
   }
 
   ngOnDestroy(): void {
-    
+
   }
 
-  RemainingMeterReadingCount(){
-    let count=this.global.AllConsumerMeters.filter(x=>x.IsReadingAdded==false && x.IsFeedbackAdded==false).length;
-    if(count){
+  RemainingMeterReadingCount() {
+    let count = this.global.AllConsumerMeters.filter(x => x.IsReadingAdded == false && x.IsFeedbackAdded == false).length;
+    if (count) {
       return count;
     }
   }
 
 
-  
 
-  
+
+
 }

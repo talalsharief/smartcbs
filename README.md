@@ -1,5 +1,9 @@
 # SMART-CBS-APP
 
+# Backend ChangeLog 11 June 2021 7:22 PM by SHAZ
+1- Status Dynamic<br>
+2- Meterindexing Fetched<br>
+
 # Backend ChangeLog 9 June 2021 3:30 PM by SHAZ
 1- Update MeterReading<br>
 2- Removed some bugs<br>

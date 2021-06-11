@@ -59,4 +59,56 @@ export class MeterandconsumerService {
       }
     });
   }
+
+  FetchStatus() {
+    return new Promise((resolve, reject) => {
+      try{
+        this.api.Get('wsControlsFilling.asmx/FillAppMeterStatus').then((res: any) => {
+           let respData = res.substring(res.indexOf("["), res.indexOf("]")+1); 
+
+        if(respData){ 
+          let data=JSON.parse(respData);
+          return  resolve(data);
+        }
+        else if(respData==null || respData=="")
+        {
+          return resolve(null)
+        }
+      })
+    }
+      catch(error){
+        console.log(error);
+        return reject(null);
+      }
+      finally{     
+      }
+    });
+  }
+
+  FetchMeterIndexConfiguration(param) {
+    return new Promise((resolve, reject) => {
+      try{
+        
+        this.api.Get('wsControlsFilling.asmx/FetchMeterIndexinConfiguration?MeterReaderID='+param.MeterReaderID).then((res: any) => {
+          //  let respData = res.substring(res.indexOf("["), res.indexOf("]")+1); 
+           let respData =res
+
+        if(respData){ 
+          let data=respData.includes("true");
+          return  resolve(data);
+        }
+        else if(respData==null || respData=="")
+        {
+          return resolve(null)
+        }
+      })
+    }
+      catch(error){
+        console.log(error);
+        return reject(null);
+      }
+      finally{     
+      }
+    });
+  }
 }

@@ -34,8 +34,11 @@ export class GlobalService {
   AllConsumersList = [];
   AllMeterReading = [];
   AllMeterFeedback = [];
+  AllMeterStatus=[]
+ 
 
   AllFetched = 0;
+  isIndexReading=false;
 
   //These variables used in searching
   AllConsumerMeters = [];
@@ -140,6 +143,8 @@ export class GlobalService {
     this.AllMetersList = []
     this.AllMeterReading = [];
     this.AllMeterFeedback = [];
+  
+    this.AllMeterStatus=[]
 
     this.local.get("Consumers").then((data) => {
       if (data) {
@@ -159,6 +164,16 @@ export class GlobalService {
     this.local.get("MeterFeedback").then((data) => {
       if (data) {
         this.AllMeterFeedback = data;
+      }
+    })
+    this.local.get("Status").then((data) => {
+      if (data) {
+        this.AllMeterStatus = data;
+      }
+    })
+    this.local.get("Index").then((data) => {
+      if (data) {
+        this.isIndexReading = data;
       }
     })
 

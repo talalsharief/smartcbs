@@ -184,4 +184,47 @@ export class DalService {
 
   }
 
+  FetchStatus() {
+    return new Promise((resolve, reject) => {
+      try {
+        this.meterandconsumer.FetchStatus().then((res: any) => {
+          if (res != undefined) {
+            this.local.set("Status", res);
+            this.global.AllMeterStatus=res;
+            return resolve(res);
+          }
+          else if (res == null) {
+            return resolve(res)
+          }
+        });
+      }
+      catch (error) {
+        console.log(error);
+        return reject();
+      }
+    });
+  }
+
+
+  FetchIndexConfiguration(param) {
+    return new Promise((resolve, reject) => {
+      try {
+        this.meterandconsumer.FetchMeterIndexConfiguration(param).then((res: any) => {
+          if (res != undefined) {
+            this.local.set("Index", res);
+            this.global.isIndexReading=res;
+            return resolve(res);
+          }
+          else if (res == null) {
+            return resolve(res)
+          }
+        });
+      }
+      catch (error) {
+        console.log(error);
+        return reject();
+      }
+    });
+  }
+
 }

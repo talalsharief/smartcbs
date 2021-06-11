@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { DalService } from 'src/app/services/dal.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -23,27 +24,30 @@ export class CpMeterFeedbackComponent implements OnInit {
     MeterId: "",
     SerialNo: ""
   }
+  StatusList = []
   ConsumerData: any;
   constructor(
     public route: ActivatedRoute,
     public local: LocalstorageService,
     public toast: ToastService,
     public nav: NavController,
-    public global: GlobalService
+    public global: GlobalService,
+    public dal: DalService
   ) {
+    this.FetchStatusList();
     // console.log(this.data);
     this.meterFeedback.status = "Faulty";
     this.route.queryParams.subscribe(params => {
       this.ConsumerData = JSON.parse(params["consumerdata"]);
       if (this.ConsumerData != undefined) {
-        this.meterFeedback.FeedbackId=this.ConsumerData.FeedbackId
-        this.meterFeedback.comments = this.ConsumerData.comments,
-          this.meterFeedback.status = this.ConsumerData.status
+        this.meterFeedback.FeedbackId = this.ConsumerData.FeedbackId
+        this.meterFeedback.comments = this.ConsumerData.comments
+       
       }
       this.local.get("userData").then((data) => {
-
+        this.meterFeedback.status =this.meterFeedback.FeedbackId==""?this.StatusList[0].StatusName: this.ConsumerData.status
       })
-      
+
     });
   }
 
@@ -64,7 +68,7 @@ export class CpMeterFeedbackComponent implements OnInit {
         _date: new Date().toLocaleDateString(),
         colorcode: "",
         isSend: false,
-        MeterId: this.meterFeedback.MeterId === "" ? this.ConsumerData.MeterID:"",
+        MeterId: this.meterFeedback.MeterId === "" ? this.ConsumerData.MeterID : "",
         SerialNo: "",
         Type: "mf"
       }
@@ -75,6 +79,7 @@ export class CpMeterFeedbackComponent implements OnInit {
           if (index >= 0)
             this.global.AllConsumerMeters[index].IsFeedbackAdded = true;
           this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter feedback saved', "success");
+          this.ClearData();
         })
       }
       else {
@@ -88,15 +93,39 @@ export class CpMeterFeedbackComponent implements OnInit {
             this.local.set("MeterFeedback", newResArr)
             // this.global.AllConsumerMeters.join();
             this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter feedback Updated', "success");
+          this.ClearData();
             // this.nav.navigateRoot("log");
             this.global.GetDataFromLocal();
             this.global.getAllConsumerMeters();
-            
+
 
           }
         })
       }
     }
 
+  }
+
+
+  FetchStatusList() {
+    this.dal.FetchStatus().then((data: any) => {
+      if (data) {
+        this.StatusList = data
+      }
+    })
+  }
+
+  ClearData(){
+    this.meterFeedback = {
+      FeedbackId: "",
+      MeterNumber: "",
+      comments: "",
+      status: "",
+      _date: "",
+      colorcode: "",
+      isSend: "",
+      MeterId: "",
+      SerialNo: ""
+    }
   }
 }

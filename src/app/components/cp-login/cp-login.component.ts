@@ -49,8 +49,10 @@ export class CpLoginComponent implements OnInit {
           this.global.UserData = data;
           this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Login Successfully', "success");
           //  this.dal.isLogin=true;
-          this.global.GetDataFromLocal();
+ 
+
           this.nav.navigateRoot("home");
+          this.global.GetDataFromLocal();
 
         }
         else if (data == null) {

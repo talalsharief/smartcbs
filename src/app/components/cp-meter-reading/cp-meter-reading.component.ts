@@ -74,9 +74,6 @@ export class CpMeterReadingComponent implements OnInit {
     if (this.meterReading.CurrentReading == 0 || this.meterReading.CurrentReading == undefined) {
       this.toast.ShowCustomToast('<ion-icon name="alert-circle"></ion-icon> Enter current meter reading', "error");
     }
-    else if(this.meterReading.CurrentReading>=5001){
-      this.toast.ShowCustomToast('<ion-icon name="alert-circle"></ion-icon> Current Reading Should be 5000 Maximum', "error");
-    }
     else {
       let obj = {
         BranchID: this.meterReading.BranchID,
@@ -84,7 +81,7 @@ export class CpMeterReadingComponent implements OnInit {
         ConsumerID: this.meterReading.ConsumerID,
         ConsumerName: this.meterReading.ConsumerName,
         CurrentReadig:this.meterReading.CurrentReading, 
-        ID: this.global.GetPrimaryKey(),
+        ID:this.meterReading.ID==""?this.global.GetPrimaryKey():this.meterReading.ID,
         MeterId: this.meterReading.MeterID,
         MeterNo: this.meterReading.MeterNo,
         MeterReadingUserID: this.meterReading.MeterReadingUserID,
@@ -160,4 +157,19 @@ export class CpMeterReadingComponent implements OnInit {
 
     }
   }
+
+  
+  OnFieldFocus(FieldName) {
+    if (FieldName == 'current' && this.meterReading.CurrentReading == 0) {
+      this.meterReading.CurrentReading = null;
+    }
+  
+
+  }
+  OnFieldBlur(FieldName) {
+    if (FieldName == 'current' && this.meterReading.CurrentReading == null) {
+      this.meterReading.CurrentReading = 0;
+    }
+  }
+
 }

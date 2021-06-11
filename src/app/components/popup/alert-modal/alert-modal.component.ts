@@ -16,6 +16,7 @@ import { LogPopupComponent } from '../log-popup/log-popup.component';
 export class AlertModalComponent implements OnInit {
   Data;
   MeterOrFeedback = 0;
+  MeterReaderID:""
   constructor(
     private modalController: ModalController,
     private global: GlobalService,
@@ -85,6 +86,7 @@ export class AlertModalComponent implements OnInit {
     this.global.AllFetched = 0;
     this.local.get("userData").then((data) => {
       if (data) {
+        this.MeterReaderID=data.MTUserID
         let obj = {
           MeterReaderID: data.MTUserID
         }
@@ -150,6 +152,15 @@ export class AlertModalComponent implements OnInit {
   isFectched() {
     return new Promise((resolve, reject) => {
       if (this.global.AllFetched >= 2) {
+        let obj={
+          MeterReaderID:this.MeterReaderID
+        }
+        this.dal.FetchIndexConfiguration(obj).then((data:any)=>{
+          if(data){
+            this.global.isIndexReading=data
+          }
+        })
+
         this.global.DoneFetched = false;
         this.global.btnFetch = true;
         this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Data Sync successfully', "success");
