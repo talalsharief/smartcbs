@@ -35,9 +35,13 @@ export class CpMeterReadingComponent implements OnInit {
     _date: ""
   }
 
+  isMeterIndex: any;
+  isMeterIndexChecked = false;
+
   CurrentReading: ""
   imageUrl: ""
   ReadingDate: string
+  LastSerialNo: any;
   constructor(
     public route: ActivatedRoute,
     public local: LocalstorageService,
@@ -50,10 +54,23 @@ export class CpMeterReadingComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.meterReading = JSON.parse(params["consumerdata"]);
       this.local.get("userData").then((data) => {
-        console.log(this.meterReading);
+        // console.log(this.meterReading);
         this.meterReading.BranchID = data.BranchID,
           this.meterReading.MeterReadingUserID = data.MTUserID
-         
+
+      })
+      this.local.get("Index").then((index) => {
+        if (index != undefined) {
+          this.isMeterIndex = index;
+        }
+      })
+      this.local.get("LastSerial").then((index) => {
+        if (index != undefined || index != null) {
+          this.LastSerialNo = index;
+        }
+        else {
+          this.LastSerialNo = 0;
+        }
       })
     });
   }
@@ -80,8 +97,8 @@ export class CpMeterReadingComponent implements OnInit {
         Cload: "0",
         ConsumerID: this.meterReading.ConsumerID,
         ConsumerName: this.meterReading.ConsumerName,
-        CurrentReadig:this.meterReading.CurrentReading, 
-        ID:this.meterReading.ID==""?this.global.GetPrimaryKey():this.meterReading.ID,
+        CurrentReadig: this.meterReading.CurrentReading,
+        ID: this.meterReading.ID == "" ? this.global.GetPrimaryKey() : this.meterReading.ID,
         MeterId: this.meterReading.MeterID,
         MeterNo: this.meterReading.MeterNo,
         MeterReadingUserID: this.meterReading.MeterReadingUserID,
@@ -92,42 +109,82 @@ export class CpMeterReadingComponent implements OnInit {
         isSend: false,
         Type: "mr"
       }
-     
 
-        if (this.meterReading.ID === "") {
-          this.global.AllMeterReading.push(obj);
-      this.local.set("MeterReading", this.global.AllMeterReading).then((data) => {
-        let index = this.global.AllConsumerMeters.findIndex(x => x.MeterNo == this.meterReading.MeterNo);
-        if (index >= 0)
-          this.global.AllConsumerMeters[index].IsReadingAdded = true;
-        this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter reading saved', "success");
-      })
-        }
-        else {
 
-          this.local.get("MeterReading").then((reading: any) => {
-            if (reading) {
-              let newResArr = []
-              newResArr = reading
-              let index = newResArr.findIndex(x => x.ID == this.meterReading.ID);
-              let Value = newResArr.filter(x => x.ID == this.meterReading.ID);
-              newResArr[index] = obj;
-              this.local.set("MeterReading", newResArr)
-              // this.global.AllConsumerMeters.join();
-              this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter Reading Updated', "success");
-              // this.nav.navigateRoot("log");
-              this.global.GetDataFromLocal();
-              this.global.getAllConsumerMeters();
-          
+      if (this.meterReading.ID === "") {
+        var SerialNo = 0;
+        if (this.isMeterIndexChecked && this.isMeterIndex) {
+          this.local.get("LastSerial").then((last)=>{
+
+            if (last != "undefined" && last != null && last != ""){
+            SerialNo = (last * 1) + 1 * 1;
             }
-            // this.global.AllFilterSearch = this.global.AllConsumerMeters.filter(x => x.IsReadingAdded == false && x.IsFeedbackAdded == false);
-  
+          else
+          {
+            SerialNo = 1;
+          }
+        })
+          }
+          else if (this.isMeterIndexChecked && this.isMeterIndex){
+            SerialNo = 1;
+          }
+          if (!(this.meterReading.ID > "0"))
+          {          this.meterReading.SerialNo = SerialNo.toString();}
+        //11 == SerialNo
+        // $cordovaSQLite.execute($db, MeterReadingInsertQuery, MeterReadingObject).then(function (result) {
+        //   console.log(result);
+        //   var UpdateSerialNo = ""
+        //   SerialObject = [SerialNo];
+        //   if (SerialLength > 0)
+        //     UpdateSerialNo = "update SerialIndexing set LastSerial = ?";
+        //   else
+        //     UpdateSerialNo = "insert into SerialIndexing (LastSerial) values (?)";
+
+        //   $cordovaSQLite.execute($db, UpdateSerialNo, SerialObject).then(function (result) {
+        //     console.log(result);
+        //   }, function (error) {
+        //     console.log(error)
+        //   })
+
+        //   $cordovaToast.show('Inserted Meter Reading', 'long', 'bottom')
+        //   FillMeter();
+        //   FillConsumer();
+        // }
         
-          })
-        }
+
+          this.global.AllMeterReading.push(obj);
+        this.local.set("MeterReading", this.global.AllMeterReading).then((data) => {
+          let index = this.global.AllConsumerMeters.findIndex(x => x.MeterNo == this.meterReading.MeterNo);
+          if (index >= 0)
+            this.global.AllConsumerMeters[index].IsReadingAdded = true;
+          this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter reading saved', "success");
+        })
+      }
+      else {
+
+        this.local.get("MeterReading").then((reading: any) => {
+          if (reading) {
+            let newResArr = []
+            newResArr = reading
+            let index = newResArr.findIndex(x => x.ID == this.meterReading.ID);
+            let Value = newResArr.filter(x => x.ID == this.meterReading.ID);
+            newResArr[index] = obj;
+            this.local.set("MeterReading", newResArr)
+            // this.global.AllConsumerMeters.join();
+            this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter Reading Updated', "success");
+            // this.nav.navigateRoot("log");
+            this.global.GetDataFromLocal();
+            this.global.getAllConsumerMeters();
+
+          }
+          // this.global.AllFilterSearch = this.global.AllConsumerMeters.filter(x => x.IsReadingAdded == false && x.IsFeedbackAdded == false);
 
 
-      
+        })
+      }
+
+
+
       // this.local.get("MeterReading").then((reading: any) => {
       //   if (reading) {
       //     let newResArr = []
@@ -158,18 +215,23 @@ export class CpMeterReadingComponent implements OnInit {
     }
   }
 
-  
+
   OnFieldFocus(FieldName) {
     if (FieldName == 'current' && this.meterReading.CurrentReading == 0) {
       this.meterReading.CurrentReading = null;
     }
-  
+
 
   }
   OnFieldBlur(FieldName) {
     if (FieldName == 'current' && this.meterReading.CurrentReading == null) {
       this.meterReading.CurrentReading = 0;
     }
+  }
+
+  onChange(evt) {
+    let value = evt.detail.checked;
+    this.isMeterIndexChecked = value;
   }
 
 }

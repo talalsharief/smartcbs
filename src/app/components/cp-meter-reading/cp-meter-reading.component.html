@@ -7,6 +7,17 @@
 
     <!-- <ion-list style="padding-top:0 ;"> -->
 
+      
+      <ion-row *ngIf="isMeterIndex">
+  
+        <ion-col size="12" class="textCenter" >
+          <ion-checkbox  (ionChange)="onChange($event)"></ion-checkbox>
+         
+          <p class="mb-0 " >Is index</p>
+        </ion-col>
+
+      </ion-row>
+
 
       <!-- Multi-line sliding item with icon options on both sides -->
       <Div class="card cardShadow borderRadius mb-3" *ngIf="this.meterReading">
