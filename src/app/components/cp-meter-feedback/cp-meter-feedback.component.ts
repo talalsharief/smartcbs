@@ -26,6 +26,10 @@ export class CpMeterFeedbackComponent implements OnInit {
   }
   StatusList = []
   ConsumerData: any;
+  LastSerialNo: any;
+  isMeterIndex: any;
+  isMeterIndexChecked = false;
+
   constructor(
     public route: ActivatedRoute,
     public local: LocalstorageService,
@@ -34,7 +38,10 @@ export class CpMeterFeedbackComponent implements OnInit {
     public global: GlobalService,
     public dal: DalService
   ) {
-    this.FetchStatusList();
+    this.FetchStatusList().then((data)=>{
+      this.meterFeedback.status = this.meterFeedback.FeedbackId == "" ? this.StatusList[0].StatusName : this.ConsumerData.status
+    
+    });
     // console.log(this.data);
     this.meterFeedback.status = "Faulty";
     this.route.queryParams.subscribe(params => {
@@ -42,10 +49,24 @@ export class CpMeterFeedbackComponent implements OnInit {
       if (this.ConsumerData != undefined) {
         this.meterFeedback.FeedbackId = this.ConsumerData.FeedbackId
         this.meterFeedback.comments = this.ConsumerData.comments
-       
+
       }
       this.local.get("userData").then((data) => {
-        this.meterFeedback.status =this.meterFeedback.FeedbackId==""?this.StatusList[0].StatusName: this.ConsumerData.status
+      })
+
+      
+      this.local.get("Index").then((index) => {
+        if (index != undefined) {
+          this.isMeterIndex = index;
+        }
+      })
+      this.local.get("LastSerial").then((index) => {
+        if (index != undefined || index != null) {
+          this.LastSerialNo = index;
+        }
+        else {
+          this.LastSerialNo = 0;
+        }
       })
 
     });
@@ -69,18 +90,46 @@ export class CpMeterFeedbackComponent implements OnInit {
         colorcode: "",
         isSend: false,
         MeterId: this.meterFeedback.MeterId === "" ? this.ConsumerData.MeterID : "",
-        SerialNo: "",
+        SerialNo: this.meterFeedback.SerialNo,
         Type: "mf"
       }
       if (this.meterFeedback.FeedbackId === "") {
-        this.global.AllMeterFeedback.push(obj);
-        this.local.set("MeterFeedback", this.global.AllMeterFeedback).then((data) => {
-          let index = this.global.AllConsumerMeters.findIndex(x => x.MeterNo == this.meterFeedback.MeterNumber);
-          if (index >= 0)
-            this.global.AllConsumerMeters[index].IsFeedbackAdded = true;
-          this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter feedback saved', "success");
-          this.ClearData();
-        })
+        var SerialNo = 0;
+        if (this.isMeterIndexChecked && this.isMeterIndex) {
+          this.local.get("LastSerial").then((last) => {
+
+            if (last != "undefined" && last != null && last != "") {
+              SerialNo = (last * 1) + 1 * 1;
+            }
+            else {
+              SerialNo = 1;
+            }
+            obj.SerialNo=SerialNo.toString()
+            this.local.set("LastSerial",SerialNo);
+            this.global.AllMeterFeedback.push(obj);
+            this.local.set("MeterFeedback", this.global.AllMeterFeedback).then((data) => {
+              let index = this.global.AllConsumerMeters.findIndex(x => x.MeterNo == this.meterFeedback.MeterNumber);
+              if (index >= 0)
+                this.global.AllConsumerMeters[index].IsFeedbackAdded = true;
+              this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter feedback saved', "success");
+              // this.ClearData();
+            })
+          })
+        }
+        else {
+
+          this.global.AllMeterFeedback.push(obj);
+          this.local.set("MeterFeedback", this.global.AllMeterFeedback).then((data) => {
+            let index = this.global.AllConsumerMeters.findIndex(x => x.MeterNo == this.meterFeedback.MeterNumber);
+            if (index >= 0)
+              this.global.AllConsumerMeters[index].IsFeedbackAdded = true;
+            this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter feedback saved', "success");
+            // this.ClearData();
+          })
+ 
+
+        }
+
       }
       else {
         this.local.get("MeterFeedback").then((reading: any) => {
@@ -93,7 +142,7 @@ export class CpMeterFeedbackComponent implements OnInit {
             this.local.set("MeterFeedback", newResArr)
             // this.global.AllConsumerMeters.join();
             this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter feedback Updated', "success");
-          this.ClearData();
+            this.ClearData();
             // this.nav.navigateRoot("log");
             this.global.GetDataFromLocal();
             this.global.getAllConsumerMeters();
@@ -108,14 +157,18 @@ export class CpMeterFeedbackComponent implements OnInit {
 
 
   FetchStatusList() {
-    this.dal.FetchStatus().then((data: any) => {
-      if (data) {
-        this.StatusList = data
-      }
+    return new Promise((resolve,reject)=>{
+      this.dal.FetchStatus().then((data: any) => {
+        if (data) {
+          this.StatusList=data;
+          return resolve(data);
+        }
+      })
     })
+   
   }
 
-  ClearData(){
+  ClearData() {
     this.meterFeedback = {
       FeedbackId: "",
       MeterNumber: "",
@@ -127,5 +180,10 @@ export class CpMeterFeedbackComponent implements OnInit {
       MeterId: "",
       SerialNo: ""
     }
+  }
+
+  onChange(evt){
+    let value = evt.detail.checked;
+    this.isMeterIndexChecked = value;
   }
 }

@@ -8,7 +8,7 @@
     <!-- <ion-list style="padding-top:0 ;"> -->
 
       
-      <ion-row *ngIf="isMeterIndex">
+      <ion-row *ngIf="isMeterIndex && this.meterReading.ID===''">
   
         <ion-col size="12" class="textCenter" >
           <ion-checkbox  (ionChange)="onChange($event)"></ion-checkbox>

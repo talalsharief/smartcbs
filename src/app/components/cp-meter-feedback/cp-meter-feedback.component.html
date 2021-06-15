@@ -7,13 +7,12 @@
 
     <!-- <ion-list style="padding-top:0 ;"> -->
 
-      <ion-row>
+      <ion-row *ngIf="isMeterIndex && this.meterFeedback.FeedbackId===''">
   
         <ion-col size="12" class="textCenter" >
-          <ion-checkbox>
-            
-          </ion-checkbox>
-          <p class="mb-0 ">Is index</p>
+          <ion-checkbox  (ionChange)="onChange($event)"></ion-checkbox>
+         
+          <p class="mb-0 " >Is index</p>
         </ion-col>
 
       </ion-row>
@@ -87,10 +86,7 @@
               <label class="LabelTxt mb-2">Comments</label>
               <textarea class="form-control ClasInput2" [(ngModel)]="meterFeedback.comments" id="exampleFormControlTextarea1" rows="3"></textarea>
           </ion-col>
-        
         </ion-row>
-     
-
     <br>
     <br>
 

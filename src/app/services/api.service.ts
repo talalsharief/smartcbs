@@ -3,7 +3,9 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http
 import { GlobalService } from './global.service';
 import { ClsUserData } from '../classes/cls-user-data';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 // import 'rxjs/add/operator/map'
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -51,34 +53,52 @@ export class ApiService {
 
 
 
-  Post(URL, data) {
+  // Post(URL, data) {
 
-    return new Promise((resolve, error) => {
+  //   return new Promise((resolve, error) => {
 
-      var _headers = new HttpHeaders();
-     let headers: {
-        'Content-Type': 'application/json; charset=utf-8'
-    }
+  //     var _headers = new HttpHeaders();
+  //    let headers: {
+  //       'Content-Type': 'application/json; charset=utf-8'
+  //   }
 
-    _headers.set('Content-Type','application/json; charset=utf-8')
+  //   _headers.set('Content-Type','application/json; charset=utf-8')
     
-      this.http.post(environment.baseURL + URL, data,{headers:_headers}).pipe().subscribe((Respdata: any) => {
+  //     this.http.post(environment.baseURL + URL, data,{headers:_headers}).pipe().subscribe((Respdata: any) => {
 
 
-        console.log("Success Post Data :" + Respdata.data)
+  //       console.log("Success Post Data :" + Respdata.data)
 
-        return resolve(Respdata)
-      }
-        , (Servererror) => {
+  //       return resolve(Respdata)
+  //     }
+  //       , (Servererror) => {
 
-          return error(Servererror);
-        }
-      )
+  //         return error(Servererror);
+  //       }
+  //     )
 
-    }
-    )
+  //   }
+  //   )
+  // }
+
+ 
+  Post(url,data) {
+
+    return new Promise((resolve,reject)=>{
+
+      this.http.post(environment.baseURL + url, data).subscribe((response: Response) => {
+return resolve(response);
+
+      })
+
+    })
   }
 
+  //   getItems() {
+  //   this.http.get('https://example.com/api/items').pipe(map(data => {})).subscribe(result => {
+  //     console.log(result);
+  //   });
+  // }
 
   Delete(URL, params) {
 
