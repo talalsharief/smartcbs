@@ -7,93 +7,98 @@
 
     <!-- <ion-list style="padding-top:0 ;"> -->
 
-      <ion-row *ngIf="isMeterIndex && this.meterFeedback.FeedbackId===''">
-  
-        <ion-col size="12" class="textCenter" >
-          <ion-checkbox  (ionChange)="onChange($event)"></ion-checkbox>
-         
-          <p class="mb-0 " >Is index</p>
-        </ion-col>
+    
 
-      </ion-row>
+    <!-- Multi-line sliding item with icon options on both sides -->
+    <Div class="card cardShadow borderRadius" *ngIf="ConsumerData">
 
-      <!-- Multi-line sliding item with icon options on both sides -->
-      <Div class="card cardShadow borderRadius" *ngIf="ConsumerData">
 
- 
-        <ion-item-sliding id="item100">
-          <ion-item href="#" lines="none" class="borderRadius">
-            <ion-note slot="start" style="width: 50%;">
-              <ion-label>
-                <p class="Hitxt mb-0 ">Meter No.</p>
-                <span class="Txt1 ">{{ConsumerData.MeterNo}}</span>
-                
-                <p class="Hitxt mb-0 ">Consumer </p>
+      <ion-item-sliding id="item100">
+        <ion-item href="#" lines="none" class="borderRadius">
+          <ion-note slot="start" class="IonNote">
+            <ion-label>
+              <p class="Hitxt mb-0 ">Meter No.</p>
+              <span class="Txt1 ">{{ConsumerData.MeterNo}}</span>
 
-                <span class="Txt1">{{ConsumerData.ConsumerName}}</span>
-              </ion-label>
-            </ion-note>
+              <p class="Hitxt mb-0 ">Consumer </p>
 
-            <ion-note class="Hitxt" slot="end">
-              <ion-label class="textRight">
-                <p class="Hitxt mb-0 ">Supp No.</p>
-                <span class="Txt1"> {{ConsumerData.SuppMeterNo}}</span>
-               
-                <p class="Hitxt mb-0 ">Consumer No.</p>
-                <span class="Txt1"> {{ConsumerData.ConsumerNo}}</span>
+              <span class="Txt1">{{ConsumerData.ConsumerName}}</span>
+            </ion-label>
+          </ion-note>
 
-              </ion-label>
-            </ion-note>
-          </ion-item>
+          <ion-note class="Hitxt" slot="end">
+            <ion-label class="textRight">
+              <p class="Hitxt mb-0 ">Supp No.</p>
+              <span class="Txt1"> {{ConsumerData.SuppMeterNo}}</span>
 
-          <ion-item-options side="start">
-            <ion-item-option routerLink="/meterreading" routerDirection="forward">
-              <ion-icon slot="icon-only" name="heart"></ion-icon>
-            </ion-item-option>
-          </ion-item-options>
+              <p class="Hitxt mb-0 ">Consumer No.</p>
+              <span class="Txt1"> {{ConsumerData.ConsumerNo}}</span>
 
-          <ion-item-options side="end">
+            </ion-label>
+          </ion-note>
+        </ion-item>
 
-            <ion-item-option color="dark" routerLink="/meterfeedback" routerDirection="forward">
-              <ion-icon slot="icon-only" name="star"></ion-icon>
-            </ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-      </Div>
+        <ion-item-options side="start">
+          <ion-item-option routerLink="/meterreading" routerDirection="forward">
+            <ion-icon slot="icon-only" name="heart"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+
+        <ion-item-options side="end">
+
+          <ion-item-option color="dark" routerLink="/meterfeedback" routerDirection="forward">
+            <ion-icon slot="icon-only" name="star"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </Div>
 
     <!-- </ion-list> -->
 
-  
-
-        <ion-row>
-          <ion-col size="12">
-            <label class="LabelTxt mb-2 mt-2">Status</label>
 
 
-              <ion-item class="ion-no-padding ClasInput2">
-                <ion-label class="LabelTxt" style="display: none;">Status</ion-label>
-                <ion-select value="notifications" [(ngModel)]="meterFeedback.status" interface="action-sheet">
-                  <ion-select-option *ngFor="let item of StatusList" [value]="item.StatusName">{{item.StatusName}}</ion-select-option>
-                </ion-select>
-              </ion-item>
-          </ion-col>
-        
-        </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <label class="LabelTxt mb-2 mt-2">Status</label>
 
-        <ion-row>
-          <ion-col size="12">
-  
-              <label class="LabelTxt mb-2">Comments</label>
-              <textarea class="form-control ClasInput2" [(ngModel)]="meterFeedback.comments" id="exampleFormControlTextarea1" rows="3"></textarea>
-          </ion-col>
-        </ion-row>
+
+        <ion-item class="ion-no-padding ClasInput2">
+          <ion-label class="LabelTxt" style="display: none;">Status</ion-label>
+          <ion-select value="notifications" [(ngModel)]="meterFeedback.status" interface="action-sheet">
+            <ion-select-option *ngFor="let item of StatusList" [value]="item.StatusName">{{item.StatusName}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+
+        <label class="LabelTxt mb-2">Comments</label>
+        <textarea class="form-control ClasInput2" [(ngModel)]="meterFeedback.comments" id="exampleFormControlTextarea1"
+          rows="3"></textarea>
+      </ion-col>
+    </ion-row>
+    <ion-row class="mt-2" *ngIf="isMeterIndex && this.meterFeedback.FeedbackId===''">
+      <ion-col size="12">
+
+        <div class="textLeft ClasCheckBox" >
+
+          <ion-checkbox (ionChange)="onChange($event)"></ion-checkbox> &nbsp;&nbsp;
+
+          <span class="mb-0 LabelTxt">Allow Indexing</span>
+        </div>
+      </ion-col>
+    </ion-row>
     <br>
     <br>
 
     <ion-row>
       <ion-col size="1"></ion-col>
-      <ion-col size="10" class="textCenter" >
-        <button type="button" class="btn btnLogin" (click)="addMeterFeedback()" >Save Feedback</button>
+      <ion-col size="10" class="textCenter">
+        <button type="button" class="btn btnLogin" (click)="addMeterFeedback()">Save Feedback</button>
       </ion-col>
       <ion-col size="1"></ion-col>
 

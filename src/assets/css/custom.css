@@ -493,3 +493,15 @@ ion-searchbar ion-icon {
      width: 70px;
      padding: 6px;
    }
+   .ClasCheckBox{
+    display: flex;align-items: center;
+    border-radius: 12px;
+    background: white;
+    border: none;
+    box-shadow: 4px 3px 6px #b8e5ff;
+    padding: 11px;
+   }
+   .IonNote{
+    width: 60%;
+    margin-right: 5px;
+   }
