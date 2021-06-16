@@ -9,7 +9,8 @@ export const environment = {
           // baseURL: "http://localhost/dPOSAPI/"
       
         // baseURL:"http://192.168.1.113/xcbm/webservices/" //Development
-      baseURL : "http://localhost:51306/" //todo: /pick from environment variable
+      // baseURL : "http://localhost:51306/" //todo: /pick from environment variable
+      baseURL : 'http://118.107.134.235:82/webservices/' //Test Server"
 };
 
 /*

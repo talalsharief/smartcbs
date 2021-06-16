@@ -192,7 +192,7 @@ padding-left: 10px;
   }
   .Txt1{
     font-weight: 600;
-        font-size: 15px;
+        font-size: 14px;
     color: #777777;
 letter-spacing: 1px;
   }
@@ -238,7 +238,7 @@ letter-spacing: 1px;
   }
   .ClasTimeDiv{
     position: relative;
-    top: -35px;
+    top: -29px;
     transform: translateY(7%);
     background: white;
     border-radius: 10px;
