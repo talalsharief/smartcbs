@@ -35,6 +35,7 @@ export class CpLoginComponent implements OnInit {
 
 
   btnLogin() {
+
     if (this.objLogin.Username == "" || this.objLogin.Password == "") {
 
       this.toast.ShowCustomToast('<ion-icon name="alert-circle"></ion-icon> Enter Username/Password', "error");

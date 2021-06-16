@@ -20,9 +20,9 @@
       </ion-row>
     </div>
     <br>
-    <div class="card cardShadow borderRadius" *ngFor="let item of this.global.FilterSearchShow">
+    <div class="card cardShadow borderRadius mb-3" *ngFor="let item of this.global.FilterSearchShow">
 
-      <ion-item-sliding id="item100">
+      <ion-item-sliding id="">
         <ion-item lines="none" class="borderRadius">
           <ion-note slot="start">
             <ion-label>
@@ -62,9 +62,10 @@
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
-      <br>
 
     </div>
+
+   
     <ion-infinite-scroll (ionInfinite)="LoadMoreData($event)">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
       </ion-infinite-scroll-content>
