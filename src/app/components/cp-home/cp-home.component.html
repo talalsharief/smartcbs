@@ -6,8 +6,9 @@
         <ion-row>
           <ion-col size="12" class="animate__animated ">
             <p class="Hitxt lightTxt ">Hello !</p>
-            <small class="Hitxt lightTxt ">Your Current Batch is {{this.global.UserData.BatchName}}</small><br>
             <span class="TxtName lightTxt" *ngIf="this.global.UserData ">{{this.global.UserData.userName}}</span>
+
+            <p class="Hitxt lightTxt ">Your Current Batch is {{this.global.UserData.BatchName}}</p><br>
           </ion-col>
         </ion-row>
       </div>
