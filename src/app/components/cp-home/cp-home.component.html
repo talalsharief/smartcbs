@@ -2,12 +2,12 @@
   <div class="BgCard">
 
     <div class="card noborder nobg">
-      <div class="card-body">
+      <div class="card-body pt-0">
         <ion-row>
-          <ion-col size="12">
-            <p class="Hitxt lightTxt">Hello !</p>
-            <small class="Hitxt lightTxt">Your Current Batch is {{this.global.UserData.BatchName}}</small><br>
-            <span class="TxtName lightTxt" *ngIf="this.global.UserData">{{this.global.UserData.userName}}</span>
+          <ion-col size="12" class="animate__animated ">
+            <p class="Hitxt lightTxt ">Hello !</p>
+            <small class="Hitxt lightTxt ">Your Current Batch is {{this.global.UserData.BatchName}}</small><br>
+            <span class="TxtName lightTxt" *ngIf="this.global.UserData ">{{this.global.UserData.userName}}</span>
           </ion-col>
         </ion-row>
       </div>
@@ -19,7 +19,7 @@
     <div class="card ClasTimeDiv nobg textCenter cardShadow borderRadius">
       <div class="card-body cardBodyPadding">
         <ion-row>
-          <ion-col size="12">
+          <ion-col size="12" class="animate__animated aanimate__fadeInUp">
             <p class="Hitxt">Today is
             </p>
             <span class="DateTxt TxtGrey">{{TodayDate}}</span>
@@ -67,7 +67,7 @@
     </ion-row>
     <ion-row>
 
-      <ion-col>
+      <ion-col class="animate__animated animate__fadeInLeft">
         <div class="card cardShadow borderRadius  text-center">
           <div class="card-body">
             <ion-row>
@@ -79,7 +79,7 @@
               </ion-col>
            
 
-              <ion-col size="12" class="pt-0">
+              <ion-col size="12" class="pt-0 ">
                 <p class="">
 
                   <span class="Hitxt">Today</span>
@@ -96,7 +96,7 @@
 
 
       </ion-col>
-      <ion-col>
+      <ion-col class="animate__animated animate__fadeInRight">
         <div class="card cardShadow borderRadius text-center">
           <div class="card-body" (click)="GotoFetchData()">
             <ion-row>
@@ -129,7 +129,7 @@
 
 
     <ion-row>
-      <ion-col>
+      <ion-col class="animate__animated animate__fadeInLeft">
 
 
         <div class="card cardShadow borderRadius text-center">
@@ -154,7 +154,7 @@
           </div>
         </div>
       </ion-col>
-      <ion-col>
+      <ion-col class="animate__animated animate__fadeInRight">
 
 
         <div class="card cardShadow borderRadius text-center ">

@@ -505,3 +505,8 @@ ion-searchbar ion-icon {
     width: 60%;
     margin-right: 5px;
    }
+   .xsTxt{
+    color: #bdcdff;
+    font-size: 11px;
+    letter-spacing: 1px;
+   }
