@@ -19,7 +19,7 @@ export class AlertModalComponent implements OnInit {
   MeterReaderID:""
   constructor(
     private modalController: ModalController,
-    private global: GlobalService,
+    public global: GlobalService,
     private navController: NavController,
     public dal: DalService,
     public local: LocalstorageService,
@@ -80,22 +80,25 @@ export class AlertModalComponent implements OnInit {
   Syncing() {
   }
 
-  btnYesFetched() {
+   btnYesFetched() {
     this.global.isFetched = true;
     this.global.btnFetch = false;
     this.global.AllFetched = 0;
-    this.local.get("userData").then((data) => {
-      if (data) {
-        this.MeterReaderID=data.MTUserID
+      console.log(this.global.UserData)
+   
+      if (this.global.UserData) {
+        this.MeterReaderID=this.global.UserData.MTUserID
         let obj = {
-          MeterReaderID: data.MTUserID
+          MeterReaderID: this.global.UserData.MTUserID
         }
         this.dal.FetchConsumers(obj).then((consumers) => {
+          console.log(consumers)
           if (consumers) {
             // this.global.isFetched = false
             // this.global.DoneFetched = true
             console.log("Consumers list fetched")
             this.global.AllFetched++;
+            console.log(this.global.AllFetched)
             this.isFectched();
 
           }
@@ -105,13 +108,14 @@ export class AlertModalComponent implements OnInit {
         });
         // this.global.isFetched = true;
         // this.global.btnFetch = false;
-        this.dal.FetchMeters(obj).then((meters) => {
+        this.dal.FetchMeters(obj).then(async(meters) => {
+          console.log(meters)
           if (meters) {
             this.global.isFetched = false
             this.global.DoneFetched = true
             console.log("Meters list fetched")
             this.global.AllFetched++;
-            this.isFectched().then((isFetched) => {
+           await this.isFectched().then((isFetched) => {
               if (isFetched) {
                 this.local.set('LastFetchDateTime', new Date().toLocaleString())
                 this.SaveFetcheHistory();//Saving/Update Fetechd time and record 
@@ -131,7 +135,7 @@ export class AlertModalComponent implements OnInit {
 
         })
       }
-    })
+
 
 
     // setTimeout(() => {
@@ -159,6 +163,8 @@ export class AlertModalComponent implements OnInit {
           if(data){
             this.global.isIndexReading=data
           }
+        }, (error)=>{
+          return reject(error)
         })
 
         this.global.DoneFetched = false;
@@ -166,7 +172,7 @@ export class AlertModalComponent implements OnInit {
         this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Data Sync successfully', "success");
         return resolve(true);
       }
-    })
+    } )
 
   }
 
@@ -186,13 +192,46 @@ export class AlertModalComponent implements OnInit {
         this.local.get("DataFetch").then((data) => {
           let tepmArr = []
           tepmArr = data;
+         
           let obj = {
             records: this.global.AllMetersList.length,
             syncDateTime: new Date().toLocaleString()
           }
           tepmArr.push(obj)
 
-          this.local.set("DataFetch", tepmArr);
+          this.local.set("DataFetch", tepmArr).then((data)=>console.log(data));
+
+        })
+
+      }
+
+    })
+  }
+  SaveSyncHistory(){
+    this.local.get("DataSync").then((d) => {
+      if (d == null) {
+        let tepmArr = []
+        let N = []
+        let value=  this.global.AllConsumerMeters.filter(x => x.isSend == false).length;
+       
+        let obj = {
+          records: value,
+          syncDateTime: new Date().toLocaleString()
+        }
+        tepmArr.push(obj)
+        this.local.set("DataSync", tepmArr);
+      }
+      else {
+        this.local.get("DataSync").then((data) => {
+          let tepmArr = []
+          tepmArr = data;
+          let obj = {
+            records: this.global.AllMeterReading.length,
+            syncDateTime: new Date().toLocaleString()
+          }
+          tepmArr.push(obj)
+
+          this.local.set("DataSync", tepmArr);
 
         })
 
@@ -205,8 +244,9 @@ export class AlertModalComponent implements OnInit {
   SyncMeterFeedback() {
     let TempArray = [];
     let MeterFeedback = []
-    this.local.get("userData").then((userData) => {
+    this.local.get("UserData").then((userData) => {
       if (userData) {
+        
         // var obj = {
         //   MeterReading: MeterReading,
         //   MeterReadingUserID: M_ID,
@@ -237,7 +277,7 @@ export class AlertModalComponent implements OnInit {
   SyncMeterReading() {
     let TempArray = [];
     let MeterReading = []
-    this.local.get("userData").then((userData) => {
+    this.local.get("UserData").then((userData) => {
       if (userData) {
         // var obj = {
         //   MeterReading: MeterReading,
@@ -258,6 +298,8 @@ export class AlertModalComponent implements OnInit {
 
             this.dal.SyncMeterReading(obj).then((data) => {
               if (data) {
+                this.local.set('LastSyncDateTime', new Date().toLocaleString())
+                this.SaveSyncHistory()
                 console.log(data);
               }
             })

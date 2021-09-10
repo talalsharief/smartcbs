@@ -15,10 +15,10 @@ export class SyncdataService {
   SyncMeterFeedback(obj) {
     return new Promise((resolve, reject) => {
       try{
-        this.api.Post('wsMeterFeedback.asmx/SyncMeterFeedback',obj).then((respData: any) => {
+        this.api.Post('api/meterreading/syncmeterreading',obj).then((respData: any) => {
         if(respData){ 
-          let data=JSON.parse(respData);
-          return  resolve(data);
+          // let data=JSON.parse(respData);
+          return  resolve(respData);
         }
         else if(respData==null || respData=="")
         {
@@ -38,10 +38,11 @@ export class SyncdataService {
   SyncMeterReading(obj) {
     return new Promise((resolve, reject) => {
       try{
-        this.api.Post('wsMeterReading.asmx/SyncMeterReading',obj).then((respData: any) => {
-        if(respData){ 
-          let data=JSON.parse(respData);
-          return  resolve(data);
+        this.api.Post('api/meterreading/syncmeterreading',obj).then((respData: any) => {
+          console.log(respData)
+        if(respData.data){ 
+          // let data=JSON.parse(respData);
+          return  resolve(respData.data);
         }
         else if(respData==null || respData=="")
         {

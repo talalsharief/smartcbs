@@ -49,10 +49,13 @@ export class GlobalService {
   MeterReadingList=[]
   AllFilterMeterReading = [];
 
+  MeterReadingAddedCount = 0;
 
 
   constructor(public local: LocalstorageService) {
     this.objUserData = new ClsUserData();
+    this.GetDataFromLocal()
+   
   }
   getDeviceInfo() {
     let id;
@@ -70,20 +73,23 @@ export class GlobalService {
       userid: id
     }
     return this.objDeviceInfo.deviceinfo;
+
   }
 
   getAllConsumerMeters() {
     this.AllConsumerMeters = []
+  
     for (let index = 0; index < this.AllConsumersList.length; index++) {
-      let CMeters = this.AllMetersList.filter(items => items.ConsumerID == this.AllConsumersList[index].ConsumerID);
+
+      let CMeters = this.AllMetersList.filter(items => items.consumerid == this.AllConsumersList[index].consumerid);
       for (let j = 0; j < CMeters.length; j++) {
 
         //Checking Reading
-        let FindMR = this.AllMeterReading.find(items => items.MeterId == CMeters[j].MeterID);
+        let FindMR = this.AllMeterReading.find(items => items.MeterId == CMeters[j].meterid);
         let MRValue = FindMR != undefined;
 
         //Checking Feedback
-        let FindFeedback = this.AllMeterFeedback.find(items => items.MeterId == CMeters[j].MeterID);
+        let FindFeedback = this.AllMeterFeedback.find(items => items.MeterId == CMeters[j].meterid);
         let FeedbackValue = FindFeedback != undefined;
         let _date:"";
         let FeedbackId:"";
@@ -104,17 +110,17 @@ export class GlobalService {
         else{_date=""}
         // if (MRValue === false && FeedbackValue === false)
         this.AllConsumerMeters.push({
-          Name: this.AllConsumersList[index].ConsumerName + " " + CMeters[j].MeterNo + " " + CMeters[j].SuppMeterNo + " " + this.AllConsumersList[index].ConsumerNo,
-          MeterID: CMeters[j].MeterID,
-          ConsumerID: this.AllConsumersList[index].ConsumerID, 
+          Name: this.AllConsumersList[index].consumername + " " + CMeters[j].meterno + " " + CMeters[j].suppmeterno + " " + this.AllConsumersList[index].consumerno,
+          MeterID: CMeters[j].meterid,
+          ConsumerID: this.AllConsumersList[index].consumerid, 
           IsReadingAdded: MRValue, 
-          SerialNo: CMeters[j].SerialNo, 
+          SerialNo: CMeters[j].serialno, 
           IsFeedbackAdded: FeedbackValue, 
-          ConsumerName: this.AllConsumersList[index].ConsumerName, 
-          MeterNo: CMeters[j].MeterNo, 
-          ConsumerNo: this.AllConsumersList[index].ConsumerNo, 
-          SuppMeterNo: CMeters[j].SuppMeterNo, 
-          PreviousReading: CMeters[j].PreviousReading,
+          ConsumerName: this.AllConsumersList[index].consumername, 
+          MeterNo: CMeters[j].meterno, 
+          ConsumerNo: this.AllConsumersList[index].consumerno, 
+          SuppMeterNo: CMeters[j].suppmeterno, 
+          PreviousReading: CMeters[j].previousreading,
           _date:_date,
           CurrentReading:MRValue==true?FindMR.CurrentReadig:0,
           status:FeedbackValue==true?FindFeedback.status:"",
@@ -129,6 +135,7 @@ export class GlobalService {
     console.log("all consumermeterslist filled");
   }
 
+  
   GetPrimaryKey() {
     let id = "";
     let possible = "0123456789" + Date.now().toString().substring(7, 13);
@@ -148,32 +155,39 @@ export class GlobalService {
 
     this.local.get("Consumers").then((data) => {
       if (data) {
+
         this.AllConsumersList = data;
+        console.log(this.AllConsumersList)
       }
     })
     this.local.get("Meters").then((data) => {
       if (data) {
         this.AllMetersList = data;
+        console.log(this.AllMetersList)
       }
     })
     this.local.get("MeterReading").then((data) => {
       if (data) {
+       
         this.AllMeterReading = data;
+        console.log(this.AllMeterReading)
       }
     })
     this.local.get("MeterFeedback").then((data) => {
       if (data) {
         this.AllMeterFeedback = data;
+        console.log('All Meter FeedBack'+this.AllMeterFeedback)
       }
     })
     this.local.get("Status").then((data) => {
       if (data) {
-        this.AllMeterStatus = data;
+        this.AllMeterStatus = data.data;
       }
     })
     this.local.get("Index").then((data) => {
       if (data) {
         this.isIndexReading = data;
+        console.log(this.isIndexReading)
       }
     })
 

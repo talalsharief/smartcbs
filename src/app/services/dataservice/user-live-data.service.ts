@@ -12,17 +12,18 @@ export class UserLiveDataService {
   UserSignInService(param) {
     return new Promise((resolve, reject) => {
       try{
-        this.api.Get('wsMeterReadingUser.asmx/validateUser?_user='+param._user+"&_pwd="+param._pwd).then((res: any) => {
-           let respData = res.substring(res.indexOf("{"), res.indexOf("}")+1);
+        this.api.Get('api/user/userlogin?username='+param._user+"&Password="+param._pwd).then((res: any) => {
+          //  let respData = res.substring(res.indexOf("{"), res.indexOf("}")+1);
            
         // })
-        if(respData){ //valid data{
-          let data=JSON.parse(respData);
-          return  resolve(data);
+        console.log(res.data[0])
+        if(res){ //valid data{
+          // let data=JSON.parse(respData);
+          return  resolve(res.data[0]);
         }
-        else if(respData==null || respData=="")
+        else if(res==null || res=="")
         {
-          return resolve(null)
+          return reject(null)
         }
       })
     }

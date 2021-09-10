@@ -20,7 +20,7 @@ export class CpLogComponent implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private global: GlobalService,
+    public global: GlobalService,
     public local: LocalstorageService,
     public nav:NavController,
     public toast:ToastService

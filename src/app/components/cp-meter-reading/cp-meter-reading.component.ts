@@ -53,7 +53,7 @@ export class CpMeterReadingComponent implements OnInit {
     this.setInputFocus();
     this.route.queryParams.subscribe(params => {
       this.meterReading = JSON.parse(params["consumerdata"]);
-      this.local.get("userData").then((data) => {
+      this.local.get("UserData").then((data) => {
         // console.log(this.meterReading);
         this.meterReading.BranchID = data.BranchID,
           this.meterReading.MeterReadingUserID = data.MTUserID
@@ -144,6 +144,7 @@ export class CpMeterReadingComponent implements OnInit {
             let index = this.global.AllConsumerMeters.findIndex(x => x.MeterNo == this.meterReading.MeterNo);
             if (index >= 0)
               this.global.AllConsumerMeters[index].IsReadingAdded = true;
+              // this.global.AllConsumerMeters
             this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter reading saved', "success");
           })
         }

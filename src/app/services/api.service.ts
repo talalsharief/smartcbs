@@ -26,7 +26,7 @@ export class ApiService {
   Get(url): Promise<any> {
     return new Promise((resolve, error) => {
       console.log("Final API Url : "+environment.baseURL + url);
-      this.http.get(environment.baseURL + url, { responseType: 'text' }).subscribe((data: any) => {
+      this.http.get(environment.baseURL + url).subscribe((data: any) => {
 
         let respData= data
         return resolve(respData);
@@ -87,9 +87,13 @@ export class ApiService {
     return new Promise((resolve,reject)=>{
 
       this.http.post(environment.baseURL + url, data).subscribe((response: Response) => {
-return resolve(response);
+      return resolve(response);
 
-      })
+      }
+      ,(error)=>{
+        return reject(error)
+      }
+      )
 
     })
   }

@@ -14,6 +14,7 @@ export class CpHomeComponent implements OnInit {
 
   TodayDate= new Date().toDateString()
 LastFetched="";
+LastSynced=""
   constructor(
 
     public toast:ToastService,
@@ -32,21 +33,54 @@ LastFetched="";
       }).then(()=>{
         this.GetLastFeteched();
       })
+      this.local.get("LastSyncDateTime").then((data)=>{
+        if(data){
+          this.LastSynced=this.global.GetRelativeTime(data);
+        }
+        else
+        {
+          this.LastSynced="-"
+        }
+        }).then(()=>{
+          this.GetLastSynced();
+        })
+      
+
+      this.local.get("userData").then((data)=>{
+      
+        if(data){
+           
+        }
+      })
+      this.GetUnSyncData()
+      this.global.getAllConsumerMeters()
+      
+       
+       
+    
+     
    }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.global.getAllConsumerMeters()
+  }
 
 
   GetLastFeteched(){
       return moment(this.LastFetched,'MM/DD/YYYY, h:mm:ss A').fromNow()
       }
+      GetLastSynced(){
+        return moment(this.LastSynced,'MM/DD/YYYY, h:mm:ss A').fromNow()
+        }
 
       Added:number
       GetMeterFeedbackAddedCount(){
+      
       let value=  this.global.AllConsumerMeters.filter(x => x.IsReadingAdded == true || x.IsFeedbackAdded == true).length;
       if(value){
         this.percentageMeterFeedbackDone()
-        return this.Added=value
+        this.global.MeterReadingAddedCount = value
+        return this.Added=this.global.MeterReadingAddedCount
 
       }
       else
@@ -72,7 +106,9 @@ LastFetched="";
       return value;
       }
 
-
+      GotoSyncData(){
+        this.nav.navigateForward('syncdata');
+      }
       GotoFetchData(){
         this.nav.navigateForward('setting');
       }

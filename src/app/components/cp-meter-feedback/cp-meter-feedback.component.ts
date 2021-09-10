@@ -38,10 +38,10 @@ export class CpMeterFeedbackComponent implements OnInit {
     public global: GlobalService,
     public dal: DalService
   ) {
-    this.FetchStatusList().then((data)=>{
-      this.meterFeedback.status = this.meterFeedback.FeedbackId == "" ? this.StatusList[0].StatusName : this.ConsumerData.status
+    // this.FetchStatusList().then((data)=>{
+    //   this.meterFeedback.status = this.meterFeedback.FeedbackId == "" ? this.StatusList[0].StatusName : this.ConsumerData.status
     
-    });
+    // });
     // console.log(this.data);
     this.meterFeedback.status = "Faulty";
     this.route.queryParams.subscribe(params => {
@@ -52,6 +52,7 @@ export class CpMeterFeedbackComponent implements OnInit {
 
       }
       this.local.get("userData").then((data) => {
+        console.log()
       })
 
       
@@ -70,6 +71,7 @@ export class CpMeterFeedbackComponent implements OnInit {
       })
 
     });
+    console.log("Meter FeedBack Component")
   }
 
   ngOnInit() { }
@@ -156,9 +158,9 @@ export class CpMeterFeedbackComponent implements OnInit {
   }
 
 
-  FetchStatusList() {
+  FetchStatusList(param) {
     return new Promise((resolve,reject)=>{
-      this.dal.FetchStatus().then((data: any) => {
+      this.dal.FetchStatus(param).then((data: any) => {
         if (data) {
           this.StatusList=data;
           return resolve(data);

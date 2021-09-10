@@ -38,7 +38,7 @@ export class DalService {
   }
 
   ifLoggedIn() {
-    this.local.get("userData").then((data) => {
+    this.local.get("UserData").then((data) => {
       if (data) {
         this.global.UserData = data;
         this.isLogin = true;
@@ -50,7 +50,7 @@ export class DalService {
   isAuthenticated() {
     this.authState.subscribe((data) => {
       if (data) {
-        this.local.get("userData").then((data) => {
+        this.local.get("UserData").then((data) => {
           if (data) {
             this.global.UserData = data;
           }
@@ -85,10 +85,13 @@ export class DalService {
   UserLiveSignIn(param) {
     return new Promise((resolve, reject) => {
       try {
-        this.objUserLiveData.UserSignInService(param).then((res: any) => {
+        this.objUserLiveData.UserSignInService(param).then(async(res: any) => {
           if (res != undefined) {
             // this.global.userData = res[0];
-            this.local.set("userData", res);
+            console.log(res)
+            await this.local.set("UserData", res);
+           
+            this.global.UserData = res;
             return resolve(res);
           }
           else if (res == null) {
@@ -109,14 +112,16 @@ export class DalService {
   FetchMeters(param) {
     return new Promise((resolve, reject) => {
       try {
-        this.meterandconsumer.FetchMeter(param).then((res: any) => {
+        this.meterandconsumer.FetchMeter(param).then(async(res: any) => {
           if (res != undefined) {
-            this.local.set("Meters", res);
-            this.global.AllMetersList=res;
+            console.log(res.data)
+           await this.local.set("Meters", res.data);
+          
+            this.global.AllMetersList=res.data;
             return resolve(res);
           }
           else if (res == null) {
-            return resolve(res)
+            return resolve(res.data)
           }
         });
       }
@@ -132,11 +137,13 @@ export class DalService {
       try {
         this.meterandconsumer.FetchConsumer(param).then((res: any) => {
           if (res != undefined) {
-            this.local.set("Consumers", res);
-            this.global.AllConsumersList=res;
-            return resolve(res);
+            console.log(res.data)
+            this.local.set("Consumers", res.data);
+            this.global.AllConsumersList=res.data;
+            return resolve(res.data);
           }
           else if (res == null) {
+            console.log(res)
             return resolve(res)
           }
         });
@@ -184,10 +191,10 @@ export class DalService {
 
   }
 
-  FetchStatus() {
+  FetchStatus(param) {
     return new Promise((resolve, reject) => {
       try {
-        this.meterandconsumer.FetchStatus().then((res: any) => {
+        this.meterandconsumer.FetchStatus(param).then((res: any) => {
           if (res != undefined) {
             this.local.set("Status", res);
             this.global.AllMeterStatus=res;
@@ -211,8 +218,8 @@ export class DalService {
       try {
         this.meterandconsumer.FetchMeterIndexConfiguration(param).then((res: any) => {
           if (res != undefined) {
-            this.local.set("Index", res);
-            this.global.isIndexReading=res;
+            this.local.set("Index", res.data);
+            this.global.isIndexReading=res.data;
             return resolve(res);
           }
           else if (res == null) {

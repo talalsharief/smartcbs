@@ -13,12 +13,15 @@ export class MeterandconsumerService {
   FetchMeter(param) {
     return new Promise((resolve, reject) => {
       try{
-        this.api.Get('wsControlsFilling.asmx/FetchMeter?MeterReaderID='+param.MeterReaderID).then((res: any) => {
-           let respData = res.substring(res.indexOf("["), res.indexOf("]")+1); 
-
+        this.api.Get('api/fetchmeter/fetchmeter?meterreaderid='+param.MeterReaderID).then((res: any) => {
+          console.log(res) 
+          // let respData = res.substring(res.indexOf("["), res.indexOf("]")+1); 
+          let respData =res
+            console.log('Fetch Meter'+respData)
         if(respData){ 
-          let data=JSON.parse(respData);
-          return  resolve(data);
+          console.log('Fetched !')
+          // let data=JSON.parse(respData);
+          return  resolve(respData);
         }
         else if(respData==null || respData=="")
         {
@@ -38,12 +41,13 @@ export class MeterandconsumerService {
   FetchConsumer(param) {
     return new Promise((resolve, reject) => {
       try{
-        this.api.Get('wsControlsFilling.asmx/FetchConsumer?MeterReaderID='+param.MeterReaderID).then((res: any) => {
-           let respData = res.substring(res.indexOf("["), res.indexOf("]")+1); 
-
+        this.api.Get('api/fetchconsumes/fetchconsumer?meterreaderid='+param.MeterReaderID).then((res: any) => {
+          //  let respData = res.substring(res.indexOf("["), res.indexOf("]")+1); 
+          let respData =res
+            console.log('Fetch Consumers'+respData)
         if(respData){ 
-          let data=JSON.parse(respData);
-          return  resolve(data);
+          // let data=JSON.parse(respData);
+          return  resolve(respData);
         }
         else if(respData==null || respData=="")
         {
@@ -60,15 +64,16 @@ export class MeterandconsumerService {
     });
   }
 
-  FetchStatus() {
+  FetchStatus(param) {
     return new Promise((resolve, reject) => {
       try{
-        this.api.Get('wsControlsFilling.asmx/FillAppMeterStatus').then((res: any) => {
-           let respData = res.substring(res.indexOf("["), res.indexOf("]")+1); 
-
+        this.api.Get('api/fillappmeter/fillappmeterstatus?userid='+param.UserID).then((res: any) => {
+          //  let respData = res.substring(res.indexOf("["), res.indexOf("]")+1); 
+          let respData =res
+            console.log('Meter Status'+respData)
         if(respData){ 
-          let data=JSON.parse(respData);
-          return  resolve(data);
+          // let data=JSON.parse(respData);
+          return  resolve(respData);
         }
         else if(respData==null || respData=="")
         {
@@ -89,13 +94,13 @@ export class MeterandconsumerService {
     return new Promise((resolve, reject) => {
       try{
         
-        this.api.Get('wsControlsFilling.asmx/FetchMeterIndexinConfiguration?MeterReaderID='+param.MeterReaderID).then((res: any) => {
+        this.api.Get('api/fetchmeterindex/fetchmeterindexinconfiguration'+param.MeterReaderID).then((res: any) => {
           //  let respData = res.substring(res.indexOf("["), res.indexOf("]")+1); 
            let respData =res
-
+              console.log(respData)
         if(respData){ 
-          let data=respData.includes("true");
-          return  resolve(data);
+          // let data=respData.includes("true");
+          return  resolve(respData);
         }
         else if(respData==null || respData=="")
         {

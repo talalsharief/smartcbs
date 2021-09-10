@@ -8,7 +8,7 @@
             <p class="Hitxt lightTxt ">Hello !</p>
             <span class="TxtName lightTxt" *ngIf="this.global.UserData ">{{this.global.UserData.userName}}</span>
 
-            <p class="Hitxt lightTxt ">Your Current Batch is {{this.global.UserData.BatchName}}</p><br>
+            <p class="Hitxt lightTxt ">Your Current Batch is {{this.global.UserData.branchName}}</p><br>
           </ion-col>
         </ion-row>
       </div>
@@ -70,7 +70,7 @@
 
       <ion-col class="animate__animated animate__fadeInLeft">
         <div class="card cardShadow borderRadius  text-center">
-          <div class="card-body">
+          <div class="card-body"  (click)="GotoSyncData()">
             <ion-row>
               <ion-col size="12">
                 <div>
@@ -81,11 +81,11 @@
            
 
               <ion-col size="12" class="pt-0 ">
-                <p class="">
+                <!-- <p class="">
 
                   <span class="Hitxt">Today</span>
-                </p>
-                <span class="Txt1">2:00 PM</span>
+                </p> -->
+                <span class="Txt1">{{LastSynced}}</span>
                 <p class="">
                   <span class="Hitxt">Last Synced</span>
                 </p>
@@ -111,7 +111,7 @@
               <ion-col size="12" class="pt-0" >
                 <p class="">
 
-                  <span class="Hitxt">{{todaay}}</span>
+                  <!-- <span class="Hitxt">{{todaay}}</span> -->
                 </p>
                 <span class="Txt1">{{LastFetched}}</span>
                 <p class="">

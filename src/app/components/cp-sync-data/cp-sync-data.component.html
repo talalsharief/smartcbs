@@ -1,105 +1,101 @@
 <div class="container-fluid noPadding  mb-5">
 
-<br>
-  <div class="container textCenter">
-    <ion-row>
-      <ion-col>
-
-
-        <div class="card cardShadow borderRadius text-center">
-          <div class="card-body">
-            
-            <ion-row>
-              <ion-col size="2" class="alignSelf">
-                <div class="SyncIcon">
-                  <img   src="assets\img\dashboardimg\fetch.png" alt="Sync Data"/>
-
-                </div>
-                
-              </ion-col>
-              <ion-col size="9" class="textCenter">
-                <span class=" NumTxt">{{GetUnSyncData()}}</span>
-                <p class="">
-                  <span class="Hitxt">Unsynced data</span>
-                </p>
-              </ion-col>
-            </ion-row>
+  <br>
+    <div class="container textCenter">
+      <ion-row>
+        <ion-col>
+  
+  
+          <div class="card cardShadow borderRadius text-center">
+            <div class="card-body">
+              
+              <ion-row>
+                <ion-col size="2" class="alignSelf">
+                  <div class="SyncIcon">
+                    <img   src="assets\img\dashboardimg\fetch.png" alt="Sync Data"/>
+  
+                  </div>
+                  
+                </ion-col>
+                <ion-col size="9" class="textCenter">
+                  <span class=" NumTxt">{{GetUnSyncData()}}</span>
+                  <p class="">
+                    <span class="Hitxt">Unsynced data</span>
+                  </p>
+                </ion-col>
+              </ion-row>
+            </div>
           </div>
-        </div>
-      </ion-col>
-    
-
-    </ion-row>
-    <br>
-   <!--  <span class="Txt1">240</span>
-    <p class="Hitxt">SYNC DATA</p>
-    <br> -->
-    <div class="card cardShadow borderRadius">
-      <div class="card-body textCenter">
-        <br>
-        <br>
-
-        <button type="button" class="btn btnCircle" (click)="btnSync()">
-          <span  [hidden]="!global.btnSync">
-          SYNC
-          <br>NOW
-        </span>
-        <span [hidden]="!global.isSyncing">
-          <img src="assets\img\gif\syncing.gif">
-        </span>
-        <span [hidden]="!global.DoneSync">
-          <ion-icon name="checkmark" class="SyncFetchIcon"></ion-icon>
-        </span>
-        </button>
+        </ion-col>
       
-        <br  >
-        <br [hidden]="global.isSyncing">
-        <br>
-
-        <p class="Hitxt">Last Synced at</p>
-        <span class="Txt1">Wed 21 April 2021 11:07 AM</span>
-        <br>
-        <br>
-
-
+  
+      </ion-row>
+      <br>
+     <!--  <span class="Txt1">240</span>
+      <p class="Hitxt">SYNC DATA</p>
+      <br> -->
+      <div class="card cardShadow borderRadius">
+        <div class="card-body textCenter">
+          <br>
+          <br>
+  
+          <button type="button" class="btn btnCircle" (click)="btnSync()">
+            <span  [hidden]="!global.btnSync">
+            SYNC
+            <br>NOW
+          </span>
+          <span [hidden]="!global.isSyncing">
+            <img src="assets\img\gif\syncing.gif">
+          </span>
+          <span [hidden]="!global.DoneSync">
+            <ion-icon name="checkmark" class="SyncFetchIcon"></ion-icon>
+          </span>
+          </button>
+        
+          <br  >
+          <br [hidden]="global.isSyncing">
+          <br>
+  
+          <p class="Hitxt">Last Synced at</p>
+          <span class="Txt1">{{LastSyncedDateTime}}</span>
+          <br>
+          <br>
+  
+  
+        </div>
+      </div>
+      <br>
+      <div class="card borderRadius cardShadow">
+  
+        <ion-row>
+          <ion-col class="noPadding">
+  
+            <p class="Hitxt mb-0 pt-2 pb-2">Last 10 Synced Data</p>
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="theadCustom">
+                  <tr>
+                    <th>Sr No.</th>
+                    <th>Sync Date</th>
+                    <th>Records Sync</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let item of SyncDataHistoryList;let i=index">
+                 
+                  <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{this.global.GetRelativeTime(item.syncDateTime)}}</td>
+                    <td>{{item.records}}</td>
+                  </tr>
+  
+                </tbody>
+              </table>
+            </div>
+  
+          </ion-col>
+        </ion-row>
       </div>
     </div>
     <br>
-    <div class="card borderRadius cardShadow">
-
-      <ion-row>
-        <ion-col class="noPadding">
-
-          <p class="Hitxt mb-0 pt-2 pb-2">Last 10 Synced Data</p>
-          <div class="table-responsive">
-            <table class="table">
-              <thead class="theadCustom">
-                <tr>
-                  <th>Sr No.</th>
-                  <th>Sync Date</th>
-                  <th>Records Sync</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Apr 11 2:00PM</td>
-                  <td>100</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Apr 11 2:00PM</td>
-                  <td>100</td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
-
-        </ion-col>
-      </ion-row>
-    </div>
+    <br>
   </div>
-  <br>
-  <br>
-</div>
