@@ -22,20 +22,24 @@ LastSynced=""
     public nav:NavController,
     public global:GlobalService
   ) {
+    this.global.GetDataFromLocal();
+    this.global.getAllConsumerMeters()
     this.local.get("LastFetchDateTime").then((data)=>{
       if(data){
-        this.LastFetched=this.global.GetRelativeTime(data);
+        this.LastFetched= this.global.GetRelativeTime(data);
       }
       else
       {
         this.LastFetched="-"
       }
       }).then(()=>{
-        this.GetLastFeteched();
+         this.GetLastFeteched();
       })
-      this.local.get("LastSyncDateTime").then((data)=>{
+
+      this.local.get("LastSyncDateTime").then(async (data)=>{
+        console.log(data)
         if(data){
-          this.LastSynced=this.global.GetRelativeTime(data);
+          this.LastSynced= await this.global.GetRelativeTime(data);
         }
         else
         {
@@ -44,7 +48,6 @@ LastSynced=""
         }).then(()=>{
           this.GetLastSynced();
         })
-      
 
       this.local.get("userData").then((data)=>{
       
@@ -53,16 +56,52 @@ LastSynced=""
         }
       })
       this.GetUnSyncData()
-      this.global.getAllConsumerMeters()
+      
       
        
        
     
      
    }
-
+   progress
+   progressText=""
+    
+   
   ngOnInit() {
     this.global.getAllConsumerMeters()
+     this.percentageMeterFeedbackDone()
+       
+      setInterval(() => { 
+        this.local.get("LastFetchDateTime").then(async(data)=>{
+          if(data){
+            this.LastFetched= await this.global.GetRelativeTime(data);
+          }
+          else
+          {
+            this.LastFetched="-"
+          }
+          }).then(()=>{
+             this.GetLastFeteched();
+          })
+
+          this.local.get("LastSyncDateTime").then(async (data)=>{
+            console.log(data)
+            if(data){
+              this.LastSynced= await this.global.GetRelativeTime(data);
+            }
+            else
+            {
+              this.LastSynced="-"
+            }
+            }).then(()=>{
+              this.GetLastSynced();
+            })
+     }, 10000);
+    
+    
+      
+      
+
   }
 
 
@@ -93,6 +132,7 @@ LastSynced=""
          let total=this.global.AllConsumerMeters.length;
         let percentage= ((100 * this.Added) / total).toFixed(1);
         if(percentage !="NaN"){
+          this.progress = percentage
           return percentage;
         }
         else

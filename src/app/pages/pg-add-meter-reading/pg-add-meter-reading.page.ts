@@ -8,7 +8,7 @@ import { GlobalService } from 'src/app/services/global.service';
   styleUrls: ['./pg-add-meter-reading.page.scss'],
 })
 export class PgAddMeterReadingPage implements OnInit {
-
+  CheckSearchEvent
   isKeyboardHide = true;
   constructor(public keyboard: Keyboard,
     public global: GlobalService
@@ -16,6 +16,11 @@ export class PgAddMeterReadingPage implements OnInit {
     this.isKeyboardHide = true;
   }
   ngOnInit() {
+    if(this.CheckSearchEvent == null || this.CheckSearchEvent == undefined){
+
+      this.global.AllFilterSearch = this.global.AllConsumerMeters.filter(x => x.IsReadingAdded == false && x.IsFeedbackAdded == false);
+      this.global.FilterSearchShow = this.global.AllFilterSearch.slice(0, 5);
+    }
   }
   ionViewWillEnter() {
     this.keyboard.onKeyboardWillShow().subscribe(() => {
@@ -31,6 +36,7 @@ export class PgAddMeterReadingPage implements OnInit {
   async SearchConsumerMeter(evt) {
     this.global.AllFilterSearch = this.global.AllConsumerMeters.filter(x => x.IsReadingAdded == false && x.IsFeedbackAdded == false);
     const searchTerm = evt.srcElement.value;
+   
     if (!searchTerm) {
       return;
     }
@@ -44,6 +50,7 @@ export class PgAddMeterReadingPage implements OnInit {
       this.global.FilterSearchShow = this.global.AllFilterSearch.slice(0, 20);
       this.global.ScrollArrayCount = this.global.FilterSearchShow.length;
     }
+  
 
   }
 }

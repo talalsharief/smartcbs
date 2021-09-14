@@ -11,6 +11,7 @@ import { AlertModalComponent } from './components/popup/alert-modal/alert-modal.
 import { Keyboard } from '@ionic-native/keyboard/ngx'
 import { IonicStorageModule } from '@ionic/storage';
 import { AuthguardService } from './services/authguard.service';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   declarations: [AppComponent,
@@ -22,7 +23,32 @@ import { AuthguardService } from './services/authguard.service';
     HttpClientModule,
      IonicModule.forRoot(),
      IonicStorageModule.forRoot(), 
-     AppRoutingModule],
+     AppRoutingModule,
+       // Specify ng-circle-progress as an import
+       NgCircleProgressModule.forRoot({
+        // set defaults here
+        backgroundStrokeWidth: 0,
+        backgroundPadding: 7,
+        space:-12,
+        toFixed: 0,
+        outerStrokeWidth: 14,
+        outerStrokeColor: '#808080',
+        innerStrokeWidth: 14,
+        innerStrokeColor: '#e7e8ea',
+        animationDuration: 500,
+        animation: true,
+        startFromZero: false,
+        responsive: true,
+        showUnits: true,
+        showTitle: true,
+        showSubtitle: false,
+        showImage: false,
+        renderOnClick: false,
+        subtitleFontSize:"20"
+        
+        
+      })
+    ],
      
   providers: [
     HttpClient,

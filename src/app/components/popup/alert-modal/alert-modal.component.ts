@@ -33,7 +33,8 @@ export class AlertModalComponent implements OnInit {
   ngOnInit(
 
   ) {
-
+    this.global.getAllConsumerMeters()
+    
   }
   async btnYesSync() {
     // this.SyncMeterFeedback();
@@ -287,20 +288,48 @@ export class AlertModalComponent implements OnInit {
           if (Reading) {
             let meter = [];
             TempArray = Reading;
-            MeterReading = TempArray.filter(x => x.IsSend == false);
+            MeterReading = TempArray.filter(x => x.isSend == false);
+            //Is send true
+            // for(let isSendTrue of MeterReading){
+
+            // }
             for (let index = 0; index < MeterReading.length; index++) {
-              meter[index] = JSON.stringify(MeterReading[index]);
+              meter[index] = MeterReading[index]
             }
             var obj = {
-              MeterReading: meter,
+              lstMeterReading: meter,
               MeterReadingUserID: userData.MTUserID,
+              
             }
 
-            this.dal.SyncMeterReading(obj).then((data) => {
+            this.dal.SyncMeterReading(obj).then((data : any) => {
               if (data) {
-                this.local.set('LastSyncDateTime', new Date().toLocaleString())
-                this.SaveSyncHistory()
-                console.log(data);
+                for(let  i = 0 ; i< data.length; i++){
+                let MeterID = this.global.AllConsumerMeters.filter(x => x.MeterID == data[i])
+                let Index = this.global.AllConsumerMeters.findIndex(x => x.MeterID == data[i])
+                for(let isSendTrue of MeterID){
+                  isSendTrue.isSend = true
+                  isSendTrue.IsReadingAdded = false
+                  isSendTrue.IsFeedbackAdded =false
+                  this.global.AllConsumerMeters.splice(Index,1,isSendTrue)
+                  this.local.set('LastSyncDateTime', new Date().toLocaleString())
+                  this.SaveSyncHistory()
+                 
+                  // this.global.local.set("Meters",this.global.AllMetersList)
+                }
+
+                } 
+                
+                setTimeout( () => {
+                  let Empty =[]
+                  this.local.set("MeterReading",Empty)
+                  this.local.set("MeterFeedback",Empty)
+
+                  this.global.getAllConsumerMeters()
+                  console.log(data);
+             }, 500);
+                
+                
               }
             })
           }

@@ -132,9 +132,10 @@ export class CpMeterReadingComponent implements OnInit {
                 this.global.AllConsumerMeters[index].IsReadingAdded = true;
               this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter reading saved', "success");
             })
-          })
-
- 
+          })  
+          this.global.GetDataFromLocal();
+            this.global.getAllConsumerMeters()
+            
         }
         else
         {
@@ -148,7 +149,8 @@ export class CpMeterReadingComponent implements OnInit {
             this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter reading saved', "success");
           })
         }
-
+        this.global.GetDataFromLocal();
+        this.global.getAllConsumerMeters()
       }
       else {
 

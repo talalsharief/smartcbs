@@ -10,7 +10,7 @@ export const environment = {
       
         // baseURL:"http://192.168.1.113/xcbm/webservices/" //Development
       // baseURL : "http://localhost:51306/" //todo: /pick from environment variable
-      baseURL : 'http://192.168.0.104/SmartCBSApi/' //Test Server"
+      baseURL : 'http://192.168.0.111/SmartCBSApi/' //Test Server"
 };
 
 /*

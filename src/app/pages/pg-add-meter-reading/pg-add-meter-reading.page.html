@@ -6,7 +6,7 @@
     <!-- <ion-title >Add Meter Reading</ion-title>  -->
     <ion-row>
       <ion-col>
-        <ion-searchbar (ionInput)="SearchConsumerMeter($event)" placeholder="Search by text" ></ion-searchbar>
+        <ion-searchbar (ionInput)="SearchConsumerMeter($event)" placeholder="Search by text" [(ngModel)]="this.CheckSearchEvent"></ion-searchbar>
       </ion-col>
       
     </ion-row>

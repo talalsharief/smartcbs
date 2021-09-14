@@ -55,7 +55,6 @@ export class GlobalService {
   constructor(public local: LocalstorageService) {
     this.objUserData = new ClsUserData();
     this.GetDataFromLocal()
-   
   }
   getDeviceInfo() {
     let id;
@@ -78,10 +77,10 @@ export class GlobalService {
 
   getAllConsumerMeters() {
     this.AllConsumerMeters = []
-  
     for (let index = 0; index < this.AllConsumersList.length; index++) {
 
-      let CMeters = this.AllMetersList.filter(items => items.consumerid == this.AllConsumersList[index].consumerid);
+        
+      let CMeters = this.AllMetersList.filter(items => items.meterid == this.AllMetersList[index].meterid);
       for (let j = 0; j < CMeters.length; j++) {
 
         //Checking Reading

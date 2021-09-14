@@ -48,14 +48,27 @@
               </ion-col>
               <ion-col size="5" class="text-center">
                 <div class="set-size charts-container">
-                  <div class="pie-wrapper progress-10 style-2">
-                    <span class="label">{{percentageMeterFeedbackDone()}}<span class="smaller">%</span></span>
-                    <div class="pie">
+                  <!-- <div class="pie-wrapper progress-10 style-2"> -->
+                    <circle-progress
+                    [percent]="progress"
+                    [radius]="70"
+                    [outerStrokeColor]="'#4882c2'"
+                    [innerStrokeColor]="'#e7e8ea'"
+                    [showSubtitle]="true"
+                    [animation]="true"
+                    [animationDuration]="300"
+                  ></circle-progress>
+                  <div class="shadow"></div>
+                    <!-- <span class="label">{{percentageMeterFeedbackDone()}}<span class="smaller">%</span></span>
+                    
+                     -->
+                     
+                    <!-- <div class="pie">
                       <div class="left-side half-circle"></div>
                       <div class="right-side half-circle"></div>
-                    </div>
-                    <div class="shadow"></div>
-                  </div>
+                    </div> -->
+                    
+                  <!-- </div> -->
                 </div>
               </ion-col>
             </ion-row>
