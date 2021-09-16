@@ -15,7 +15,7 @@ export class CpSettingComponent implements OnInit {
   LastFechedDateTime = ""
   FetchDataHistoryList=[]
   constructor(
-    private global: GlobalService,
+    public global: GlobalService,
     private modalController: ModalController,
     public local: LocalstorageService
   ) {
@@ -29,7 +29,9 @@ export class CpSettingComponent implements OnInit {
     })
   }
   ngOnInit() {
-
+    setTimeout(()=>{
+      this.global.getAllConsumerMeters()
+    },1000)
   }
   async btnFetch() {
     this.global.isFetch = true
@@ -52,6 +54,7 @@ export class CpSettingComponent implements OnInit {
       this.local.get("DataFetch").then((data)=>{
         if(data){
           this.FetchDataHistoryList=data
+          this.FetchDataHistoryList.reverse()
         }
       })
     }

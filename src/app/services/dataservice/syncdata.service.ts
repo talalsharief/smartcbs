@@ -16,9 +16,9 @@ export class SyncdataService {
     return new Promise((resolve, reject) => {
       try{
         this.api.Post('api/meterreading/syncmeterreading',obj).then((respData: any) => {
-        if(respData){ 
+        if(respData.data){ 
           // let data=JSON.parse(respData);
-          return  resolve(respData);
+          return  resolve(respData.data);
         }
         else if(respData==null || respData=="")
         {
@@ -39,7 +39,7 @@ export class SyncdataService {
     return new Promise((resolve, reject) => {
       try{
         this.api.Post('api/meterreading/syncmeterreading',obj).then((respData: any) => {
-          console.log(respData)
+          console.log(respData.data)
         if(respData.data){ 
           // let data=JSON.parse(respData);
           return  resolve(respData.data);

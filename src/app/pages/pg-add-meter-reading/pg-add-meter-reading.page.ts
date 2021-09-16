@@ -16,13 +16,28 @@ export class PgAddMeterReadingPage implements OnInit {
     this.isKeyboardHide = true;
   }
   ngOnInit() {
+    setTimeout(()=>{
+      if(this.CheckSearchEvent == null || this.CheckSearchEvent == undefined){
+
+        this.global.AllFilterSearch = this.global.AllConsumerMeters.filter(x => x.IsReadingAdded == false && x.IsFeedbackAdded == false);
+      
+        this.global.FilterSearchShow = this.global.AllFilterSearch.slice(0, 20);
+        this.global.ScrollArrayCount = this.global.AllFilterSearch.length;
+      
+      }
+    },1000)
+ 
+  }
+  ionViewWillEnter() {
+    
     if(this.CheckSearchEvent == null || this.CheckSearchEvent == undefined){
 
       this.global.AllFilterSearch = this.global.AllConsumerMeters.filter(x => x.IsReadingAdded == false && x.IsFeedbackAdded == false);
-      this.global.FilterSearchShow = this.global.AllFilterSearch.slice(0, 5);
+    
+      this.global.FilterSearchShow = this.global.AllFilterSearch.slice(0, 20);
+      this.global.ScrollArrayCount = this.global.AllFilterSearch.length;
+    
     }
-  }
-  ionViewWillEnter() {
     this.keyboard.onKeyboardWillShow().subscribe(() => {
       this.isKeyboardHide = false;
       // console.log('SHOWK');
@@ -48,7 +63,7 @@ export class PgAddMeterReadingPage implements OnInit {
     console.log("All Filter Search Found length: " + this.global.AllFilterSearch.length);
     if (searchTerm != "") {
       this.global.FilterSearchShow = this.global.AllFilterSearch.slice(0, 20);
-      this.global.ScrollArrayCount = this.global.FilterSearchShow.length;
+      this.global.ScrollArrayCount = this.global.AllFilterSearch.length;
     }
   
 

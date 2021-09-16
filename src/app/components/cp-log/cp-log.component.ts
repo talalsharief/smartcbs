@@ -29,7 +29,9 @@ export class CpLogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.global.getAllConsumerMeters()
+    setTimeout(()=>{
+      this.global.getAllConsumerMeters()
+    },1000)
     this.GetAllReadingFeedback(1);
     this.highlightedDiv = 1;
 

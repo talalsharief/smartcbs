@@ -7,7 +7,7 @@
 
     <!-- <ion-list style="padding-top:0 ;"> -->
 
-      
+<!--       
       <ion-row *ngIf="isMeterIndex && this.meterReading.ID===''">
   
         <ion-col size="12" class="textCenter" >
@@ -16,12 +16,12 @@
           <p class="mb-0 " >Is index</p>
         </ion-col>
 
-      </ion-row>
+      </ion-row> -->
 
 
       <!-- Multi-line sliding item with icon options on both sides -->
       <Div class="card cardShadow borderRadius mb-3" *ngIf="this.meterReading">
-        <ion-item-sliding id="item100">
+      
           <ion-item class="borderRadius" lines="none">
             <ion-note slot="start" class="IonNote">
               <ion-label>
@@ -46,19 +46,9 @@
             </ion-note>
           </ion-item>
 
-          <ion-item-options side="start">
-            <ion-item-option routerLink="/meterfeedback" routerDirection="forward">
-              <ion-icon slot="icon-only" name="heart"></ion-icon>
-            </ion-item-option>
-          </ion-item-options>
+      
 
-          <ion-item-options side="end">
-
-            <ion-item-option color="dark" routerLink="/meterreading" routerDirection="forward">
-              <ion-icon slot="icon-only" name="star"></ion-icon>
-            </ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
+        
       </Div>
 
     <!-- </ion-list> -->
@@ -84,6 +74,17 @@
       <ion-col>
         <p class="Txt1 mb-2 ">Meter Image</p>
         <div class="noImg">Select Image</div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="mt-2" *ngIf="isMeterIndex && this.meterReading.ID===''">
+      <ion-col size="12">
+
+        <div class="textLeft ClasCheckBox" >
+
+          <ion-checkbox (ionChange)="onChange($event)"></ion-checkbox> &nbsp;&nbsp;
+
+          <span class="mb-0 LabelTxt">Allow Indexing</span>
+        </div>
       </ion-col>
     </ion-row>
 <br>

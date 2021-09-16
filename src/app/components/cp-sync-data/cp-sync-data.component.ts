@@ -34,7 +34,9 @@ export class CpSyncDataComponent implements OnInit {
 
   ngOnInit() {
    
-
+    setTimeout(()=>{
+      this.global.getAllConsumerMeters()
+    },1000)
   }
   async btnSync(){
     this.global.IsSync = true;
@@ -63,6 +65,7 @@ export class CpSyncDataComponent implements OnInit {
         console.log(data)
         if(data){
           this.SyncDataHistoryList=data
+          this.SyncDataHistoryList.reverse()
         }
       })
     }

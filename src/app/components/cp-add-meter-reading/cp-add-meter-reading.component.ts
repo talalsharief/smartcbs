@@ -44,6 +44,12 @@ export class CpAddMeterReadingComponent implements OnInit {
 
   ngOnInit() {
     // this.sList.closeSlidingItems()
+    setTimeout(()=>{
+      
+      this.FetchAllConsumerMeters()
+      this.global.FilterSearchShow
+    },500)
+   
   }
   ionViewWillEnter() {
     alert("Entered");

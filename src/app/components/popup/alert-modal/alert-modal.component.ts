@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
-import { ModalController, NavController, NavParams } from '@ionic/angular';
+import { LoadingController, ModalController, NavController, NavParams } from '@ionic/angular';
 import * as moment from 'moment';
 import { DalService } from 'src/app/services/dal.service';
 import { GlobalService } from 'src/app/services/global.service';
@@ -24,7 +24,9 @@ export class AlertModalComponent implements OnInit {
     public dal: DalService,
     public local: LocalstorageService,
     public toast: ToastService,
-    public navparam: NavParams
+    public navparam: NavParams,
+    public loadingController: LoadingController
+  
   ) {
     this.Data = this.navparam.get('data');
     this.MeterOrFeedback = this.navparam.get('type');
@@ -33,8 +35,7 @@ export class AlertModalComponent implements OnInit {
   ngOnInit(
 
   ) {
-    this.global.getAllConsumerMeters()
-    
+
   }
   async btnYesSync() {
     // this.SyncMeterFeedback();
@@ -258,14 +259,32 @@ export class AlertModalComponent implements OnInit {
             TempArray = Feedback;
             MeterFeedback = TempArray.filter(x => x.isSend == false);
             for (let index = 0; index < MeterFeedback.length; index++) {
-              meter[index] = JSON.stringify(MeterFeedback[index]);
+              meter[index] = MeterFeedback[index];
             }
             var obj = {
               Meterfeedback: meter,
               MeterReadingUserID: userData.MTUserID,
             }
-            this.dal.SyncMeterFeedback(obj).then((data) => {
+            this.dal.SyncMeterFeedback(obj).then((data : any) => {
               if (data) {
+                let newarr = []
+                newarr = data
+                for(let  i = 0 ; i< data.length; i++){
+                  let FeedBackID = this.global.AllMeterFeedback.filter(x => x.MeterId == data[i])
+                  let Index = this.global.AllMeterFeedback.findIndex(x => x.MeterId == data[i])
+                  for(let isSendTrue of FeedBackID){
+                    isSendTrue.isSend = true
+                    this.global.AllMeterFeedback.splice(Index,1,isSendTrue)
+                    this.local.set("MeterFeedback",this.global.AllMeterFeedback)
+                    this.local.set('LastSyncDateTime', new Date().toLocaleString())
+                    this.SaveSyncHistory()
+                   
+                    // this.global.local.set("Meters",this.global.AllMetersList)
+                  }
+  
+                  } 
+                this.local.set('LastSyncDateTime', new Date().toLocaleString())
+                this.SaveSyncHistory()
                 console.log(data);
               }
             })
@@ -276,6 +295,7 @@ export class AlertModalComponent implements OnInit {
   }
 
   SyncMeterReading() {
+    this.presentLoading()
     let TempArray = [];
     let MeterReading = []
     this.local.get("UserData").then((userData) => {
@@ -289,47 +309,35 @@ export class AlertModalComponent implements OnInit {
             let meter = [];
             TempArray = Reading;
             MeterReading = TempArray.filter(x => x.isSend == false);
-            //Is send true
-            // for(let isSendTrue of MeterReading){
-
-            // }
             for (let index = 0; index < MeterReading.length; index++) {
-              meter[index] = MeterReading[index]
+              meter[index] = MeterReading[index];
             }
             var obj = {
               lstMeterReading: meter,
               MeterReadingUserID: userData.MTUserID,
-              
             }
 
             this.dal.SyncMeterReading(obj).then((data : any) => {
               if (data) {
+                let newarr = []
+                newarr = data
                 for(let  i = 0 ; i< data.length; i++){
-                let MeterID = this.global.AllConsumerMeters.filter(x => x.MeterID == data[i])
-                let Index = this.global.AllConsumerMeters.findIndex(x => x.MeterID == data[i])
-                for(let isSendTrue of MeterID){
-                  isSendTrue.isSend = true
-                  isSendTrue.IsReadingAdded = false
-                  isSendTrue.IsFeedbackAdded =false
-                  this.global.AllConsumerMeters.splice(Index,1,isSendTrue)
-                  this.local.set('LastSyncDateTime', new Date().toLocaleString())
-                  this.SaveSyncHistory()
-                 
-                  // this.global.local.set("Meters",this.global.AllMetersList)
-                }
-
-                } 
-                
-                setTimeout( () => {
-                  let Empty =[]
-                  this.local.set("MeterReading",Empty)
-                  this.local.set("MeterFeedback",Empty)
-
-                  this.global.getAllConsumerMeters()
-                  console.log(data);
-             }, 500);
-                
-                
+                  let MeterID = this.global.AllMeterReading.filter(x => x.MeterId == data[i])
+                  let Index = this.global.AllMeterReading.findIndex(x => x.MeterId == data[i])
+                  for(let isSendTrue of MeterID){
+                    isSendTrue.isSend = true
+                    this.global.AllMeterReading.splice(Index,1,isSendTrue)
+                    this.local.set("MeterReading",this.global.AllMeterReading)
+                    this.local.set('LastSyncDateTime', new Date().toLocaleString())
+                    this.SaveSyncHistory()
+                   
+                    // this.global.local.set("Meters",this.global.AllMetersList)
+                  }
+  
+                  } 
+                this.local.set('LastSyncDateTime', new Date().toLocaleString())
+                this.SaveSyncHistory()
+                console.log(data);
               }
             })
           }
@@ -341,5 +349,34 @@ export class AlertModalComponent implements OnInit {
   SyncMeterFeedBack(){
     this.SyncMeterFeedback()
     this.SyncMeterReading()
+  }
+
+
+  btnYesClear(){
+    this.local.remove("LastSerial")
+    this.local.remove("MeterReading")
+    this.local.remove("LastSyncDateTime")
+    this.local.remove("MeterFeedback")
+    this.local.remove("LastFetchDateTime")
+    this.local.remove("DataFetch")
+    this.local.remove("DataSync")
+    this.local.remove("Meters")
+    this.local.remove("Consumers")
+    this.local.remove("Status")
+    this.local.remove("Index")
+    this.navController.navigateRoot("home")
+    this.modalController.dismiss()
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+      duration: 8000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 }

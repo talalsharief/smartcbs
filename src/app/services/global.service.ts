@@ -16,6 +16,7 @@ export class GlobalService {
   IsEdit: boolean = false;
   isSyncing: boolean = false;
   isFetch: boolean = false;
+  isClear: boolean = false;
   btnSync: boolean = true;
   btnFetch: boolean = true;
   isFetched: boolean = false;
@@ -51,10 +52,13 @@ export class GlobalService {
 
   MeterReadingAddedCount = 0;
 
+  LastSync
+  LastFetch
 
   constructor(public local: LocalstorageService) {
     this.objUserData = new ClsUserData();
     this.GetDataFromLocal()
+   
   }
   getDeviceInfo() {
     let id;
@@ -180,13 +184,24 @@ export class GlobalService {
     })
     this.local.get("Status").then((data) => {
       if (data) {
-        this.AllMeterStatus = data.data;
+        this.AllMeterStatus = data;
       }
     })
     this.local.get("Index").then((data) => {
       if (data) {
         this.isIndexReading = data;
         console.log(this.isIndexReading)
+      }
+    })
+    this.local.get("LastSyncDateTime").then((data)=>{
+      if(data){
+          this.LastSync = data
+      }
+    })
+
+    this.local.get("LastFetchDateTime").then((data)=>{
+      if(data){
+        this.LastFetch = data
       }
     })
 

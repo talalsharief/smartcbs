@@ -38,6 +38,7 @@ export class CpMeterFeedbackComponent implements OnInit {
     public global: GlobalService,
     public dal: DalService
   ) {
+    
     // this.FetchStatusList().then((data)=>{
     //   this.meterFeedback.status = this.meterFeedback.FeedbackId == "" ? this.StatusList[0].StatusName : this.ConsumerData.status
     
@@ -74,7 +75,11 @@ export class CpMeterFeedbackComponent implements OnInit {
     console.log("Meter FeedBack Component")
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    setTimeout(()=>{
+      this.global.getAllConsumerMeters()
+    },1000)
+  }
 
 
   addMeterFeedback() {
@@ -115,6 +120,8 @@ export class CpMeterFeedbackComponent implements OnInit {
                 this.global.AllConsumerMeters[index].IsFeedbackAdded = true;
               this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter feedback saved', "success");
               // this.ClearData();
+              this.nav.navigateRoot("addmeterreading");
+              this.global.getAllConsumerMeters();
             })
           })
         }
@@ -127,6 +134,8 @@ export class CpMeterFeedbackComponent implements OnInit {
               this.global.AllConsumerMeters[index].IsFeedbackAdded = true;
             this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter feedback saved', "success");
             // this.ClearData();
+            this.nav.navigateRoot("addmeterreading");
+            this.global.getAllConsumerMeters();
           })
  
 
@@ -145,8 +154,7 @@ export class CpMeterFeedbackComponent implements OnInit {
             // this.global.AllConsumerMeters.join();
             this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter feedback Updated', "success");
             this.ClearData();
-            // this.nav.navigateRoot("log");
-            this.global.GetDataFromLocal();
+             this.nav.navigateRoot("addmeterreading");
             this.global.getAllConsumerMeters();
 
 

@@ -78,3 +78,30 @@
     </ion-row>
   </div>
 </ng-container>
+
+<ng-container *ngIf="this.global.isClear">
+  <div class="container">
+    <ion-row>
+      <ion-col class="textCenter">
+        <ion-icon name="alert-circle-outline" class="LogoutModalIcon"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="textCenter">
+
+        <span class="Txt1">Are You Sure ?</span>
+        <p class="">
+          <span class="Hitxt">You want to Clear all the data from App ?</span>
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6" class="textCenter">
+        <button type="button" class="btn btnCancel animate__animated aanimate__fadeInUp" (click)="btnCancel()">Cancel</button>
+      </ion-col>
+      <ion-col size="6" class="textCenter">
+        <button type="button" class="btn btnLogin animate__animated aanimate__fadeInUp" (click)="btnYesClear()">Yes</button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ng-container>

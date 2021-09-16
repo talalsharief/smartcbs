@@ -177,6 +177,7 @@ export class DalService {
     return new Promise((resolve, reject) => {
       try {
         this.syncdata.SyncMeterReading(obj).then((res: any) => {
+          console.log(res)
           if (res != undefined) {
             return resolve(res);
           }
@@ -196,12 +197,12 @@ export class DalService {
       try {
         this.meterandconsumer.FetchStatus(param).then((res: any) => {
           if (res != undefined) {
-            this.local.set("Status", res);
-            this.global.AllMeterStatus=res;
-            return resolve(res);
+            this.local.set("Status", res.data);
+            this.global.AllMeterStatus=res.data;
+            return resolve(res.data);
           }
           else if (res == null) {
-            return resolve(res)
+            return resolve(res.data)
           }
         });
       }
@@ -220,10 +221,10 @@ export class DalService {
           if (res != undefined) {
             this.local.set("Index", res.data);
             this.global.isIndexReading=res.data;
-            return resolve(res);
+            return resolve(res.data);
           }
           else if (res == null) {
-            return resolve(res)
+            return resolve(res.data)
           }
         });
       }

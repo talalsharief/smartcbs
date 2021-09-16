@@ -1,8 +1,11 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="ClasToolbar">
+    <ion-icon name="arrow-back-outline" (click)="back()" slot="start" style="margin-left: 5px;" ></ion-icon>
+    <ion-title >Settings</ion-title>
     
-    <ion-title >Setting</ion-title>
-   
+      <ion-label slot="end" style="margin-right:5px" (click)="clear()">Remove All Data
+      <ion-icon name="calendar-clear-outline" slot="end"  style="margin-right: 5px;"></ion-icon>
+    </ion-label>
   </ion-toolbar>
 </ion-header>
 

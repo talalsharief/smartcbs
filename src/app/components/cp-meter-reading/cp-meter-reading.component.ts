@@ -78,7 +78,9 @@ export class CpMeterReadingComponent implements OnInit {
   ngOnInit(
 
   ) {
-
+    setTimeout(()=>{
+      this.global.getAllConsumerMeters()
+    },1000)
   }
 
   setInputFocus() {
@@ -131,10 +133,11 @@ export class CpMeterReadingComponent implements OnInit {
               if (index >= 0)
                 this.global.AllConsumerMeters[index].IsReadingAdded = true;
               this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter reading saved', "success");
+              this.global.FilterSearchShow
+              this.nav.navigateRoot("addmeterreading")
+              this.global.getAllConsumerMeters()
             })
           })  
-          this.global.GetDataFromLocal();
-            this.global.getAllConsumerMeters()
             
         }
         else
@@ -147,10 +150,10 @@ export class CpMeterReadingComponent implements OnInit {
               this.global.AllConsumerMeters[index].IsReadingAdded = true;
               // this.global.AllConsumerMeters
             this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter reading saved', "success");
+            this.nav.navigateRoot("addmeterreading")
+            this.global.getAllConsumerMeters()
           })
         }
-        this.global.GetDataFromLocal();
-        this.global.getAllConsumerMeters()
       }
       else {
 
@@ -165,9 +168,8 @@ export class CpMeterReadingComponent implements OnInit {
             // this.global.AllConsumerMeters.join();
             this.toast.ShowCustomToast('<ion-icon name="checkmark-outline"></ion-icon> Meter Reading Updated', "success");
             // this.nav.navigateRoot("log");
-            this.global.GetDataFromLocal();
-            this.global.getAllConsumerMeters();
-
+           this.nav.navigateRoot("addmeterreading")
+            this.global.getAllConsumerMeters()
           }
           // this.global.AllFilterSearch = this.global.AllConsumerMeters.filter(x => x.IsReadingAdded == false && x.IsFeedbackAdded == false);
 

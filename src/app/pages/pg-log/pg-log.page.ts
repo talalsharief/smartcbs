@@ -18,7 +18,10 @@ export class PgLogPage implements OnInit {
 
   ngOnInit() {
   }
-
+  ionViewWillEnter() {
+    this.global.GetDataFromLocal()
+    this.global.getAllConsumerMeters()
+  }
   async btnShowLog(){
     
     const modal = await this.modalController.create({

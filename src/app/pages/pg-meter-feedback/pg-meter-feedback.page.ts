@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalService } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-pg-meter-feedback',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PgMeterFeedbackPage implements OnInit {
 
-  constructor() { }
+  constructor(public global:GlobalService) { }
 
   ngOnInit() {
   }
-
+  ionViewWillEnter() {
+    this.global.GetDataFromLocal()
+    this.global.getAllConsumerMeters()
+  }
 }
